@@ -1,289 +1,303 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
-export default function CreateQuotationPage() {
+export default function
+CreateQuotationPage() {
+
+  const [
+    productId,
+    setProductId,
+  ] = useState(1);
+
   const [quantity, setQuantity] =
-    useState(1000);
+    useState(100);
 
-  const [unitPrice, setUnitPrice] =
-    useState(4.5);
+  const [
+    printMethod,
+    setPrintMethod,
+  ] = useState("PET");
 
-  const [productionCost, setProductionCost] =
-    useState(2.8);
+  const [
+    printSize,
+    setPrintSize,
+  ] = useState("20x20");
 
-  const revenue = useMemo(() => {
-    return quantity * unitPrice;
-  }, [quantity, unitPrice]);
+  const [
+    pricing,
+    setPricing,
+  ] = useState({
 
-  const cost = useMemo(() => {
-    return quantity * productionCost;
-  }, [quantity, productionCost]);
+    blankCost: 0,
 
-  const profit = useMemo(() => {
-    return revenue - cost;
-  }, [revenue, cost]);
+    printCost: 0,
 
-  const margin = useMemo(() => {
-    return ((profit / revenue) * 100).toFixed(1);
-  }, [profit, revenue]);
+    unitPrice: 0,
+
+    totalPrice: 0,
+  });
+
+  useEffect(() => {
+
+    async function loadPrice() {
+
+      const response =
+        await fetch(
+          "/api/calculate-price",
+          {
+            method: "POST",
+
+            cache: "no-store",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body: JSON.stringify({
+
+              productId,
+
+              quantity,
+
+              printMethod,
+
+              printSize,
+            }),
+          }
+        );
+
+      const data =
+        await response.json();
+
+      console.log(
+        "PRICE RESPONSE:",
+        data
+      );
+
+      setPricing(data);
+    }
+
+    loadPrice();
+
+  }, [
+    productId,
+    quantity,
+    printMethod,
+    printSize,
+  ]);
 
   return (
-    <main className="min-h-screen bg-neutral-100">
 
-      <div className="flex">
+    <main className="min-h-screen bg-neutral-100 p-10">
 
-        {/* Sidebar */}
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_420px]">
 
-        <aside className="sticky top-0 hidden h-screen w-72 border-r border-neutral-200 bg-white p-8 lg:block">
+        {/* LEFT */}
 
-          <div>
+        <div className="rounded-[40px] bg-white p-10 shadow-sm">
 
-            <h1 className="text-2xl font-bold tracking-tight">
-              Vietnam Clothing
-            </h1>
+          <p className="text-sm uppercase tracking-[0.3em] text-neutral-500">
+            Pricing Engine
+          </p>
 
-            <p className="mt-2 text-sm text-neutral-500">
-              Admin Dashboard
-            </p>
+          <h1 className="mt-4 text-5xl font-bold tracking-tight">
+            Create Quote
+          </h1>
 
-          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
 
-          <nav className="mt-16 space-y-3">
-
-            {[
-              "Dashboard",
-              "Leads",
-              "Customers",
-              "Quotations",
-              "Products",
-              "Blog",
-              "Production",
-              "Inventory",
-              "Settings",
-            ].map((item) => (
-              <button
-                key={item}
-                className={`flex w-full items-center rounded-2xl px-5 py-4 text-left transition ${
-                  item === "Quotations"
-                    ? "bg-black text-white"
-                    : "hover:bg-neutral-100"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-
-          </nav>
-
-        </aside>
-
-        {/* Main */}
-
-        <section className="flex-1 p-8 lg:p-12">
-
-          <div className="flex items-center justify-between">
+            {/* Product */}
 
             <div>
 
-              <p className="text-sm uppercase tracking-[0.3em] text-neutral-500">
-                Sales System
-              </p>
+              <label className="text-sm font-medium">
+                Product
+              </label>
 
-              <h2 className="mt-3 text-5xl font-bold tracking-tight">
-                Create Quotation
-              </h2>
-
-            </div>
-
-            <button className="rounded-full bg-black px-8 py-4 text-white transition hover:scale-105">
-              Export PDF
-            </button>
-
-          </div>
-
-          <div className="mt-12 grid gap-10 xl:grid-cols-[1.2fr_0.8fr]">
-
-            {/* Form */}
-
-            <div className="rounded-[32px] bg-white p-10 shadow-sm">
-
-              <div className="grid gap-6 md:grid-cols-2">
-
-                <div>
-
-                  <label className="mb-3 block text-sm uppercase tracking-[0.2em] text-neutral-500">
-                    Customer
-                  </label>
-
-                  <input
-                    type="text"
-                    placeholder="Customer Name"
-                    className="w-full rounded-2xl border border-neutral-200 px-6 py-5 outline-none focus:border-black"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-3 block text-sm uppercase tracking-[0.2em] text-neutral-500">
-                    Product
-                  </label>
-
-                  <input
-                    type="text"
-                    placeholder="Product Name"
-                    className="w-full rounded-2xl border border-neutral-200 px-6 py-5 outline-none focus:border-black"
-                  />
-
-                </div>
-
-              </div>
-
-              <div className="mt-6 grid gap-6 md:grid-cols-2">
-
-                <div>
-
-                  <label className="mb-3 block text-sm uppercase tracking-[0.2em] text-neutral-500">
-                    Quantity
-                  </label>
-
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) =>
-                      setQuantity(Number(e.target.value))
-                    }
-                    className="w-full rounded-2xl border border-neutral-200 px-6 py-5 outline-none focus:border-black"
-                  />
-
-                </div>
-
-                <div>
-
-                  <label className="mb-3 block text-sm uppercase tracking-[0.2em] text-neutral-500">
-                    Unit Price ($)
-                  </label>
-
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={unitPrice}
-                    onChange={(e) =>
-                      setUnitPrice(Number(e.target.value))
-                    }
-                    className="w-full rounded-2xl border border-neutral-200 px-6 py-5 outline-none focus:border-black"
-                  />
-
-                </div>
-
-              </div>
-
-              <div className="mt-6">
-
-                <label className="mb-3 block text-sm uppercase tracking-[0.2em] text-neutral-500">
-                  Production Cost ($)
-                </label>
-
-                <input
-                  type="number"
-                  step="0.1"
-                  value={productionCost}
-                  onChange={(e) =>
-                    setProductionCost(
-                      Number(e.target.value)
+              <select
+                value={productId}
+                onChange={(e) =>
+                  setProductId(
+                    Number(
+                      e.target.value
                     )
-                  }
-                  className="w-full rounded-2xl border border-neutral-200 px-6 py-5 outline-none focus:border-black"
-                />
+                  )
+                }
+                className="mt-3 w-full rounded-2xl border border-neutral-200 px-5 py-4 outline-none"
+              >
 
-              </div>
+                <option value={1}>
+                  TEE REGULAR RT-001
+                </option>
 
-              <div className="mt-6">
+                <option value={3}>
+                  OVERSIZED OS-001
+                </option>
 
-                <label className="mb-3 block text-sm uppercase tracking-[0.2em] text-neutral-500">
-                  Notes
-                </label>
-
-                <textarea
-                  rows={6}
-                  placeholder="Quotation notes..."
-                  className="w-full rounded-2xl border border-neutral-200 px-6 py-5 outline-none focus:border-black"
-                />
-
-              </div>
+              </select>
 
             </div>
 
-            {/* Summary */}
+            {/* Quantity */}
 
-            <div className="rounded-[32px] bg-black p-10 text-white shadow-sm">
+            <div>
 
-              <p className="text-sm uppercase tracking-[0.3em] text-white/50">
-                Quote Summary
-              </p>
+              <label className="text-sm font-medium">
+                Quantity
+              </label>
 
-              <div className="mt-12 space-y-8">
+              <input
+                type="number"
+                value={quantity}
+                onChange={(e) =>
+                  setQuantity(
+                    Number(
+                      e.target.value
+                    )
+                  )
+                }
+                className="mt-3 w-full rounded-2xl border border-neutral-200 px-5 py-4 outline-none"
+              />
 
-                <div>
+            </div>
 
-                  <p className="text-sm text-white/50">
-                    Revenue
-                  </p>
+            {/* Print Method */}
 
-                  <div className="mt-2 text-5xl font-bold tracking-tight">
-                    ${revenue.toLocaleString()}
-                  </div>
+            <div>
 
-                </div>
+              <label className="text-sm font-medium">
+                Print Method
+              </label>
 
-                <div>
+              <select
+                value={printMethod}
+                onChange={(e) =>
+                  setPrintMethod(
+                    e.target.value
+                  )
+                }
+                className="mt-3 w-full rounded-2xl border border-neutral-200 px-5 py-4 outline-none"
+              >
 
-                  <p className="text-sm text-white/50">
-                    Production Cost
-                  </p>
+                <option>
+                  PET
+                </option>
 
-                  <div className="mt-2 text-4xl font-bold tracking-tight">
-                    ${cost.toLocaleString()}
-                  </div>
+                <option>
+                  DTG
+                </option>
 
-                </div>
+                <option>
+                  Decal
+                </option>
 
-                <div>
+              </select>
 
-                  <p className="text-sm text-white/50">
-                    Estimated Profit
-                  </p>
+            </div>
 
-                  <div className="mt-2 text-4xl font-bold tracking-tight">
-                    ${profit.toLocaleString()}
-                  </div>
+            {/* Print Size */}
 
-                </div>
+            <div>
 
-                <div>
+              <label className="text-sm font-medium">
+                Print Size
+              </label>
 
-                  <p className="text-sm text-white/50">
-                    Profit Margin
-                  </p>
+              <select
+                value={printSize}
+                onChange={(e) =>
+                  setPrintSize(
+                    e.target.value
+                  )
+                }
+                className="mt-3 w-full rounded-2xl border border-neutral-200 px-5 py-4 outline-none"
+              >
 
-                  <div className="mt-2 text-4xl font-bold tracking-tight">
-                    {margin}%
-                  </div>
+                <option>
+                  20x20
+                </option>
 
-                </div>
+                <option>
+                  30x40
+                </option>
 
-              </div>
+                <option>
+                  A3
+                </option>
 
-              <button className="mt-12 w-full rounded-full bg-white px-8 py-5 font-medium text-black transition hover:scale-[1.02]">
-                Save Quotation
-              </button>
+              </select>
 
             </div>
 
           </div>
 
-        </section>
+        </div>
+
+        {/* RIGHT */}
+
+        <aside className="sticky top-10 h-fit rounded-[40px] bg-black p-10 text-white shadow-2xl">
+
+          <p className="text-sm uppercase tracking-[0.3em] text-white/50">
+            Live Pricing
+          </p>
+
+          <div className="mt-10 space-y-8">
+
+            <div>
+
+              <div className="text-sm text-white/50">
+                Blank Cost
+              </div>
+
+              <div className="mt-2 text-4xl font-bold">
+                ${pricing.blankCost}
+              </div>
+
+            </div>
+
+            <div>
+
+              <div className="text-sm text-white/50">
+                Print Cost
+              </div>
+
+              <div className="mt-2 text-4xl font-bold">
+                ${pricing.printCost}
+              </div>
+
+            </div>
+
+            <div>
+
+              <div className="text-sm text-white/50">
+                Unit Price
+              </div>
+
+              <div className="mt-2 text-5xl font-bold">
+                ${pricing.unitPrice}
+              </div>
+
+            </div>
+
+            <div className="border-t border-white/10 pt-8">
+
+              <div className="text-sm text-white/50">
+                Total Price
+              </div>
+
+              <div className="mt-3 text-6xl font-bold tracking-tight">
+                ${pricing.totalPrice}
+              </div>
+
+            </div>
+
+          </div>
+
+        </aside>
 
       </div>
 
