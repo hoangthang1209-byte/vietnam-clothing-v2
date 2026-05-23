@@ -7,183 +7,263 @@ export default function Footer() {
 
     <footer
       className="
-        relative
-        overflow-hidden
         border-t
         border-black/5
-        bg-black
-        text-white
+        bg-white
+        pt-24
       "
     >
 
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div
+        className="
+          mx-auto
+          grid
+          max-w-7xl
+          gap-16
+          px-6
+          pb-16
+          lg:grid-cols-4
+        "
+      >
 
         <div
           className="
-            grid
-            gap-16
-            lg:grid-cols-4
+            lg:col-span-2
           "
         >
 
           <div
             className="
-              lg:col-span-2
+              text-3xl
+              font-bold
+              tracking-tight
             "
           >
 
-            <div
-              className="
-                text-3xl
-                font-bold
-                tracking-tight
-              "
-            >
-
-              Vietnam Clothing
-
-            </div>
-
-            <p
-              className="
-                mt-6
-                max-w-xl
-                text-lg
-                leading-8
-                text-white/60
-              "
-            >
-
-              Premium OEM & ODM
-              apparel manufacturing
-              solutions for modern
-              fashion brands,
-              startups, and enterprise
-              production worldwide.
-
-            </p>
+            Vietnam Clothing
 
           </div>
 
-          <div>
+          <p
+            className="
+              mt-6
+              max-w-xl
+              leading-8
+              text-black/60
+            "
+          >
 
-            <div
+            Premium OEM & ODM
+            apparel manufacturing
+            partner in Vietnam for
+            fashion brands, uniforms,
+            merchandise and global
+            apparel projects.
+
+          </p>
+
+          <div
+            className="
+              mt-10
+              flex
+              flex-wrap
+              gap-4
+            "
+          >
+
+            <a
+              href="mailto:hello@vietnamclothing.com"
               className="
+                rounded-full
+                border
+                border-black/10
+                px-5
+                py-3
                 text-sm
-                font-semibold
-                uppercase
-                tracking-[0.2em]
-                text-white/40
+                transition
+                hover:bg-black
+                hover:text-white
               "
             >
 
-              Navigation
+              hello@vietnamclothing.com
 
-            </div>
+            </a>
 
-            <div
+            <a
+              href="tel:+84918681878"
               className="
-                mt-6
-                flex
-                flex-col
-                gap-4
+                rounded-full
+                border
+                border-black/10
+                px-5
+                py-3
+                text-sm
+                transition
+                hover:bg-black
+                hover:text-white
               "
             >
 
-              <Link
-                href="/"
-                className="
-                  text-white/70
-                  transition
-                  hover:text-white
-                "
-              >
+              +84 918 681 878
 
-                Home
-
-              </Link>
-
-              <Link
-                href="/products"
-                className="
-                  text-white/70
-                  transition
-                  hover:text-white
-                "
-              >
-
-                Products
-
-              </Link>
-
-              <Link
-                href="/about"
-                className="
-                  text-white/70
-                  transition
-                  hover:text-white
-                "
-              >
-
-                About
-
-              </Link>
-
-              <Link
-                href="/contact"
-                className="
-                  text-white/70
-                  transition
-                  hover:text-white
-                "
-              >
-
-                Contact
-
-              </Link>
-
-            </div>
+            </a>
 
           </div>
 
-          <div>
+        </div>
 
-            <div
+        <div>
+
+          <div
+            className="
+              text-sm
+              font-semibold
+              uppercase
+              tracking-[0.2em]
+            "
+          >
+
+            Navigation
+
+          </div>
+
+          <div
+            className="
+              mt-6
+              flex
+              flex-col
+              gap-4
+            "
+          >
+
+            <Link
+              href="/en"
               className="
-                text-sm
-                font-semibold
-                uppercase
-                tracking-[0.2em]
-                text-white/40
+                text-black/60
+                transition
+                hover:text-black
+              "
+            >
+
+              Home
+
+            </Link>
+
+            <Link
+              href="/en/products"
+              className="
+                text-black/60
+                transition
+                hover:text-black
+              "
+            >
+
+              Products
+
+            </Link>
+
+            <Link
+              href="/en/about"
+              className="
+                text-black/60
+                transition
+                hover:text-black
+              "
+            >
+
+              About
+
+            </Link>
+
+            <Link
+              href="/en/contact"
+              className="
+                text-black/60
+                transition
+                hover:text-black
               "
             >
 
               Contact
 
+            </Link>
+
+          </div>
+
+        </div>
+
+        <div>
+
+          <div
+            className="
+              text-sm
+              font-semibold
+              uppercase
+              tracking-[0.2em]
+            "
+          >
+
+            Capabilities
+
+          </div>
+
+          <div
+            className="
+              mt-6
+              flex
+              flex-col
+              gap-4
+            "
+          >
+
+            <div
+              className="
+                text-black/60
+              "
+            >
+
+              OEM Manufacturing
+
             </div>
 
             <div
               className="
-                mt-6
-                flex
-                flex-col
-                gap-4
-                text-white/70
+                text-black/60
               "
             >
 
-              <div>
-                hello@vietnamclothing.com
-              </div>
+              ODM Manufacturing
 
-              <div>
-                +84 123 456 789
-              </div>
+            </div>
 
-              <div>
-                Ho Chi Minh City,
-                Vietnam
-              </div>
+            <div
+              className="
+                text-black/60
+              "
+            >
+
+              Screen Printing
+
+            </div>
+
+            <div
+              className="
+                text-black/60
+              "
+            >
+
+              Embroidery
+
+            </div>
+
+            <div
+              className="
+                text-black/60
+              "
+            >
+
+              Global Export
 
             </div>
 
@@ -191,17 +271,26 @@ export default function Footer() {
 
         </div>
 
+      </div>
+
+      <div
+        className="
+          border-t
+          border-black/5
+        "
+      >
+
         <div
           className="
-            mt-20
+            mx-auto
             flex
+            max-w-7xl
             flex-col
-            gap-6
-            border-t
-            border-white/10
-            pt-8
+            gap-4
+            px-6
+            py-8
             text-sm
-            text-white/40
+            text-black/40
             md:flex-row
             md:items-center
             md:justify-between
@@ -209,8 +298,10 @@ export default function Footer() {
         >
 
           <div>
+
             © 2026 Vietnam Clothing.
             All rights reserved.
+
           </div>
 
           <div
@@ -220,15 +311,15 @@ export default function Footer() {
             "
           >
 
-            <Link href="/privacy">
+            <Link href="/en">
 
               Privacy Policy
 
             </Link>
 
-            <Link href="/terms">
+            <Link href="/en">
 
-              Terms
+              Terms & Conditions
 
             </Link>
 

@@ -1,30 +1,12 @@
-import Link from "next/link";
+import Image
+from "next/image";
 
-import Image from "next/image";
-
-import type {
-  Metadata,
-} from "next";
-
-import Container
-from "@/components/ui/Container";
-
-import Reveal
-from "@/components/animation/Reveal";
+import Link
+from "next/link";
 
 import {
   products,
 } from "@/data/products";
-
-export const metadata:
-  Metadata = {
-
-  title:
-    "Products",
-
-  description:
-    "Premium OEM & ODM apparel manufacturing solutions from Vietnam Clothing.",
-};
 
 export default function ProductsPage() {
 
@@ -33,23 +15,24 @@ export default function ProductsPage() {
     <main
       className="
         bg-white
-        pt-40
-        pb-32
         text-black
       "
     >
 
-      <Container>
+      <section
+        className="
+          border-b
+          border-black/5
+          pb-24
+          pt-56
+        "
+      >
 
         <div
           className="
-            mb-20
-            flex
-            flex-col
-            gap-8
-            lg:flex-row
-            lg:items-end
-            lg:justify-between
+            mx-auto
+            max-w-7xl
+            px-6
           "
         >
 
@@ -59,82 +42,92 @@ export default function ProductsPage() {
             "
           >
 
-            <p
+            <div
               className="
-                mb-5
                 text-sm
                 uppercase
                 tracking-[0.3em]
-                text-neutral-500
+                text-black/40
               "
             >
 
-              Products
+              Product Collections
 
-            </p>
+            </div>
 
             <h1
               className="
-                text-5xl
+                mt-6
+                text-6xl
                 font-bold
-                leading-tight
                 tracking-tight
-                lg:text-7xl
+                md:text-7xl
               "
             >
 
               Premium Apparel
-
-              <br />
-
-              Manufacturing Solutions
+              Manufacturing
 
             </h1>
 
+            <p
+              className="
+                mt-8
+                max-w-2xl
+                text-lg
+                leading-8
+                text-black/60
+              "
+            >
+
+              OEM & ODM apparel
+              manufacturing solutions
+              for fashion brands,
+              uniforms and merchandise
+              projects worldwide.
+
+            </p>
+
           </div>
-
-          <p
-            className="
-              max-w-xl
-              text-lg
-              leading-8
-              text-black/60
-            "
-          >
-
-            Explore our OEM & ODM
-            apparel manufacturing
-            capabilities for modern
-            global brands.
-
-          </p>
 
         </div>
 
+      </section>
+
+      <section
+        className="
+          py-24
+        "
+      >
+
         <div
           className="
-            grid
-            gap-8
-            md:grid-cols-2
-            xl:grid-cols-3
+            mx-auto
+            max-w-7xl
+            px-6
           "
         >
 
-          {
-            Object.values(
-              products
-            ).map(
-              (
-                product
-              ) => (
+          <div
+            className="
+              grid
+              gap-8
+              md:grid-cols-2
+            "
+          >
 
-                <Reveal
-                  key={
-                    product.slug
-                  }
-                >
+            {
+              Object.values(
+                products
+              ).map(
+                (
+                  product
+                ) => (
 
                   <Link
+                    key={
+                      product.slug
+                    }
                     href={`/en/products/${product.slug}`}
                     className="
                       group
@@ -144,9 +137,8 @@ export default function ProductsPage() {
                       border
                       border-black/5
                       bg-white
-                      transition-all
-                      duration-500
-                      hover:-translate-y-2
+                      transition
+                      hover:-translate-y-1
                       hover:shadow-2xl
                     "
                   >
@@ -164,8 +156,8 @@ export default function ProductsPage() {
                         alt={
                           product.title
                         }
-                        width={1200}
-                        height={1400}
+                        width={1600}
+                        height={2000}
                         className="
                           aspect-[4/5]
                           h-full
@@ -179,11 +171,14 @@ export default function ProductsPage() {
 
                     </div>
 
-                    <div className="p-8">
+                    <div
+                      className="
+                        p-10
+                      "
+                    >
 
                       <div
                         className="
-                          mb-4
                           text-xs
                           uppercase
                           tracking-[0.3em]
@@ -199,7 +194,8 @@ export default function ProductsPage() {
 
                       <h2
                         className="
-                          text-3xl
+                          mt-5
+                          text-4xl
                           font-bold
                           tracking-tight
                         "
@@ -213,9 +209,8 @@ export default function ProductsPage() {
 
                       <p
                         className="
-                          mt-4
-                          line-clamp-3
-                          leading-7
+                          mt-5
+                          leading-8
                           text-black/60
                         "
                       >
@@ -228,14 +223,14 @@ export default function ProductsPage() {
 
                       <div
                         className="
-                          mt-8
+                          mt-10
                           inline-flex
                           items-center
                           gap-3
                           rounded-full
                           border
                           border-black/10
-                          px-5
+                          px-6
                           py-3
                           text-sm
                           transition
@@ -249,7 +244,6 @@ export default function ProductsPage() {
                         <span
                           className="
                             transition
-                            duration-300
                             group-hover:translate-x-1
                           "
                         >
@@ -263,15 +257,15 @@ export default function ProductsPage() {
                     </div>
 
                   </Link>
-
-                </Reveal>
+                )
               )
-            )
-          }
+            }
+
+          </div>
 
         </div>
 
-      </Container>
+      </section>
 
     </main>
   );

@@ -3,109 +3,71 @@ import type {
 } from "@/types/product";
 
 export const products:
-  Record<
-    string,
-    Product
-  > = {
+  Record<string, Product> = {
 
-  "premium-cotton-tshirt": {
+  "t-shirts": {
 
     slug:
-      "premium-cotton-tshirt",
-
-    category:
-      "T-Shirts",
+      "t-shirts",
 
     title:
-      "Premium Cotton T-Shirt",
+      "Premium T-Shirts",
 
-    seoTitle:
-      "Premium Cotton T-Shirt Manufacturer Vietnam",
-
-    seoDescription:
-      "High-quality premium cotton t-shirt manufacturing with OEM & ODM customization solutions.",
-
-    keywords: [
-
-      "premium t-shirt",
-
-      "cotton t-shirt manufacturer",
-
-      "OEM apparel",
-
-      "Vietnam clothing factory",
-    ],
+    category:
+      "Apparel Manufacturing",
 
     description:
-      "Premium cotton t-shirt designed for modern brands seeking scalable production and high-quality manufacturing.",
+      "Premium OEM & ODM t-shirt manufacturing solutions for fashion brands, uniforms and merchandise projects worldwide.",
 
     image:
-      "/images/products/shirt-1.jpg",
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1600&auto=format&fit=crop",
 
     gallery: [
 
-      "/images/products/shirt-1.jpg",
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1600&auto=format&fit=crop",
 
-      "/images/products/shirt-2.jpg",
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=1600&auto=format&fit=crop",
 
-      "/images/products/shirt-3.jpg",
-
-      "/images/products/shirt-4.jpg",
-    ],
-
-    sections: [
-
-      {
-        type:
-          "hero",
-      },
-
-      {
-        type:
-          "features",
-      },
-
-      {
-        type:
-          "content",
-      },
-
-      {
-        type:
-          "cta",
-      },
+      "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=1600&auto=format&fit=crop",
     ],
 
     features: [
 
-      "Premium cotton fabric",
+      "Premium Cotton Fabrics",
 
-      "OEM & ODM production",
+      "OEM & ODM Manufacturing",
 
-      "Custom private label",
+      "Silkscreen & DTG Printing",
 
-      "Scalable manufacturing",
+      "Global Export Standards",
 
-      "Fast lead time",
-    ],
-
-    materials: [
-
-      "100% Cotton",
-
-      "Cotton Poly Blend",
-
-      "Organic Cotton",
+      "Custom Packaging Solutions",
     ],
 
     specifications: [
 
       {
         label:
-          "Fabric",
+          "MOQ",
 
         value:
-          "Cotton / Poly",
+          "100 pcs",
+      },
+
+      {
+        label:
+          "Lead Time",
+
+        value:
+          "7 - 14 Days",
+      },
+
+      {
+        label:
+          "Material",
+
+        value:
+          "100% Cotton",
       },
 
       {
@@ -113,23 +75,7 @@ export const products:
           "Printing",
 
         value:
-          "Screen / DTF",
-      },
-
-      {
-        label:
-          "Customization",
-
-        value:
-          "OEM / ODM",
-      },
-
-      {
-        label:
-          "Production",
-
-        value:
-          "Vietnam Factory",
+          "Screen / DTG / Embroidery",
       },
     ],
 
@@ -137,199 +83,87 @@ export const products:
 
       {
         question:
-          "What is your MOQ?",
+          "What is the minimum order quantity?",
 
         answer:
-          "Our MOQ starts from 100 pieces depending on product type and customization.",
+          "Our MOQ starts from 100 pieces depending on product specifications.",
       },
 
       {
         question:
-          "Do you provide OEM & ODM services?",
+          "Do you provide OEM manufacturing?",
 
         answer:
-          "Yes. We provide full OEM & ODM apparel manufacturing solutions.",
+          "Yes. We provide full OEM & ODM apparel manufacturing services.",
       },
 
       {
         question:
-          "What is the average lead time?",
+          "Can you export internationally?",
 
         answer:
-          "Production lead time is typically 7-14 working days.",
+          "Yes. We export apparel products worldwide.",
       },
     ],
-
-    cta: {
-
-      title:
-        "Start Your Production",
-
-      description:
-        "Contact our manufacturing team for quotation and sampling support.",
-
-      button:
-        "Request Quote",
-    },
-
-    contentBlocks: [
-
-      {
-        type:
-          "heading",
-
-        content:
-          "Modern Apparel Manufacturing",
-      },
-
-      {
-        type:
-          "paragraph",
-
-        content:
-          "Vietnam Clothing provides scalable premium apparel manufacturing solutions for modern fashion brands.",
-      },
-
-      {
-        type:
-          "checklist",
-
-        items: [
-
-          "OEM Production",
-
-          "ODM Development",
-
-          "Private Label",
-
-          "Quality Control",
-        ],
-      },
-    ],
-  },
-
-  "performance-polo-shirt": {
-
-    slug:
-      "performance-polo-shirt",
-
-    category:
-      "Polo Shirts",
-
-    title:
-      "Performance Polo Shirt",
 
     seoTitle:
-      "Performance Polo Shirt OEM Manufacturer",
+      "Premium T-Shirt Manufacturing Vietnam",
 
     seoDescription:
-      "Modern performance polo shirt manufacturing with premium materials and branding customization.",
+      "OEM & ODM premium t-shirt manufacturing solutions from Vietnam Clothing.",
+  },
 
-    keywords: [
+  "hoodies": {
 
-      "polo shirt manufacturer",
+    slug:
+      "hoodies",
 
-      "performance polo",
+    title:
+      "Custom Hoodies",
 
-      "OEM polo shirt",
-
-      "Vietnam apparel factory",
-    ],
+    category:
+      "OEM Manufacturing",
 
     description:
-      "Premium performance polo shirt optimized for uniforms, corporate branding, and modern apparel production.",
+      "Premium hoodie manufacturing for fashion brands and merchandise collections.",
 
     image:
-      "/images/products/polo-1.jpg",
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1600&auto=format&fit=crop",
 
     gallery: [
 
-      "/images/products/polo-1.jpg",
+      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1600&auto=format&fit=crop",
 
-      "/images/products/polo-2.jpg",
-
-      "/images/products/polo-3.jpg",
-
-      "/images/products/polo-4.jpg",
-    ],
-
-    sections: [
-
-      {
-        type:
-          "hero",
-      },
-
-      {
-        type:
-          "features",
-      },
-
-      {
-        type:
-          "specs",
-      },
-
-      {
-        type:
-          "cta",
-      },
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1600&auto=format&fit=crop",
     ],
 
     features: [
 
-      "Moisture-wicking fabric",
+      "Heavyweight Fabric",
 
-      "Corporate uniform ready",
+      "Streetwear Quality",
 
-      "Premium embroidery",
+      "Custom Labels",
 
-      "OEM production",
-
-      "Fast delivery",
-    ],
-
-    materials: [
-
-      "Polyester",
-
-      "Cotton Spandex",
-
-      "Performance Mesh",
+      "Premium Embroidery",
     ],
 
     specifications: [
 
       {
         label:
-          "Fabric",
+          "MOQ",
 
         value:
-          "Performance Poly",
+          "80 pcs",
       },
 
       {
         label:
-          "Branding",
+          "Lead Time",
 
         value:
-          "Embroidery",
-      },
-
-      {
-        label:
-          "Fit",
-
-        value:
-          "Modern Fit",
-      },
-
-      {
-        label:
-          "Production",
-
-        value:
-          "OEM Factory",
+          "10 - 18 Days",
       },
     ],
 
@@ -337,50 +171,17 @@ export const products:
 
       {
         question:
-          "Can I customize logos?",
+          "Can you produce oversized hoodies?",
 
         answer:
-          "Yes. We support embroidery, screen printing, DTF, and heat transfer.",
-      },
-
-      {
-        question:
-          "Do you offer sampling?",
-
-        answer:
-          "Yes. Sample development is available before mass production.",
+          "Yes. We support oversized and streetwear fits.",
       },
     ],
 
-    cta: {
+    seoTitle:
+      "Custom Hoodie Manufacturing Vietnam",
 
-      title:
-        "Build Your Apparel Brand",
-
-      description:
-        "Talk with our production team for scalable manufacturing solutions.",
-
-      button:
-        "Contact Us",
-    },
-
-    contentBlocks: [
-
-      {
-        type:
-          "heading",
-
-        content:
-          "Performance Manufacturing",
-      },
-
-      {
-        type:
-          "paragraph",
-
-        content:
-          "Designed for uniforms, golf apparel, hospitality, and premium corporate branding.",
-      },
-    ],
+    seoDescription:
+      "OEM hoodie manufacturing solutions from Vietnam Clothing.",
   },
 };

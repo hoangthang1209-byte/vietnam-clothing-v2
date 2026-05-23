@@ -9,6 +9,10 @@ import {
 } from "react";
 
 import {
+  usePathname,
+} from "next/navigation";
+
+import {
   motion,
   AnimatePresence,
 } from "framer-motion";
@@ -19,6 +23,9 @@ import {
 } from "lucide-react";
 
 export default function Navbar() {
+
+  const pathname =
+    usePathname();
 
   const [
     isVisible,
@@ -110,7 +117,7 @@ export default function Navbar() {
               opacity: 0,
             }}
             transition={{
-              duration: 0.3,
+              duration: 0.25,
             }}
             className="
               fixed
@@ -121,7 +128,14 @@ export default function Navbar() {
             "
           >
 
-            <div className="mx-auto max-w-7xl px-6 pt-6">
+            <div
+              className="
+                mx-auto
+                max-w-7xl
+                px-6
+                pt-6
+              "
+            >
 
               <div
                 className="
@@ -131,7 +145,7 @@ export default function Navbar() {
                   rounded-full
                   border
                   border-white/10
-                  bg-white/70
+                  bg-white/80
                   px-6
                   py-4
                   shadow-xl
@@ -140,7 +154,7 @@ export default function Navbar() {
               >
 
                 <Link
-                  href="/"
+                  href="/en"
                   className="
                     text-lg
                     font-bold
@@ -162,13 +176,21 @@ export default function Navbar() {
                 >
 
                   <Link
-                    href="/products"
-                    className="
+                    href="/en/products"
+                    className={`
                       text-sm
-                      text-black/60
                       transition
-                      hover:text-black
-                    "
+
+                      ${
+                        pathname.includes(
+                          "/products"
+                        )
+
+                          ? "text-black"
+
+                          : "text-black/60 hover:text-black"
+                      }
+                    `}
                   >
 
                     Products
@@ -176,13 +198,21 @@ export default function Navbar() {
                   </Link>
 
                   <Link
-                    href="/about"
-                    className="
+                    href="/en/about"
+                    className={`
                       text-sm
-                      text-black/60
                       transition
-                      hover:text-black
-                    "
+
+                      ${
+                        pathname.includes(
+                          "/about"
+                        )
+
+                          ? "text-black"
+
+                          : "text-black/60 hover:text-black"
+                      }
+                    `}
                   >
 
                     About
@@ -190,16 +220,69 @@ export default function Navbar() {
                   </Link>
 
                   <Link
-                    href="/contact"
-                    className="
+                    href="/en/contact"
+                    className={`
                       text-sm
-                      text-black/60
                       transition
-                      hover:text-black
-                    "
+
+                      ${
+                        pathname.includes(
+                          "/contact"
+                        )
+
+                          ? "text-black"
+
+                          : "text-black/60 hover:text-black"
+                      }
+                    `}
                   >
 
                     Contact
+
+                  </Link>
+
+                </div>
+
+                <div
+                  className="
+                    hidden
+                    items-center
+                    gap-2
+                    md:flex
+                  "
+                >
+
+                  <Link
+                    href="/en"
+                    className="
+                      rounded-full
+                      px-3
+                      py-2
+                      text-xs
+                      font-medium
+                      transition
+                      hover:bg-black/5
+                    "
+                  >
+
+                    EN
+
+                  </Link>
+
+                  <Link
+                    href="/vi"
+                    className="
+                      rounded-full
+                      px-3
+                      py-2
+                      text-xs
+                      font-medium
+                      transition
+                      hover:bg-black/5
+                    "
+                  >
+
+                    VI
 
                   </Link>
 
@@ -275,7 +358,7 @@ export default function Navbar() {
                 x: "100%",
               }}
               transition={{
-                duration: 0.3,
+                duration: 0.25,
               }}
               className="
                 absolute
@@ -348,7 +431,7 @@ export default function Navbar() {
               >
 
                 <Link
-                  href="/products"
+                  href="/en/products"
                   className="
                     text-2xl
                     font-semibold
@@ -360,7 +443,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  href="/about"
+                  href="/en/about"
                   className="
                     text-2xl
                     font-semibold
@@ -372,7 +455,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  href="/contact"
+                  href="/en/contact"
                   className="
                     text-2xl
                     font-semibold
