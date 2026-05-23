@@ -1,54 +1,62 @@
-import { Metadata }
-from "next";
+import type {
+  Metadata,
+} from "next";
 
-import { notFound }
-from "next/navigation";
+import {
+  notFound,
+} from "next/navigation";
 
-import { products }
-from "@/data/products";
+import {
+  products,
+} from "@/data/products";
 
-import FactoryProcess
-from "@/sections/FactoryProcess";
+import Breadcrumb
+from "@/components/navigation/Breadcrumb";
 
-import InquiryCTA
-from "@/components/InquiryCTA";
-
-import InquiryForm
-from "@/components/InquiryForm";
-
-import RelatedProducts
-from "@/components/RelatedProducts";
-
-import ProductHero
-from "@/sections/ProductHero";
-
-import ProductStats
-from "@/sections/ProductStats";
+import ProductPageClient
+from "@/components/products/ProductPageClient";
 
 type Props = {
-  params: Promise<{
-    slug: string;
-  }>;
+
+  params:
+    Promise<{
+      locale: string;
+      slug: string;
+    }>;
 };
+
+export async function generateStaticParams() {
+
+  return Object.keys(
+    products
+  ).map(
+    (
+      slug
+    ) => ({
+
+      slug,
+    })
+  );
+}
 
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
 
-  const { slug } =
-    await params;
+  const {
+    slug,
+  } = await params;
 
   const product =
     products[
-      slug as keyof typeof products
+      slug
     ];
 
-  if (!product) {
+  if (
+    !product
+  ) {
 
-    return {
-      title:
-        "Product Not Found",
-    };
+    return {};
   }
 
   return {
@@ -78,43 +86,57 @@ export default async function ProductPage({
   params,
 }: Props) {
 
-  const { slug } =
-    await params;
+  const {
+    slug,
+  } = await params;
 
   const product =
     products[
-      slug as keyof typeof products
+      slug
     ];
 
-  if (!product) {
-    return notFound();
+  if (
+    !product
+  ) {
+
+    notFound();
   }
 
   return (
 
-    <main className="min-h-screen bg-white pt-40 text-black">
+    <main className="bg-white text-black">
 
-      <div className="mx-auto max-w-7xl px-6">
+      <section className="pt-32">
 
-        <ProductHero
-          product={product}
-        />
+        <div className="mx-auto max-w-7xl px-6">
 
-        <ProductStats
-          product={product}
-        />
+          <Breadcrumb
+            items={[
+              {
+                label:
+                  "Products",
 
-        <FactoryProcess />
+                href:
+                  "/en/products",
+              },
 
-        <InquiryCTA />
+              {
+                label:
+                  product.title,
 
-        <InquiryForm />
+                href:
+                  `/en/products/${product.slug}`,
+              },
+            ]}
+          />
 
-        <RelatedProducts
-          currentSlug={slug}
-        />
+        </div>
 
-      </div>
+      </section>
+
+      <ProductPageClient
+        product={product}
+      />
 
     </main>
   );
