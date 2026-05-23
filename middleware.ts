@@ -1,47 +1,51 @@
 import {
+    NextRequest,
     NextResponse,
   } from "next/server";
   
-  import type {
-    NextRequest,
-  } from "next/server";
+  const locales = [
+    "en",
+    "vi",
+  ];
   
   export function middleware(
     request: NextRequest
   ) {
   
-    const pathname =
-      request.nextUrl.pathname;
+    const {
+      pathname,
+    } = request.nextUrl;
   
-    const isMissingLocale =
+    const pathnameHasLocale =
+      locales.some(
+        (
+          locale
+        ) =>
   
-      !pathname.startsWith(
-        "/en"
-      ) &&
-  
-      !pathname.startsWith(
-        "/vi"
+          pathname.startsWith(
+            `/${locale}`
+          )
       );
   
     if (
-      isMissingLocale
+      pathnameHasLocale
     ) {
   
-      return NextResponse.redirect(
-        new URL(
-          `/en${pathname}`,
-          request.url
-        )
-      );
+      return NextResponse.next();
     }
   
-    return NextResponse.next();
+    request.nextUrl.pathname =
+      `/en${pathname}`;
+  
+    return NextResponse.redirect(
+      request.nextUrl
+    );
   }
   
   export const config = {
   
     matcher: [
   
-      "/((?!api|_next|favicon.ico).*)",
+      "/((?!_next|api|favicon.ico).*)",
     ],
   };
