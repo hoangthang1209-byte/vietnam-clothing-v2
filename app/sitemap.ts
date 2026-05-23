@@ -1,105 +1,95 @@
 import type {
-    MetadataRoute,
-  } from "next";
-  
-  import {
-    products,
-  } from "@/data/products";
-  
-  import {
-    collections,
-  } from "@/data/collections";
-  
-  import {
-    blogPosts,
-  } from "@/data/blog";
-  
-  const BASE_URL =
-    "https://vietnamclothing.com";
-  
-  export default function sitemap():
-    MetadataRoute.Sitemap {
-  
-    const productUrls =
-      Object.values(
-        products
-      ).map(
-        (
-          product
-        ) => ({
-  
-          url:
-            `${BASE_URL}/en/products/${product.slug}`,
-  
-          lastModified:
-            new Date(),
-        })
-      );
-  
-    const collectionUrls =
-      Object.values(
-        collections
-      ).map(
-        (
-          collection
-        ) => ({
-  
-          url:
-            `${BASE_URL}/en/collections/${collection.slug}`,
-  
-          lastModified:
-            new Date(),
-        })
-      );
-  
-    const blogUrls =
-      Object.values(
-        blogPosts
-      ).map(
-        (
-          post
-        ) => ({
-  
-          url:
-            `${BASE_URL}/en/blog/${post.slug}`,
-  
-          lastModified:
-            new Date(
-              post.publishedAt
-            ),
-        })
-      );
-  
-    return [
-  
-      {
+  MetadataRoute,
+} from "next";
+
+import {
+  getProducts,
+} from "@/lib/getProducts";
+
+export default async function sitemap():
+Promise<MetadataRoute.Sitemap> {
+
+  const products =
+    await getProducts();
+
+  const productUrls =
+    products.map(
+      (
+        product: any
+      ) => ({
+
         url:
-          `${BASE_URL}/en`,
-  
+          `https://vietnamclothing.com/en/products/${product.slug}`,
+
         lastModified:
           new Date(),
-      },
-  
-      {
-        url:
-          `${BASE_URL}/en/blog`,
-  
-        lastModified:
-          new Date(),
-      },
-  
-      {
-        url:
-          `${BASE_URL}/en/collections`,
-  
-        lastModified:
-          new Date(),
-      },
-  
-      ...productUrls,
-  
-      ...collectionUrls,
-  
-      ...blogUrls,
-    ];
-  }
+
+        changeFrequency:
+          "weekly" as const,
+
+        priority:
+          0.8,
+      })
+    );
+
+  return [
+
+    {
+      url:
+        "https://vietnamclothing.com/en",
+
+      lastModified:
+        new Date(),
+
+      changeFrequency:
+        "weekly",
+
+      priority:
+        1,
+    },
+
+    {
+      url:
+        "https://vietnamclothing.com/en/products",
+
+      lastModified:
+        new Date(),
+
+      changeFrequency:
+        "weekly",
+
+      priority:
+        0.9,
+    },
+
+    {
+      url:
+        "https://vietnamclothing.com/en/about",
+
+      lastModified:
+        new Date(),
+
+      changeFrequency:
+        "monthly",
+
+      priority:
+        0.7,
+    },
+
+    {
+      url:
+        "https://vietnamclothing.com/en/contact",
+
+      lastModified:
+        new Date(),
+
+      changeFrequency:
+        "monthly",
+
+      priority:
+        0.7,
+    },
+
+    ...productUrls,
+  ];
+}

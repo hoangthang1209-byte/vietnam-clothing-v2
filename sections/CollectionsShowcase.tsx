@@ -1,141 +1,208 @@
+import Image
+from "next/image";
+
 const collections = [
 
-    {
-      title:
-        "Streetwear",
-  
-      image:
-        "https://images.unsplash.com/photo-1523398002811-999ca8dec234?q=80&w=1400&auto=format&fit=crop",
-    },
-  
-    {
-      title:
-        "Corporate Uniforms",
-  
-      image:
-        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1400&auto=format&fit=crop",
-    },
-  
-    {
-      title:
-        "Activewear",
-  
-      image:
-        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1400&auto=format&fit=crop",
-    },
-  
-    {
-      title:
-        "Merchandise",
-  
-      image:
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1400&auto=format&fit=crop",
-    },
-  ];
-  
-  export default function CollectionsShowcase() {
-  
-    return (
-  
-      <section className="py-32">
-  
-        <div className="mx-auto max-w-7xl px-6">
-  
-          <div className="max-w-3xl">
-  
-            <div className="text-sm uppercase tracking-[0.3em] text-black/40">
-  
-              Collections
-  
+  {
+    title:
+      "Streetwear Collection",
+
+    image:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600&auto=format&fit=crop",
+  },
+
+  {
+    title:
+      "Corporate Uniforms",
+
+    image:
+      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=1600&auto=format&fit=crop",
+  },
+
+  {
+    title:
+      "Premium Basics",
+
+    image:
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1600&auto=format&fit=crop",
+  },
+];
+
+export default function CollectionsShowcase() {
+
+  return (
+
+    <section
+      className="
+        py-32
+      "
+    >
+
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-6
+        "
+      >
+
+        <div
+          className="
+            mb-20
+            flex
+            flex-col
+            justify-between
+            gap-10
+            lg:flex-row
+            lg:items-end
+          "
+        >
+
+          <div
+            className="
+              max-w-4xl
+            "
+          >
+
+            <div
+              className="
+                text-sm
+                uppercase
+                tracking-[0.3em]
+                text-black/40
+              "
+            >
+
+              Featured Collections
+
             </div>
-  
+
             <h2
               className="
                 mt-6
                 text-6xl
-                font-semibold
+                font-bold
                 tracking-tight
-                leading-none
               "
             >
-  
-              Built For
-              Modern Apparel
-              Brands
-  
+
+              Premium Apparel
+              Collections
+
             </h2>
-  
+
           </div>
-  
-          <div className="mt-20 grid gap-8 md:grid-cols-2">
-  
-            {
-              collections.map(
-                (
-                  collection
-                ) => (
-  
-                  <a
-                    key={
-                      collection.title
+
+          <p
+            className="
+              max-w-xl
+              text-lg
+              leading-8
+              text-black/60
+            "
+          >
+
+            Explore modern apparel
+            manufacturing solutions
+            designed for fashion brands,
+            uniforms and global
+            merchandise campaigns.
+
+          </p>
+
+        </div>
+
+        <div
+          className="
+            grid
+            gap-8
+            lg:grid-cols-3
+          "
+        >
+
+          {
+            collections.map(
+              (
+                item,
+                index
+              ) => (
+
+                <div
+                  key={index}
+                  className="
+                    group
+                    relative
+                    overflow-hidden
+                    rounded-[40px]
+                  "
+                >
+
+                  <Image
+                    src={
+                      item.image
                     }
-                    href="/collections"
-                    className="group block"
+                    alt={
+                      item.title
+                    }
+                    width={1600}
+                    height={2000}
+                    className="
+                      aspect-[4/5]
+                      h-full
+                      w-full
+                      object-cover
+                      transition
+                      duration-700
+                      group-hover:scale-105
+                    "
+                  />
+
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      bg-gradient-to-t
+                      from-black/70
+                      via-black/10
+                      to-transparent
+                    "
+                  />
+
+                  <div
+                    className="
+                      absolute
+                      bottom-0
+                      left-0
+                      p-8
+                      text-white
+                    "
                   >
-  
-                    <div
+
+                    <h3
                       className="
-                        overflow-hidden
-                        rounded-[40px]
+                        text-3xl
+                        font-bold
+                        tracking-tight
                       "
                     >
-  
-                      <img
-                        src={
-                          collection.image
-                        }
-                        alt={
-                          collection.title
-                        }
-                        className="
-                          aspect-[4/5]
-                          w-full
-                          object-cover
-                          transition
-                          duration-700
-                          group-hover:scale-105
-                        "
-                      />
-  
-                    </div>
-  
-                    <div className="mt-6 flex items-center justify-between">
-  
-                      <div className="text-3xl font-semibold">
-  
-                        {
-                          collection.title
-                        }
-  
-                      </div>
-  
-                      <div className="text-black/40">
-  
-                        Explore →
-  
-                      </div>
-  
-                    </div>
-  
-                  </a>
-                )
+
+                      {
+                        item.title
+                      }
+
+                    </h3>
+
+                  </div>
+
+                </div>
               )
-            }
-  
-          </div>
-  
+            )
+          }
+
         </div>
-  
-      </section>
-    );
-  }
+
+      </div>
+
+    </section>
+  );
+}

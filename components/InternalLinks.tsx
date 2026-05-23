@@ -1,80 +1,119 @@
 import Link
 from "next/link";
 
-import { products }
-from "@/data/products";
+import {
+  getProducts,
+} from "@/lib/getProducts";
 
-type Props = {
-  currentSlug?: string;
-};
+export default async function InternalLinks() {
 
-export default function InternalLinks({
-  currentSlug,
-}: Props) {
+  const products =
+    await getProducts();
 
-  const relatedProducts =
-    Object.entries(products)
-      .filter(
-        ([slug]) =>
-          slug !== currentSlug
-      )
-      .slice(0, 4);
+  if (
+    !products?.length
+  ) {
+
+    return null;
+  }
 
   return (
 
-    <section className="mx-auto max-w-7xl px-6 py-24">
+    <section
+      className="
+        border-t
+        border-black/5
+        py-20
+      "
+    >
 
-      <div className="mb-16">
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-6
+        "
+      >
 
-        <div className="text-sm uppercase tracking-[0.3em] text-black/40">
-          Explore More
+        <div
+          className="
+            mb-10
+          "
+        >
+
+          <div
+            className="
+              text-xs
+              uppercase
+              tracking-[0.3em]
+              text-black/40
+            "
+          >
+
+            Explore More
+
+          </div>
+
+          <h2
+            className="
+              mt-5
+              text-4xl
+              font-bold
+              tracking-tight
+            "
+          >
+
+            Related Product
+            Categories
+
+          </h2>
+
         </div>
 
-        <h2 className="mt-6 text-5xl font-semibold">
+        <div
+          className="
+            flex
+            flex-wrap
+            gap-4
+          "
+        >
 
-          Related Manufacturing Solutions
+          {
+            products.map(
+              (
+                product: any
+              ) => (
 
-        </h2>
+                <Link
+                  key={
+                    product.id
+                  }
+                  href={
+                    `/en/products/${product.slug}`
+                  }
+                  className="
+                    rounded-full
+                    border
+                    border-black/10
+                    px-6
+                    py-3
+                    text-sm
+                    transition
+                    hover:bg-black
+                    hover:text-white
+                  "
+                >
 
-      </div>
+                  {
+                    product.title
+                  }
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-
-        {
-          relatedProducts.map(
-            ([
-              slug,
-              product,
-            ]: any) => (
-
-              <Link
-                key={slug}
-                href={`/products/${slug}`}
-                className="
-                  rounded-[32px]
-                  border border-black/10
-                  p-8
-                  transition
-                  hover:border-black
-                "
-              >
-
-                <h3 className="text-2xl font-semibold">
-
-                  {product.title}
-
-                </h3>
-
-                <p className="mt-4 text-black/60">
-
-                  {product.description}
-
-                </p>
-
-              </Link>
+                </Link>
+              )
             )
-          )
-        }
+          }
+
+        </div>
 
       </div>
 

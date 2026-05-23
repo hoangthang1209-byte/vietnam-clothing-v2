@@ -1,43 +1,17 @@
+import Link
+from "next/link";
+
 import Image
 from "next/image";
 
-const projects = [
+import {
+  getProducts,
+} from "@/lib/getProducts";
 
-  {
-    title:
-      "Corporate Uniform Collection",
+export default async function CollectionProducts() {
 
-    category:
-      "Uniform Manufacturing",
-
-    image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1600&auto=format&fit=crop",
-  },
-
-  {
-    title:
-      "Streetwear Hoodie Production",
-
-    category:
-      "OEM Manufacturing",
-
-    image:
-      "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1600&auto=format&fit=crop",
-  },
-
-  {
-    title:
-      "Premium Merchandise Collection",
-
-    category:
-      "Brand Merchandise",
-
-    image:
-      "https://images.unsplash.com/photo-1503341504253-dff4815485f1?q=80&w=1600&auto=format&fit=crop",
-  },
-];
-
-export default function CaseStudies() {
+  const products =
+    await getProducts();
 
   return (
 
@@ -82,7 +56,7 @@ export default function CaseStudies() {
               "
             >
 
-              Featured Projects
+              Product Collections
 
             </div>
 
@@ -95,29 +69,12 @@ export default function CaseStudies() {
               "
             >
 
-              Real Production
-              Case Studies
+              Explore
+              Our Products
 
             </h2>
 
           </div>
-
-          <p
-            className="
-              max-w-xl
-              text-lg
-              leading-8
-              text-black/60
-            "
-          >
-
-            Explore selected apparel
-            manufacturing projects
-            produced for fashion brands,
-            corporate uniforms and
-            merchandise campaigns.
-
-          </p>
 
         </div>
 
@@ -125,19 +82,24 @@ export default function CaseStudies() {
           className="
             grid
             gap-8
+            md:grid-cols-2
             lg:grid-cols-3
           "
         >
 
           {
-            projects.map(
+            products.map(
               (
-                project,
-                index
+                product: any
               ) => (
 
-                <div
-                  key={index}
+                <Link
+                  key={
+                    product.id
+                  }
+                  href={
+                    `/en/products/${product.slug}`
+                  }
                   className="
                     group
                     overflow-hidden
@@ -159,13 +121,13 @@ export default function CaseStudies() {
 
                     <Image
                       src={
-                        project.image
+                        product.image
                       }
                       alt={
-                        project.title
+                        product.title
                       }
                       width={1600}
-                      height={1800}
+                      height={2000}
                       className="
                         aspect-[4/5]
                         h-full
@@ -195,7 +157,7 @@ export default function CaseStudies() {
                     >
 
                       {
-                        project.category
+                        product.category
                       }
 
                     </div>
@@ -210,14 +172,14 @@ export default function CaseStudies() {
                     >
 
                       {
-                        project.title
+                        product.title
                       }
 
                     </h3>
 
                   </div>
 
-                </div>
+                </Link>
               )
             )
           }

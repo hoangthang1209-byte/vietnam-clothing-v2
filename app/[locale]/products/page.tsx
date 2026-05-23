@@ -1,14 +1,17 @@
-import Image
-from "next/image";
-
 import Link
 from "next/link";
 
-import {
-  products,
-} from "@/data/products";
+import Image
+from "next/image";
 
-export default function ProductsPage() {
+import {
+  getProducts,
+} from "@/lib/getProducts";
+
+export default async function ProductsPage() {
+
+  const products =
+    await getProducts();
 
   return (
 
@@ -51,7 +54,7 @@ export default function ProductsPage() {
               "
             >
 
-              Product Collections
+              Product Catalog
 
             </div>
 
@@ -67,6 +70,7 @@ export default function ProductsPage() {
 
               Premium Apparel
               Manufacturing
+              Solutions
 
             </h1>
 
@@ -80,11 +84,11 @@ export default function ProductsPage() {
               "
             >
 
-              OEM & ODM apparel
-              manufacturing solutions
-              for fashion brands,
-              uniforms and merchandise
-              projects worldwide.
+              Explore OEM & ODM
+              apparel manufacturing
+              services for fashion
+              brands, uniforms and
+              merchandise projects.
 
             </p>
 
@@ -113,25 +117,25 @@ export default function ProductsPage() {
               grid
               gap-8
               md:grid-cols-2
+              lg:grid-cols-3
             "
           >
 
             {
-              Object.values(
-                products
-              ).map(
+              products.map(
                 (
-                  product
+                  product: any
                 ) => (
 
                   <Link
                     key={
-                      product.slug
+                      product.id
                     }
-                    href={`/en/products/${product.slug}`}
+                    href={
+                      `/en/products/${product.slug}`
+                    }
                     className="
                       group
-                      block
                       overflow-hidden
                       rounded-[40px]
                       border
@@ -173,7 +177,7 @@ export default function ProductsPage() {
 
                     <div
                       className="
-                        p-10
+                        p-8
                       "
                     >
 
@@ -195,7 +199,7 @@ export default function ProductsPage() {
                       <h2
                         className="
                           mt-5
-                          text-4xl
+                          text-3xl
                           font-bold
                           tracking-tight
                         "
@@ -220,39 +224,6 @@ export default function ProductsPage() {
                         }
 
                       </p>
-
-                      <div
-                        className="
-                          mt-10
-                          inline-flex
-                          items-center
-                          gap-3
-                          rounded-full
-                          border
-                          border-black/10
-                          px-6
-                          py-3
-                          text-sm
-                          transition
-                          group-hover:bg-black
-                          group-hover:text-white
-                        "
-                      >
-
-                        Explore Product
-
-                        <span
-                          className="
-                            transition
-                            group-hover:translate-x-1
-                          "
-                        >
-
-                          →
-
-                        </span>
-
-                      </div>
 
                     </div>
 

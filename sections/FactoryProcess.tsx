@@ -1,110 +1,232 @@
-const processes = [
-    {
-      step: "01",
-      title: "Fabric Sourcing",
-      description:
-        "Premium fabric sourcing with stable quality standards and color consistency.",
-      image:
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1400&auto=format&fit=crop",
-    },
-  
-    {
-      step: "02",
-      title: "Pattern & Sampling",
-      description:
-        "Professional pattern development and fast sampling for bulk production approval.",
-      image:
-        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1400&auto=format&fit=crop",
-    },
-  
-    {
-      step: "03",
-      title: "Printing & Embroidery",
-      description:
-        "High-quality screen printing, DTF, embroidery and finishing solutions.",
-      image:
-        "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1400&auto=format&fit=crop",
-    },
-  
-    {
-      step: "04",
-      title: "Quality Control",
-      description:
-        "Strict QC standards before packaging and global export delivery.",
-      image:
-        "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop",
-    },
-  ];
-  
-  export default function FactoryProcess() {
-    return (
-      <section className="bg-black py-32 text-white">
-  
-        <div className="mx-auto max-w-7xl px-6">
-  
-          <div className="mb-20 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-  
-            <div className="max-w-3xl">
-  
-              <p className="mb-5 text-sm uppercase tracking-[0.3em] text-white/40">
-                Manufacturing Process
-              </p>
-  
-              <h2 className="text-5xl font-bold leading-tight tracking-tight">
-                Inside Our
-                <br />
-                Factory Workflow
-              </h2>
-  
-            </div>
-  
-            <p className="max-w-xl leading-8 text-white/60">
-              End-to-end apparel manufacturing solutions from sourcing to final production with international quality standards.
-            </p>
-  
+const steps = [
+
+  {
+    number:
+      "01",
+
+    title:
+      "Consultation",
+
+    description:
+      "Understand project requirements, target market, materials and production goals.",
+  },
+
+  {
+    number:
+      "02",
+
+    title:
+      "Sampling",
+
+    description:
+      "Develop samples, fitting adjustments and production-ready specifications.",
+  },
+
+  {
+    number:
+      "03",
+
+    title:
+      "Production",
+
+    description:
+      "Large-scale apparel manufacturing with strict quality control standards.",
+  },
+
+  {
+    number:
+      "04",
+
+    title:
+      "Printing & Embroidery",
+
+    description:
+      "Premium decoration solutions including silkscreen, DTG and embroidery.",
+  },
+
+  {
+    number:
+      "05",
+
+    title:
+      "Quality Control",
+
+    description:
+      "Final inspection and international production quality assurance workflow.",
+  },
+
+  {
+    number:
+      "06",
+
+    title:
+      "Global Export",
+
+    description:
+      "Packaging, logistics and worldwide shipping support for global clients.",
+  },
+];
+
+export default function FactoryProcess() {
+
+  return (
+
+    <section
+      className="
+        border-y
+        border-black/5
+        bg-neutral-50
+        py-32
+      "
+    >
+
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-6
+        "
+      >
+
+        <div
+          className="
+            mb-20
+            max-w-4xl
+          "
+        >
+
+          <div
+            className="
+              text-sm
+              uppercase
+              tracking-[0.3em]
+              text-black/40
+            "
+          >
+
+            Manufacturing Workflow
+
           </div>
-  
-          <div className="grid gap-8 lg:grid-cols-2">
-  
-            {processes.map((item) => (
-              <div
-                key={item.title}
-                className="group overflow-hidden rounded-[32px] bg-neutral-900"
-              >
-  
-                <div className="relative aspect-[4/3] overflow-hidden">
-  
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-  
-                  <div className="absolute left-6 top-6 rounded-full border border-white/20 bg-black/50 px-5 py-2 text-sm backdrop-blur">
-                    Step {item.step}
-                  </div>
-  
-                </div>
-  
-                <div className="p-10">
-  
-                  <h3 className="mb-5 text-3xl font-bold">
-                    {item.title}
-                  </h3>
-  
-                  <p className="leading-8 text-white/60">
-                    {item.description}
-                  </p>
-  
-                </div>
-  
-              </div>
-            ))}
-  
-          </div>
-  
+
+          <h2
+            className="
+              mt-6
+              text-6xl
+              font-bold
+              tracking-tight
+            "
+          >
+
+            From Concept
+            To Production
+
+          </h2>
+
+          <p
+            className="
+              mt-8
+              max-w-2xl
+              text-lg
+              leading-8
+              text-black/60
+            "
+          >
+
+            Vietnam Clothing provides
+            a complete OEM & ODM
+            apparel manufacturing
+            workflow from consultation
+            and sampling to production,
+            quality control and export.
+
+          </p>
+
         </div>
-  
-      </section>
-    );
-  }
+
+        <div
+          className="
+            grid
+            gap-6
+            md:grid-cols-2
+            lg:grid-cols-3
+          "
+        >
+
+          {
+            steps.map(
+              (
+                step,
+                index
+              ) => (
+
+                <div
+                  key={index}
+                  className="
+                    rounded-[36px]
+                    border
+                    border-black/5
+                    bg-white
+                    p-10
+                    transition
+                    hover:-translate-y-1
+                    hover:shadow-2xl
+                  "
+                >
+
+                  <div
+                    className="
+                      text-sm
+                      font-medium
+                      uppercase
+                      tracking-[0.3em]
+                      text-black/30
+                    "
+                  >
+
+                    {
+                      step.number
+                    }
+
+                  </div>
+
+                  <h3
+                    className="
+                      mt-6
+                      text-3xl
+                      font-bold
+                      tracking-tight
+                    "
+                  >
+
+                    {
+                      step.title
+                    }
+
+                  </h3>
+
+                  <p
+                    className="
+                      mt-6
+                      leading-8
+                      text-black/60
+                    "
+                  >
+
+                    {
+                      step.description
+                    }
+
+                  </p>
+
+                </div>
+              )
+            )
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+  );
+}

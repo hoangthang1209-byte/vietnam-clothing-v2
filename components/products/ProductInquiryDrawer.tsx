@@ -9,6 +9,9 @@ import {
   X,
 } from "lucide-react";
 
+import InquiryForm
+from "@/components/forms/InquiryForm";
+
 type Props = {
 
   isOpen: boolean;
@@ -18,7 +21,7 @@ type Props = {
   productTitle: string;
 };
 
-export default function ProductInquiryModal({
+export default function ProductInquiryDrawer({
 
   isOpen,
 
@@ -171,93 +174,15 @@ export default function ProductInquiryModal({
 
               </div>
 
-              <form
+              <div
                 className="
                   mt-12
-                  grid
-                  gap-5
                 "
               >
 
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="
-                    rounded-2xl
-                    border
-                    border-black/10
-                    px-6
-                    py-4
-                    outline-none
-                    transition
-                    focus:border-black
-                  "
-                />
+                <InquiryForm />
 
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="
-                    rounded-2xl
-                    border
-                    border-black/10
-                    px-6
-                    py-4
-                    outline-none
-                    transition
-                    focus:border-black
-                  "
-                />
-
-                <input
-                  type="text"
-                  placeholder="Company Name"
-                  className="
-                    rounded-2xl
-                    border
-                    border-black/10
-                    px-6
-                    py-4
-                    outline-none
-                    transition
-                    focus:border-black
-                  "
-                />
-
-                <textarea
-                  placeholder="Tell us about your project..."
-                  rows={5}
-                  className="
-                    rounded-2xl
-                    border
-                    border-black/10
-                    px-6
-                    py-4
-                    outline-none
-                    transition
-                    focus:border-black
-                  "
-                />
-
-                <button
-                  type="submit"
-                  className="
-                    mt-4
-                    rounded-full
-                    bg-black
-                    px-8
-                    py-4
-                    text-white
-                    transition
-                    hover:scale-[1.02]
-                  "
-                >
-
-                  Submit Inquiry
-
-                </button>
-
-              </form>
+              </div>
 
             </motion.div>
 

@@ -1,142 +1,146 @@
+import Link
+from "next/link";
+
 export default function HomepageCTA() {
 
-    return (
-  
-      <section
+  return (
+
+    <section
+      className="
+        py-32
+      "
+    >
+
+      <div
         className="
-          relative
-          overflow-hidden
-          bg-black
-          py-40
-          text-white
+          mx-auto
+          max-w-7xl
+          px-6
         "
       >
-  
+
         <div
           className="
-            absolute inset-0
-            opacity-20
+            overflow-hidden
+            rounded-[48px]
+            bg-black
+            px-10
+            py-20
+            text-white
+            md:px-20
           "
         >
-  
-          <img
-            src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2000&auto=format&fit=crop"
-            alt=""
-            className="
-              h-full w-full
-              object-cover
-            "
-          />
-  
-        </div>
-  
-        <div
-          className="
-            relative
-            mx-auto
-            max-w-6xl
-            px-6
-            text-center
-          "
-        >
-  
+
           <div
             className="
-              text-sm
-              uppercase
-              tracking-[0.3em]
-              text-white/40
+              max-w-4xl
             "
           >
-  
-            Start Your Project
-  
-          </div>
-  
-          <h2
-            className="
-              mx-auto
-              mt-8
-              max-w-5xl
-              text-6xl
-              font-semibold
-              leading-none
-              tracking-tight
-  
-              md:text-8xl
-            "
-          >
-  
-            Premium Apparel
-            Manufacturing
-            For Global Brands
-  
-          </h2>
-  
-          <p
-            className="
-              mx-auto
-              mt-10
-              max-w-2xl
-              text-xl
-              leading-relaxed
-              text-white/70
-            "
-          >
-  
-            Partner with Vietnam Clothing
-            for scalable OEM & ODM apparel
-            manufacturing solutions built
-            for modern fashion brands.
-  
-          </p>
-  
-          <div
-            className="
-              mt-14
-              flex
-              flex-wrap
-              justify-center
-              gap-4
-            "
-          >
-  
-            <a
-              href="/en/contact"
+
+            <div
               className="
-                rounded-full
-                bg-white
-                px-8 py-4
-                text-black
-                transition
-                hover:opacity-90
+                text-sm
+                uppercase
+                tracking-[0.3em]
+                text-white/40
               "
             >
-  
-              Request Quotation
-  
-            </a>
-  
-            <a
-              href="/collections"
+
+              OEM & ODM Manufacturing
+
+            </div>
+
+            <h2
               className="
-                rounded-full
-                border border-white/20
-                px-8 py-4
-                text-white
-                transition
-                hover:bg-white/10
+                mt-6
+                text-5xl
+                font-bold
+                tracking-tight
+                md:text-6xl
               "
             >
-  
-              Explore Collections
-  
-            </a>
-  
+
+              Looking For A
+              Reliable Apparel
+              Manufacturing Partner?
+
+            </h2>
+
+            <p
+              className="
+                mt-8
+                max-w-2xl
+                text-lg
+                leading-8
+                text-white/60
+              "
+            >
+
+              Vietnam Clothing provides
+              premium OEM & ODM apparel
+              manufacturing services
+              for fashion brands,
+              merchandise campaigns
+              and corporate uniforms
+              worldwide.
+
+            </p>
+
+            <div
+              className="
+                mt-12
+                flex
+                flex-wrap
+                gap-4
+              "
+            >
+
+              <Link
+                href="/en/contact"
+                className="
+                  rounded-full
+                  bg-white
+                  px-8
+                  py-4
+                  font-medium
+                  text-black
+                  transition
+                  hover:scale-105
+                "
+              >
+
+                Request Quotation
+
+              </Link>
+
+              <Link
+                href="/en/products"
+                className="
+                  rounded-full
+                  border
+                  border-white/20
+                  px-8
+                  py-4
+                  font-medium
+                  text-white
+                  transition
+                  hover:bg-white
+                  hover:text-black
+                "
+              >
+
+                Explore Products
+
+              </Link>
+
+            </div>
+
           </div>
-  
+
         </div>
-  
-      </section>
-    );
-  }
+
+      </div>
+
+    </section>
+  );
+}

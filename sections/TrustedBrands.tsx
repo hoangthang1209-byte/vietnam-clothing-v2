@@ -1,109 +1,103 @@
-import Image from "next/image";
-
 const brands = [
-  {
-    name: "BIDV",
-    logo: "/brands/bidv-seeklogo.png",
-  },
 
-  {
-    name: "Coca-Cola",
-    logo: "/brands/coca-cola-seeklogo.png",
-  },
+  "Tech Company",
 
-  {
-    name: "Friesland Campina",
-    logo: "/brands/friesland-campina-seeklogo.png",
-  },
+  "Fashion Brand",
 
-  {
-    name: "Heineken",
-    logo: "/brands/heineken-seeklogo.png",
-  },
+  "Corporate Group",
 
-  {
-    name: "McDonald's",
-    logo: "/brands/mcdonalds-seeklogo.png",
-  },
+  "Coffee Chain",
 
-  {
-    name: "Mercedes-Benz",
-    logo: "/brands/mercedes-benz-seeklogo.png",
-  },
+  "Streetwear Label",
 
-  {
-    name: "MobiFone",
-    logo: "/brands/mobifone-seeklogo.png",
-  },
-
-  {
-    name: "Starbucks",
-    logo: "/brands/starbucks-seeklogo.png",
-  },
-
-  {
-    name: "Texas Chicken",
-    logo: "/brands/texas-chicken-seeklogo.png",
-  },
-
-  {
-    name: "The Coffee House",
-    logo: "/brands/the-coffee-house-seeklogo.png",
-  },
-
-  {
-    name: "Tiger Beer",
-    logo: "/brands/tiger-beer-seeklogo.png",
-  },
-
-  {
-    name: "Toyota",
-    logo: "/brands/toyota-seeklogo.png",
-  },
-];
-
-const duplicatedBrands = [
-  ...brands,
-  ...brands,
+  "Global Startup",
 ];
 
 export default function TrustedBrands() {
+
   return (
-    <section className="overflow-hidden border-y border-neutral-200 bg-white py-20">
 
-      <div className="mb-14 text-center">
+    <section
+      className="
+        border-y
+        border-black/5
+        bg-neutral-50
+        py-16
+      "
+    >
 
-        <p className="text-sm uppercase tracking-[0.3em] text-neutral-500">
-          Trusted By Leading Brands
-        </p>
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-6
+        "
+      >
 
-      </div>
+        <div
+          className="
+            text-center
+          "
+        >
 
-      <div className="relative">
+          <div
+            className="
+              text-xs
+              uppercase
+              tracking-[0.3em]
+              text-black/40
+            "
+          >
 
-        <div className="flex w-max animate-marquee gap-6">
+            Trusted By Global Brands
 
-          {duplicatedBrands.map(
-            (brand, index) => (
-              <div
-                key={`${brand.name}-${index}`}
-                className="group flex h-32 w-52 items-center justify-center rounded-3xl border border-neutral-200 bg-white p-8 transition hover:-translate-y-1 hover:border-black hover:shadow-xl"
-              >
+          </div>
 
-                <div className="relative h-16 w-full">
+        </div>
 
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    fill
-                    className="object-contain grayscale transition duration-300 group-hover:grayscale-0"
-                  />
+        <div
+          className="
+            mt-10
+            grid
+            grid-cols-2
+            gap-6
+            md:grid-cols-3
+            lg:grid-cols-6
+          "
+        >
+
+          {
+            brands.map(
+              (
+                brand
+              ) => (
+
+                <div
+                  key={brand}
+                  className="
+                    flex
+                    h-24
+                    items-center
+                    justify-center
+                    rounded-[24px]
+                    border
+                    border-black/5
+                    bg-white
+                    text-sm
+                    font-medium
+                    text-black/50
+                    transition
+                    hover:-translate-y-1
+                    hover:shadow-lg
+                  "
+                >
+
+                  {brand}
 
                 </div>
-
-              </div>
+              )
             )
-          )}
+          }
 
         </div>
 
