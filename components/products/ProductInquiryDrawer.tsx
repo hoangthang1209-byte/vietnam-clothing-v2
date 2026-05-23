@@ -1,338 +1,270 @@
 "use client";
 
 import {
-  useState,
-} from "react";
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 import {
-  ArrowRight,
   X,
 } from "lucide-react";
 
-import type {
-  Product,
-} from "@/types/product";
-
 type Props = {
-
-  product: Product;
 
   isOpen: boolean;
 
-  setIsOpen:
-    (
-      value: boolean
-    ) => void;
+  onClose: () => void;
+
+  productTitle: string;
 };
 
-export default function ProductInquiryDrawer({
-
-  product,
+export default function ProductInquiryModal({
 
   isOpen,
 
-  setIsOpen,
+  onClose,
+
+  productTitle,
 
 }: Props) {
 
-  const [
-    isSubmitting,
-    setIsSubmitting,
-  ] = useState(
-    false
-  );
-
-  const [
-    isSubmitted,
-    setIsSubmitted,
-  ] = useState(
-    false
-  );
-
-  const handleSubmit =
-    () => {
-
-      setIsSubmitting(
-        true
-      );
-
-      setTimeout(() => {
-
-        setIsSubmitting(
-          false
-        );
-
-        setIsSubmitted(
-          true
-        );
-
-      }, 1800);
-    };
-
-  if (
-    !isOpen
-  ) {
-
-    return null;
-  }
-
   return (
 
-    <>
+    <AnimatePresence>
 
-      <div
-        onClick={() =>
-          setIsOpen(
-            false
-          )
-        }
-        className="
-          fixed
-          inset-0
-          z-[90]
-          bg-black/50
-          backdrop-blur-sm
-        "
-      />
+      {
+        isOpen && (
 
-      <div
-        className="
-          fixed
-          right-0
-          top-0
-          z-[100]
-          flex
-          h-screen
-          w-full
-          max-w-xl
-          flex-col
-          overflow-y-auto
-          border-l
-          border-black/10
-          bg-white
-          p-8
-          shadow-2xl
-        "
-      >
-
-        <div
-          className="
-            flex
-            items-center
-            justify-between
-          "
-        >
-
-          <div>
-
-            <div
-              className="
-                text-xs
-                uppercase
-                tracking-[0.3em]
-                text-black/40
-              "
-            >
-
-              Request Quote
-
-            </div>
-
-            <h2
-              className="
-                mt-3
-                text-3xl
-                font-bold
-              "
-            >
-
-              {
-                product.title
-              }
-
-            </h2>
-
-          </div>
-
-          <button
-            onClick={() =>
-              setIsOpen(
-                false
-              )
-            }
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
             className="
+              fixed
+              inset-0
+              z-[999]
               flex
-              h-12
-              w-12
               items-center
               justify-center
-              rounded-full
-              bg-neutral-100
-              transition
-              hover:bg-neutral-200
+              bg-black/40
+              p-6
+              backdrop-blur-sm
             "
           >
 
-            <X
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.96,
+              }}
+              transition={{
+                duration: 0.2,
+              }}
               className="
-                h-5
-                w-5
+                relative
+                w-full
+                max-w-2xl
+                rounded-[40px]
+                bg-white
+                p-10
+                shadow-2xl
               "
-            />
+            >
 
-          </button>
-
-        </div>
-
-        <div
-          className="
-            mt-10
-            space-y-6
-          "
-        >
-
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-black/10
-              px-5
-              py-4
-              outline-none
-              transition
-              focus:border-black
-            "
-          />
-
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-black/10
-              px-5
-              py-4
-              outline-none
-              transition
-              focus:border-black
-            "
-          />
-
-          <input
-            type="text"
-            placeholder="Company Name"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-black/10
-              px-5
-              py-4
-              outline-none
-              transition
-              focus:border-black
-            "
-          />
-
-          <textarea
-            rows={6}
-            placeholder="Tell us about your project..."
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-black/10
-              px-5
-              py-4
-              outline-none
-              transition
-              focus:border-black
-            "
-          />
-
-          <button
-            onClick={
-              handleSubmit
-            }
-            disabled={
-              isSubmitting
-            }
-            className="
-              flex
-              w-full
-              items-center
-              justify-center
-              gap-2
-              rounded-2xl
-              bg-black
-              px-6
-              py-5
-              text-white
-              transition
-              hover:scale-[1.01]
-              disabled:cursor-not-allowed
-              disabled:opacity-50
-            "
-          >
-
-            {
-              isSubmitting
-
-                ? "Submitting..."
-
-                : isSubmitted
-
-                  ? "Inquiry Submitted"
-
-                  : "Submit Inquiry"
-            }
-
-            <ArrowRight
-              className="
-                h-4
-                w-4
-              "
-            />
-
-          </button>
-
-          {
-            isSubmitted && (
-
-              <div
+              <button
+                onClick={onClose}
                 className="
-                  rounded-2xl
-                  border
-                  border-green-200
-                  bg-green-50
-                  p-5
-                  text-sm
-                  leading-7
-                  text-green-700
+                  absolute
+                  right-6
+                  top-6
+                  flex
+                  h-12
+                  w-12
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-neutral-100
                 "
               >
 
-                Thank you 😄🔥
+                <X
+                  className="
+                    h-5
+                    w-5
+                  "
+                />
 
-                Our production team
-                will contact you shortly
-                with pricing, MOQ,
-                lead time, and sampling
-                details.
+              </button>
+
+              <div
+                className="
+                  max-w-xl
+                "
+              >
+
+                <div
+                  className="
+                    text-xs
+                    uppercase
+                    tracking-[0.3em]
+                    text-black/40
+                  "
+                >
+
+                  Request Quote
+
+                </div>
+
+                <h2
+                  className="
+                    mt-6
+                    text-5xl
+                    font-bold
+                    tracking-tight
+                  "
+                >
+
+                  Start Your
+                  Project
+
+                </h2>
+
+                <p
+                  className="
+                    mt-6
+                    leading-8
+                    text-black/60
+                  "
+                >
+
+                  Get quotation,
+                  MOQ and production
+                  consultation for:
+
+                  <span
+                    className="
+                      font-semibold
+                      text-black
+                    "
+                  >
+
+                    {" "}
+                    {productTitle}
+
+                  </span>
+
+                </p>
 
               </div>
-            )
-          }
 
-        </div>
+              <form
+                className="
+                  mt-12
+                  grid
+                  gap-5
+                "
+              >
 
-      </div>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="
+                    rounded-2xl
+                    border
+                    border-black/10
+                    px-6
+                    py-4
+                    outline-none
+                    transition
+                    focus:border-black
+                  "
+                />
 
-    </>
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="
+                    rounded-2xl
+                    border
+                    border-black/10
+                    px-6
+                    py-4
+                    outline-none
+                    transition
+                    focus:border-black
+                  "
+                />
+
+                <input
+                  type="text"
+                  placeholder="Company Name"
+                  className="
+                    rounded-2xl
+                    border
+                    border-black/10
+                    px-6
+                    py-4
+                    outline-none
+                    transition
+                    focus:border-black
+                  "
+                />
+
+                <textarea
+                  placeholder="Tell us about your project..."
+                  rows={5}
+                  className="
+                    rounded-2xl
+                    border
+                    border-black/10
+                    px-6
+                    py-4
+                    outline-none
+                    transition
+                    focus:border-black
+                  "
+                />
+
+                <button
+                  type="submit"
+                  className="
+                    mt-4
+                    rounded-full
+                    bg-black
+                    px-8
+                    py-4
+                    text-white
+                    transition
+                    hover:scale-[1.02]
+                  "
+                >
+
+                  Submit Inquiry
+
+                </button>
+
+              </form>
+
+            </motion.div>
+
+          </motion.div>
+        )
+      }
+
+    </AnimatePresence>
   );
 }

@@ -20,6 +20,9 @@ from "./RelatedProducts";
 import ProductFullscreenModal
 from "./ProductFullscreenModal";
 
+import ProductInquiryDrawer
+from "./ProductInquiryDrawer";
+
 type Props = {
 
   product: Product;
@@ -84,6 +87,16 @@ export default function ProductPageClient({
             false
           )
         }
+      />
+
+      <ProductInquiryDrawer
+        isOpen={isInquiryOpen}
+        onClose={() =>
+          setIsInquiryOpen(
+            false
+          )
+        }
+        productTitle={product.title}
       />
 
     </main>

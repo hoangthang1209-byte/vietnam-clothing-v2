@@ -1,17 +1,14 @@
+import {
+  notFound,
+} from "next/navigation";
+
 import type {
   Metadata,
 } from "next";
 
 import {
-  notFound,
-} from "next/navigation";
-
-import {
   products,
 } from "@/data/products";
-
-import Breadcrumb
-from "@/components/navigation/Breadcrumb";
 
 import ProductPageClient
 from "@/components/products/ProductPageClient";
@@ -20,24 +17,9 @@ type Props = {
 
   params:
     Promise<{
-      locale: string;
       slug: string;
     }>;
 };
-
-export async function generateStaticParams() {
-
-  return Object.keys(
-    products
-  ).map(
-    (
-      slug
-    ) => ({
-
-      slug,
-    })
-  );
-}
 
 export async function generateMetadata({
   params,
@@ -62,18 +44,18 @@ export async function generateMetadata({
   return {
 
     title:
-      product.seoTitle,
+      product.title,
 
     description:
-      product.seoDescription,
+      product.description,
 
     openGraph: {
 
       title:
-        product.seoTitle,
+        product.title,
 
       description:
-        product.seoDescription,
+        product.description,
 
       images: [
         product.image,
@@ -104,40 +86,8 @@ export default async function ProductPage({
 
   return (
 
-    <main className="bg-white text-black">
-
-      <section className="pt-32">
-
-        <div className="mx-auto max-w-7xl px-6">
-
-          <Breadcrumb
-            items={[
-              {
-                label:
-                  "Products",
-
-                href:
-                  "/en/products",
-              },
-
-              {
-                label:
-                  product.title,
-
-                href:
-                  `/en/products/${product.slug}`,
-              },
-            ]}
-          />
-
-        </div>
-
-      </section>
-
-      <ProductPageClient
-        product={product}
-      />
-
-    </main>
+    <ProductPageClient
+      product={product}
+    />
   );
 }
