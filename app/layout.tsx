@@ -19,9 +19,6 @@ from "@/components/layout/Navbar";
 import Footer
 from "@/components/layout/Footer";
 
-import SmoothScrollProvider
-from "@/components/providers/SmoothScrollProvider";
-
 const jakarta =
   Plus_Jakarta_Sans({
 
@@ -132,7 +129,6 @@ export default function RootLayout({
 
     <html
       lang="en"
-      data-scroll-behavior="smooth"
       className={`
         ${geistSans.variable}
         ${geistMono.variable}
@@ -151,8 +147,6 @@ export default function RootLayout({
           ${jakarta.className}
         `}
       >
-
-        <SmoothScrollProvider />
 
         <Navbar />
 
