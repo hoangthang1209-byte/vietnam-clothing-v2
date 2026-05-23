@@ -1,6 +1,3 @@
-import MegaMenu
-from "../../components/MegaMenu";
-
 import Hero
 from "../../sections/Hero";
 
@@ -57,41 +54,36 @@ export default async function HomePage({
 
   return (
 
-    <>
-      <MegaMenu />
+    <main
+      className="
+        min-h-screen
+        bg-white
+        text-black
+      "
+    >
 
-      <main
-        className="
-          min-h-screen
-          bg-white
-          text-black
-        "
-      >
+      <Hero
+        dict={dict}
+      />
 
-        <Hero
-          dict={dict}
-        />
+      <TrustedBrands />
 
-        <TrustedBrands />
+      <ProductCategories />
 
-        <ProductCategories />
+      <ManufacturingCapabilities />
 
-        <ManufacturingCapabilities />
+      <WhyChooseUs />
 
-        <WhyChooseUs />
+      <FactoryGallery />
 
-        <FactoryGallery />
+      <FactoryProcess />
 
-        <FactoryProcess />
+      <Testimonials />
 
-        <Testimonials />
+      <FinalCTA />
 
-        <FinalCTA />
+      <RealInquiryForm />
 
-        <RealInquiryForm />
-
-      </main>
-
-    </>
+    </main>
   );
-}``
+}
