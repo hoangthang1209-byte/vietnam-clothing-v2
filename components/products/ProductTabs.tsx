@@ -4,11 +4,6 @@ import {
   useState,
 } from "react";
 
-import {
-  motion,
-  AnimatePresence,
-} from "framer-motion";
-
 import type {
   Product,
 } from "@/types/product";
@@ -18,6 +13,15 @@ type Props = {
   product: Product;
 };
 
+const tabs = [
+
+  "Overview",
+
+  "Specifications",
+
+  "FAQ",
+];
+
 export default function ProductTabs({
   product,
 }: Props) {
@@ -26,14 +30,26 @@ export default function ProductTabs({
     activeTab,
     setActiveTab,
   ] = useState(
-    "features"
+    "Overview"
   );
 
   return (
 
-    <section className="py-24">
+    <section
+      className="
+        border-t
+        border-black/5
+        py-32
+      "
+    >
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-6
+        "
+      >
 
         <div
           className="
@@ -47,11 +63,7 @@ export default function ProductTabs({
         >
 
           {
-            [
-              "features",
-              "materials",
-              "specifications",
-            ].map(
+            tabs.map(
               (
                 tab
               ) => (
@@ -68,8 +80,6 @@ export default function ProductTabs({
                     px-6
                     py-3
                     text-sm
-                    font-medium
-                    capitalize
                     transition
 
                     ${
@@ -91,175 +101,220 @@ export default function ProductTabs({
 
         </div>
 
-        <div className="pt-12">
+        <div
+          className="
+            pt-16
+          "
+        >
 
-          <AnimatePresence
-            mode="wait"
-          >
+          {
+            activeTab ===
+              "Overview" && (
 
-            <motion.div
-              key={activeTab}
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-              }}
-              transition={{
-                duration: 0.25,
-              }}
-            >
+              <div
+                className="
+                  grid
+                  gap-16
+                  lg:grid-cols-2
+                "
+              >
 
-              {
-                activeTab === "features" && (
+                <div>
 
-                  <div
+                  <h3
                     className="
-                      grid
-                      gap-4
-                      md:grid-cols-2
+                      text-4xl
+                      font-bold
+                      tracking-tight
+                    "
+                  >
+
+                    Product Overview
+
+                  </h3>
+
+                  <p
+                    className="
+                      mt-8
+                      text-lg
+                      leading-8
+                      text-black/60
                     "
                   >
 
                     {
-                      product.features.map(
-                        (
-                          feature,
-                          index
-                        ) => (
-
-                          <div
-                            key={index}
-                            className="
-                              rounded-[24px]
-                              border
-                              border-black/5
-                              bg-neutral-50
-                              p-6
-                            "
-                          >
-
-                            {feature}
-
-                          </div>
-                        )
-                      )
+                      product.description
                     }
 
-                  </div>
-                )
-              }
+                  </p>
 
-              {
-                activeTab === "materials" && (
+                </div>
 
-                  <div
-                    className="
-                      flex
-                      flex-wrap
-                      gap-4
-                    "
-                  >
+                <div
+                  className="
+                    grid
+                    gap-4
+                  "
+                >
 
-                    {
-                      product.materials.map(
-                        (
-                          material,
-                          index
-                        ) => (
+                  {
+                    product.features.map(
+                      (
+                        feature,
+                        index
+                      ) => (
 
-                          <div
-                            key={index}
-                            className="
-                              rounded-full
-                              border
-                              border-black/10
-                              px-6
-                              py-3
-                            "
-                          >
+                        <div
+                          key={index}
+                          className="
+                            rounded-[24px]
+                            border
+                            border-black/5
+                            bg-neutral-50
+                            p-6
+                          "
+                        >
 
-                            {material}
+                          {feature}
 
-                          </div>
-                        )
+                        </div>
                       )
-                    }
+                    )
+                  }
 
-                  </div>
-                )
-              }
+                </div>
 
-              {
-                activeTab === "specifications" && (
+              </div>
+            )
+          }
 
-                  <div
-                    className="
-                      grid
-                      gap-6
-                      md:grid-cols-2
-                    "
-                  >
+          {
+            activeTab ===
+              "Specifications" && (
 
-                    {
-                      product.specifications.map(
-                        (
-                          spec,
-                          index
-                        ) => (
+              <div
+                className="
+                  grid
+                  gap-4
+                "
+              >
 
-                          <div
-                            key={index}
-                            className="
-                              flex
-                              items-center
-                              justify-between
-                              rounded-[24px]
-                              border
-                              border-black/5
-                              bg-neutral-50
-                              p-6
-                            "
-                          >
+                {
+                  product.specifications.map(
+                    (
+                      spec,
+                      index
+                    ) => (
 
-                            <div
-                              className="
-                                text-black/50
-                              "
-                            >
+                      <div
+                        key={index}
+                        className="
+                          flex
+                          items-center
+                          justify-between
+                          rounded-[24px]
+                          border
+                          border-black/5
+                          p-6
+                        "
+                      >
 
-                              {spec.label}
+                        <div
+                          className="
+                            text-black/50
+                          "
+                        >
 
-                            </div>
+                          {
+                            spec.label
+                          }
 
-                            <div
-                              className="
-                                font-semibold
-                              "
-                            >
+                        </div>
 
-                              {spec.value}
+                        <div
+                          className="
+                            font-medium
+                          "
+                        >
 
-                            </div>
+                          {
+                            spec.value
+                          }
 
-                          </div>
-                        )
-                      )
-                    }
+                        </div>
 
-                  </div>
-                )
-              }
+                      </div>
+                    )
+                  )
+                }
 
-            </motion.div>
+              </div>
+            )
+          }
 
-          </AnimatePresence>
+          {
+            activeTab ===
+              "FAQ" && (
+
+              <div
+                className="
+                  grid
+                  gap-6
+                "
+              >
+
+                {
+                  product.faq.map(
+                    (
+                      item,
+                      index
+                    ) => (
+
+                      <div
+                        key={index}
+                        className="
+                          rounded-[28px]
+                          border
+                          border-black/5
+                          p-8
+                        "
+                      >
+
+                        <h3
+                          className="
+                            text-2xl
+                            font-bold
+                          "
+                        >
+
+                          {
+                            item.question
+                          }
+
+                        </h3>
+
+                        <p
+                          className="
+                            mt-4
+                            leading-8
+                            text-black/60
+                          "
+                        >
+
+                          {
+                            item.answer
+                          }
+
+                        </p>
+
+                      </div>
+                    )
+                  )
+                }
+
+              </div>
+            )
+          }
 
         </div>
 

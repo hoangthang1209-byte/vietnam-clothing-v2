@@ -8,47 +8,17 @@ import type {
   Product,
 } from "@/types/product";
 
-import Reveal
-from "@/components/animation/Reveal";
-
-import BackgroundGlow
-from "@/components/ui/BackgroundGlow";
-
 import ProductHero
-from "@/components/products/ProductHero";
-
-import ProductSocialProof
-from "@/components/products/ProductSocialProof";
-
-import ProductSpecs
-from "@/components/products/ProductSpecs";
+from "./ProductHero";
 
 import ProductTabs
-from "@/components/products/ProductTabs";
-
-import ProductReviews
-from "@/components/products/ProductReviews";
-
-import ProductCTASection
-from "@/components/products/ProductCTASection";
-
-import ProductStickyCTA
-from "@/components/products/ProductStickyCTA";
-
-import ProductInquiryDrawer
-from "@/components/products/ProductInquiryDrawer";
-
-import ProductFullscreenModal
-from "@/components/products/ProductFullscreenModal";
-
-import ProductSectionRenderer
-from "@/components/products/ProductSectionRenderer";
+from "./ProductTabs";
 
 import RelatedProducts
-from "@/components/products/RelatedProducts";
+from "./RelatedProducts";
 
-import FAQSection
-from "@/components/seo/FAQSection";
+import ProductFullscreenModal
+from "./ProductFullscreenModal";
 
 type Props = {
 
@@ -82,144 +52,40 @@ export default function ProductPageClient({
 
   return (
 
-    <>
-
-      <BackgroundGlow />
+    <main
+      className="
+        bg-white
+        text-black
+      "
+    >
 
       <ProductHero
         product={product}
-        activeImage={
-          activeImage
-        }
-        setActiveImage={
-          setActiveImage
-        }
-        setIsFullscreen={
-          setIsFullscreen
-        }
-        setIsInquiryOpen={
-          setIsInquiryOpen
-        }
+        activeImage={activeImage}
+        setActiveImage={setActiveImage}
+        setIsFullscreen={setIsFullscreen}
+        setIsInquiryOpen={setIsInquiryOpen}
       />
 
-      <Reveal>
-
-        <ProductSocialProof />
-
-      </Reveal>
-
-      <Reveal delay={0.1}>
-
-        <ProductSpecs
-          product={product}
-        />
-
-      </Reveal>
-
-      <Reveal delay={0.15}>
-
-        <ProductTabs
-          product={product}
-        />
-
-      </Reveal>
-
-      <Reveal delay={0.2}>
-
-        <ProductReviews />
-
-      </Reveal>
-
-      <Reveal delay={0.25}>
-
-        <ProductCTASection
-          product={product}
-          setIsInquiryOpen={
-            setIsInquiryOpen
-          }
-        />
-
-      </Reveal>
-
-      {
-        product.sections.map(
-          (
-            section,
-            index
-          ) => (
-
-            <Reveal
-              key={index}
-              delay={
-                index * 0.05
-              }
-            >
-
-              <ProductSectionRenderer
-                product={product}
-                section={section}
-              />
-
-            </Reveal>
-          )
-        )
-      }
-
-      <Reveal delay={0.3}>
-
-        <FAQSection
-          items={
-            product.faq
-          }
-        />
-
-      </Reveal>
-
-      <Reveal delay={0}>
-
-        <RelatedProducts
-          currentSlug={
-            product.slug
-          }
-          category={
-            product.category
-          }
-        />
-
-      </Reveal>
-
-      <ProductStickyCTA
+      <ProductTabs
         product={product}
-        setIsInquiryOpen={
-          setIsInquiryOpen
-        }
       />
 
-      <ProductInquiryDrawer
-        product={product}
-        isOpen={
-          isInquiryOpen
-        }
-        setIsOpen={
-          setIsInquiryOpen
-        }
+      <RelatedProducts
+        currentSlug={product.slug}
+        category={product.category}
       />
 
       <ProductFullscreenModal
-        image={
-          activeImage
-        }
-        title={
-          product.title
-        }
-        isOpen={
-          isFullscreen
-        }
-        setIsOpen={
-          setIsFullscreen
+        image={activeImage}
+        isOpen={isFullscreen}
+        onClose={() =>
+          setIsFullscreen(
+            false
+          )
         }
       />
 
-    </>
+    </main>
   );
 }

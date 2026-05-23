@@ -4,6 +4,11 @@ import Image
 from "next/image";
 
 import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
+
+import {
   X,
 } from "lucide-react";
 
@@ -11,97 +16,120 @@ type Props = {
 
   image: string;
 
-  title: string;
-
   isOpen: boolean;
 
-  setIsOpen:
-    (
-      value: boolean
-    ) => void;
+  onClose: () => void;
 };
 
-export default function ProductFullscreenModal({
+export default function ProductFullscreen({
 
   image,
 
-  title,
-
   isOpen,
 
-  setIsOpen,
+  onClose,
 
 }: Props) {
 
-  if (
-    !isOpen
-  ) {
-
-    return null;
-  }
-
   return (
 
-    <div
-      className="
-        fixed
-        inset-0
-        z-[100]
-        flex
-        items-center
-        justify-center
-        bg-black/95
-        p-6
-      "
-    >
+    <AnimatePresence>
 
-      <button
-        onClick={() =>
-          setIsOpen(
-            false
-          )
-        }
-        className="
-          absolute
-          right-6
-          top-6
-          flex
-          h-14
-          w-14
-          items-center
-          justify-center
-          rounded-full
-          bg-white/10
-          text-white
-          backdrop-blur-xl
-          transition
-          hover:bg-white/20
-        "
-      >
+      {
+        isOpen && (
 
-        <X
-          className="
-            h-6
-            w-6
-          "
-        />
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            className="
+              fixed
+              inset-0
+              z-[999]
+              flex
+              items-center
+              justify-center
+              bg-black/90
+              p-6
+            "
+          >
 
-      </button>
+            <button
+              onClick={onClose}
+              className="
+                absolute
+                right-6
+                top-6
+                flex
+                h-14
+                w-14
+                items-center
+                justify-center
+                rounded-full
+                bg-white/10
+                text-white
+                backdrop-blur
+              "
+            >
 
-      <Image
-        src={image}
-        alt={title}
-        width={2000}
-        height={2000}
-        className="
-          max-h-[90vh]
-          w-auto
-          rounded-[32px]
-          object-contain
-        "
-        priority
-      />
+              <X
+                className="
+                  h-6
+                  w-6
+                "
+              />
 
-    </div>
+            </button>
+
+            <motion.div
+              initial={{
+                scale: 0.92,
+                opacity: 0,
+              }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+              }}
+              exit={{
+                scale: 0.92,
+                opacity: 0,
+              }}
+              transition={{
+                duration: 0.25,
+              }}
+              className="
+                relative
+                max-h-[90vh]
+                max-w-6xl
+                overflow-hidden
+                rounded-[40px]
+              "
+            >
+
+              <Image
+                src={image}
+                alt="Product"
+                width={2000}
+                height={2000}
+                className="
+                  h-full
+                  w-full
+                  object-contain
+                "
+              />
+
+            </motion.div>
+
+          </motion.div>
+        )
+      }
+
+    </AnimatePresence>
   );
 }
