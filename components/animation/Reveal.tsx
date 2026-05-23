@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  motion,
-} from "framer-motion";
-
 type Props = {
 
   children:
@@ -18,32 +14,13 @@ export default function Reveal({
 
   children,
 
-  delay = 0,
-
   className,
 
 }: Props) {
 
   return (
 
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: 12,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.15,
-      }}
-      transition={{
-        duration: 0.35,
-        delay,
-        ease: "easeOut",
-      }}
+    <div
       className={
         className
       }
@@ -51,6 +28,6 @@ export default function Reveal({
 
       {children}
 
-    </motion.div>
+    </div>
   );
-}``
+}
