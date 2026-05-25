@@ -13,7 +13,7 @@ const ReactQuill =
 
       const quill =
         await import(
-          "react-quill"
+          "react-quill-new"
         );
 
       return quill.default as ComponentType<any>;
