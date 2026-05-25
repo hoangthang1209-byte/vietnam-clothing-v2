@@ -20,11 +20,11 @@ export default function HeroSection() {
           absolute
           left-1/2
           top-0
-          h-[600px]
-          w-[600px]
+          h-[700px]
+          w-[700px]
           -translate-x-1/2
           rounded-full
-          bg-neutral-200/60
+          bg-neutral-300/40
           blur-3xl
         "
       />
@@ -57,6 +57,7 @@ export default function HeroSection() {
               font-semibold
               uppercase
               tracking-[0.3em]
+              text-black/70
               backdrop-blur-xl
             "
           >
@@ -69,9 +70,9 @@ export default function HeroSection() {
             className="
               mt-10
               text-6xl
-              font-black
-              leading-none
-              tracking-tight
+              font-extrabold
+              leading-[0.9]
+              tracking-[-0.06em]
               md:text-8xl
             "
           >
@@ -88,9 +89,9 @@ export default function HeroSection() {
             className="
               mt-10
               max-w-3xl
-              text-xl
-              leading-9
-              text-black/60
+              text-2xl
+              leading-[1.8]
+              text-black/55
             "
           >
 
@@ -120,8 +121,11 @@ export default function HeroSection() {
                 px-8
                 py-5
                 text-sm
-                font-medium
+                font-semibold
                 text-white
+                transition
+                duration-300
+                hover:scale-105
               "
             >
 
@@ -135,10 +139,16 @@ export default function HeroSection() {
                 rounded-full
                 border
                 border-black/10
+                bg-white/70
                 px-8
                 py-5
                 text-sm
-                font-medium
+                font-semibold
+                backdrop-blur-xl
+                transition
+                duration-300
+                hover:bg-black
+                hover:text-white
               "
             >
 
@@ -164,7 +174,7 @@ export default function HeroSection() {
               rounded-[32px]
               border
               border-black/10
-              bg-white/80
+              bg-white/60
               p-10
               backdrop-blur-xl
             "
@@ -173,7 +183,7 @@ export default function HeroSection() {
             <div
               className="
                 text-5xl
-                font-black
+                font-extrabold
                 tracking-tight
               "
             >
@@ -201,7 +211,7 @@ export default function HeroSection() {
               rounded-[32px]
               border
               border-black/10
-              bg-white/80
+              bg-white/60
               p-10
               backdrop-blur-xl
             "
@@ -210,7 +220,7 @@ export default function HeroSection() {
             <div
               className="
                 text-5xl
-                font-black
+                font-extrabold
                 tracking-tight
               "
             >
@@ -238,7 +248,7 @@ export default function HeroSection() {
               rounded-[32px]
               border
               border-black/10
-              bg-white/80
+              bg-white/60
               p-10
               backdrop-blur-xl
             "
@@ -247,7 +257,7 @@ export default function HeroSection() {
             <div
               className="
                 text-5xl
-                font-black
+                font-extrabold
                 tracking-tight
               "
             >
