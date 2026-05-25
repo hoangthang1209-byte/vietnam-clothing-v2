@@ -3,6 +3,9 @@
 import Image
 from "next/image";
 
+import Link
+from "next/link";
+
 import {
   motion,
 } from "framer-motion";
@@ -137,12 +140,14 @@ export default function Hero({
             "
           >
 
-            <button
+            <Link
+              href="/en/contact"
               className="
                 rounded-full
                 bg-black
                 px-8
                 py-4
+                text-center
                 text-white
                 shadow-2xl
                 shadow-black/10
@@ -154,9 +159,10 @@ export default function Hero({
 
               Start Your Project
 
-            </button>
+            </Link>
 
-            <button
+            <Link
+              href="/en/products"
               className="
                 rounded-full
                 border
@@ -164,6 +170,7 @@ export default function Hero({
                 bg-white/70
                 px-8
                 py-4
+                text-center
                 backdrop-blur-xl
                 transition
                 hover:bg-black
@@ -173,7 +180,7 @@ export default function Hero({
 
               Explore Products
 
-            </button>
+            </Link>
 
           </div>
 
