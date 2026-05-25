@@ -5,7 +5,9 @@
 
 /* React Quill */
 @import
-"url('react-quill/dist/quill.snow.css')";
+url(
+  "react-quill-new/dist/quill.snow.css"
+);
 
 :root {
 
