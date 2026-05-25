@@ -1,58 +1,88 @@
-import HeroSection
-from "@/components/home/HeroSection";
-
-import BrandMarquee
-from "@/components/home/BrandMarquee";
-
-import HomeCategories
-from "@/components/home/HomeCategories";
-
-import FeaturedProducts
-from "@/components/home/FeaturedProducts";
-
-import WhyChooseUs
-from "@/components/home/WhyChooseUs";
+import Hero
+from "../../sections/Hero";
 
 import TrustedBrands
-from "@/components/home/TrustedBrands";
+from "../../sections/TrustedBrands";
 
-import FactoryStats
-from "@/components/home/FactoryStats";
+import ManufacturingCapabilities
+from "../../sections/ManufacturingCapabilities";
+
+import ProductCategories
+from "../../sections/ProductCategories";
+
+import WhyChooseUs
+from "../../sections/WhyChooseUs";
 
 import FactoryGallery
-from "@/components/home/FactoryGallery";
+from "../../sections/FactoryGallery";
 
-import HomeCTA
-from "@/components/home/HomeCTA";
+import FactoryProcess
+from "../../sections/FactoryProcess";
 
-export default function HomePage() {
+import Testimonials
+from "../../sections/Testimonials";
+
+import FinalCTA
+from "../../sections/FinalCTA";
+
+import RealInquiryForm
+from "@/components/RealInquiryForm";
+
+import {
+  dictionaries,
+} from "../../dictionaries";
+
+export default async function HomePage({
+  params,
+}: {
+  params:
+    Promise<{
+      locale:
+        | "en"
+        | "vi";
+    }>;
+}) {
+
+  const {
+    locale,
+  } = await params;
+
+  const dict =
+    dictionaries[
+      locale
+    ];
 
   return (
 
     <main
       className="
+        min-h-screen
         bg-white
         text-black
       "
     >
 
-      <HeroSection />
-
-      <BrandMarquee />
-
-      <HomeCategories />
-
-      <FeaturedProducts />
-
-      <WhyChooseUs />
+      <Hero
+        dict={dict}
+      />
 
       <TrustedBrands />
 
-      <FactoryStats />
+      <ProductCategories />
+
+      <ManufacturingCapabilities />
+
+      <WhyChooseUs />
 
       <FactoryGallery />
 
-      <HomeCTA />
+      <FactoryProcess />
+
+      <Testimonials />
+
+      <FinalCTA />
+
+      <RealInquiryForm />
 
     </main>
   );

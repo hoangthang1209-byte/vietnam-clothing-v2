@@ -1,141 +1,92 @@
-import Image
-from "next/image";
-
 const images = [
-
-  "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop",
-
-  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop",
-
-  "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600&auto=format&fit=crop",
-
-  "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1600&auto=format&fit=crop",
-];
-
-export default function FactoryGallery() {
-
-  return (
-
-    <section
-      className="
-        border-y
-        border-black/5
-        bg-neutral-50
-        py-32
-      "
-    >
-
-      <div
-        className="
-          mx-auto
-          max-w-7xl
-          px-6
-        "
-      >
-
-        <div
-          className="
-            mb-20
-            max-w-4xl
-          "
-        >
-
-          <div
-            className="
-              text-sm
-              uppercase
-              tracking-[0.3em]
-              text-black/40
-            "
-          >
-
-            Factory & Production
-
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1400&auto=format&fit=crop",
+  
+    "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1400&auto=format&fit=crop",
+  
+    "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1400&auto=format&fit=crop",
+  
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop",
+  
+    "https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1400&auto=format&fit=crop",
+  ];
+  
+  export default function FactoryGallery() {
+    return (
+      <section className="bg-black py-32 text-white">
+  
+        <div className="mx-auto max-w-7xl px-6">
+  
+          <div className="mb-20 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
+  
+            <div className="max-w-3xl">
+  
+              <p className="mb-5 text-sm uppercase tracking-[0.3em] text-white/40">
+                Factory Gallery
+              </p>
+  
+              <h2 className="text-5xl font-bold leading-tight tracking-tight lg:text-6xl">
+                Inside Vietnam
+                <br />
+                Clothing Production
+              </h2>
+  
+            </div>
+  
+            <p className="max-w-xl leading-8 text-white/60">
+              Explore our manufacturing process, production workflow and apparel development capabilities for global clients.
+            </p>
+  
           </div>
-
-          <h2
-            className="
-              mt-6
-              text-6xl
-              font-bold
-              tracking-tight
-            "
-          >
-
-            Manufacturing
-            Excellence
-
-          </h2>
-
-          <p
-            className="
-              mt-8
-              max-w-2xl
-              text-lg
-              leading-8
-              text-black/60
-            "
-          >
-
-            From sampling and
-            fabric sourcing to
-            large-scale production,
-            Vietnam Clothing delivers
-            premium apparel manufacturing
-            solutions with international
-            quality standards.
-
-          </p>
-
+  
+          <div className="grid gap-6 lg:grid-cols-12">
+  
+            <div className="overflow-hidden rounded-[36px] lg:col-span-7">
+  
+              <img
+                src={images[0]}
+                alt=""
+                className="h-full w-full object-cover transition duration-700 hover:scale-105"
+              />
+  
+            </div>
+  
+            <div className="grid gap-6 lg:col-span-5">
+  
+              <div className="overflow-hidden rounded-[36px]">
+  
+                <img
+                  src={images[1]}
+                  alt=""
+                  className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                />
+  
+              </div>
+  
+              <div className="grid grid-cols-2 gap-6">
+  
+                {images.slice(2).map((image) => (
+                  <div
+                    key={image}
+                    className="overflow-hidden rounded-[36px]"
+                  >
+  
+                    <img
+                      src={image}
+                      alt=""
+                      className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    />
+  
+                  </div>
+                ))}
+  
+              </div>
+  
+            </div>
+  
+          </div>
+  
         </div>
-
-        <div
-          className="
-            grid
-            gap-6
-            md:grid-cols-2
-          "
-        >
-
-          {
-            images.map(
-              (
-                image,
-                index
-              ) => (
-
-                <div
-                  key={index}
-                  className="
-                    overflow-hidden
-                    rounded-[40px]
-                  "
-                >
-
-                  <Image
-                    src={image}
-                    alt="Factory Gallery"
-                    width={1600}
-                    height={1200}
-                    className="
-                      h-[500px]
-                      w-full
-                      object-cover
-                      transition
-                      duration-700
-                      hover:scale-105
-                    "
-                  />
-
-                </div>
-              )
-            )
-          }
-
-        </div>
-
-      </div>
-
-    </section>
-  );
-}
+  
+      </section>
+    );
+  }
