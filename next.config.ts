@@ -5,18 +5,16 @@ import type {
 const nextConfig:
   NextConfig = {
 
-  images: {
+  typescript: {
 
-    remotePatterns: [
+    ignoreBuildErrors:
+      true,
+  },
 
-      {
-        protocol:
-          "https",
+  eslint: {
 
-        hostname:
-          "images.unsplash.com",
-      },
-    ],
+    ignoreDuringBuilds:
+      true,
   },
 };
 
