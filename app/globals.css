@@ -1,13 +1,12 @@
-/* Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* React Quill */
 @import
 url(
   "react-quill-new/dist/quill.snow.css"
 );
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
 
