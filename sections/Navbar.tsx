@@ -1,15 +1,28 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Link
+from "next/link";
+
+import {
+  useState,
+} from "react";
+
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 export default function Navbar() {
-  const [open, setOpen] =
-    useState(false);
+
+  const [
+    open,
+    setOpen,
+  ] = useState(false);
 
   return (
+
     <>
+
       <header
         className="
           fixed
@@ -21,6 +34,7 @@ export default function Navbar() {
           md:px-6
         "
       >
+
         <div
           className="
             mx-auto
@@ -38,6 +52,7 @@ export default function Navbar() {
             backdrop-blur-2xl
           "
         >
+
           <Link
             href="/en"
             className="
@@ -46,7 +61,9 @@ export default function Navbar() {
               tracking-tight
             "
           >
+
             Vietnam Clothing
+
           </Link>
 
           <nav
@@ -60,21 +77,39 @@ export default function Navbar() {
               md:flex
             "
           >
-            <Link href="/en/products">
+
+            <Link
+              href="/en/products"
+            >
+
               Products
+
             </Link>
 
-            <Link href="/en/about">
+            <Link
+              href="/en/about"
+            >
+
               About
+
             </Link>
 
-            <Link href="/en/contact">
+            <Link
+              href="/en/contact"
+            >
+
               Contact
+
             </Link>
 
-            <Link href="/en/blog">
+            <Link
+              href="/en/blog"
+            >
+
               Blog
+
             </Link>
+
           </nav>
 
           <div
@@ -83,6 +118,7 @@ export default function Navbar() {
               md:block
             "
           >
+
             <Link
               href="/en/contact"
               className="
@@ -94,12 +130,16 @@ export default function Navbar() {
                 font-medium
                 text-white
                 transition
+                duration-300
                 hover:scale-105
                 hover:bg-neutral-800
               "
             >
+
               Get Quote
+
             </Link>
+
           </div>
 
           <button
@@ -118,11 +158,13 @@ export default function Navbar() {
               md:hidden
             "
           >
+
             <div
               className="
                 space-y-1
               "
             >
+
               <div
                 className="
                   h-[2px]
@@ -138,87 +180,157 @@ export default function Navbar() {
                   bg-black
                 "
               />
+
             </div>
+
           </button>
+
         </div>
+
       </header>
 
       <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: -20,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              y: -20,
-            }}
-            className="
-              fixed
-              inset-0
-              z-40
-              bg-white
-              px-6
-              pt-32
-            "
-          >
-            <div
+
+        {
+          open && (
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: -20,
+              }}
+
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              exit={{
+                opacity: 0,
+                y: -20,
+              }}
+
+              transition={{
+                duration: 0.25,
+              }}
+
               className="
-                flex
-                flex-col
-                gap-6
-                text-2xl
-                font-semibold
+                fixed
+                inset-0
+                z-40
+                bg-white
+                px-6
+                pt-32
               "
             >
-              <Link
-                href="/en/products"
-              >
-                Products
-              </Link>
 
-              <Link
-                href="/en/about"
-              >
-                About
-              </Link>
-
-              <Link
-                href="/en/contact"
-              >
-                Contact
-              </Link>
-
-              <Link
-                href="/en/blog"
-              >
-                Blog
-              </Link>
-
-              <Link
-                href="/en/contact"
+              <button
+                onClick={() =>
+                  setOpen(false)
+                }
                 className="
-                  mt-6
+                  absolute
+                  right-6
+                  top-6
+                  flex
+                  h-12
+                  w-12
+                  items-center
+                  justify-center
                   rounded-full
-                  bg-black
-                  px-6
-                  py-4
-                  text-center
-                  text-base
-                  text-white
+                  border
+                  border-black/10
+                  text-2xl
                 "
               >
-                Get Quote
-              </Link>
-            </div>
-          </motion.div>
-        )}
+
+                ×
+
+              </button>
+
+              <div
+                className="
+                  flex
+                  flex-col
+                  gap-6
+                  text-2xl
+                  font-semibold
+                "
+              >
+
+                <Link
+                  href="/en/products"
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                >
+
+                  Products
+
+                </Link>
+
+                <Link
+                  href="/en/about"
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                >
+
+                  About
+
+                </Link>
+
+                <Link
+                  href="/en/contact"
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                >
+
+                  Contact
+
+                </Link>
+
+                <Link
+                  href="/en/blog"
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                >
+
+                  Blog
+
+                </Link>
+
+                <Link
+                  href="/en/contact"
+                  onClick={() =>
+                    setOpen(false)
+                  }
+                  className="
+                    mt-6
+                    rounded-full
+                    bg-black
+                    px-6
+                    py-4
+                    text-center
+                    text-base
+                    text-white
+                  "
+                >
+
+                  Get Quote
+
+                </Link>
+
+              </div>
+
+            </motion.div>
+          )
+        }
+
       </AnimatePresence>
+
     </>
   );
 }
