@@ -1,340 +1,192 @@
-@import
-url(
-  "react-quill-new/dist/quill.snow.css"
-);
+@import "tailwindcss";
 
-/* Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* =========================================
+   BASE
+========================================= */
 
-:root {
-
-  --background:
-    #ffffff;
-
-  --foreground:
-    #000000;
+* {
+  box-sizing: border-box;
 }
 
 html {
-
-  scroll-behavior:
-    smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-
-  background:
-    var(--background);
-
-  color:
-    var(--foreground);
-
+  margin: 0;
+  background: #ffffff;
+  color: #111111;
   font-family:
+    Inter,
     Arial,
     Helvetica,
     sans-serif;
-
-  overflow-x:
-    hidden;
+  overflow-x: hidden;
 }
 
-* {
-
-  box-sizing:
-    border-box;
-}
-
-img {
-
-  max-width:
-    100%;
-
-  height:
-    auto;
-}
+/* =========================================
+   LINKS
+========================================= */
 
 a {
-
-  color:
-    inherit;
-
-  text-decoration:
-    none;
+  color: inherit;
+  text-decoration: none;
 }
 
-/* Container */
+/* =========================================
+   IMAGES
+========================================= */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================================
+   BUTTON RESET
+========================================= */
+
+button {
+  font: inherit;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
 
 .container {
-
-  width:
-    100%;
-
-  margin:
-    0 auto;
-
-  padding:
-    0 24px;
-
-  max-width:
-    1280px;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
 }
 
-/* Selection */
-
-::selection {
-
-  background:
-    black;
-
-  color:
-    white;
-}
-
-/* Scrollbar */
-
-::-webkit-scrollbar {
-
-  width:
-    10px;
-}
-
-::-webkit-scrollbar-track {
-
-  background:
-    #f5f5f5;
-}
-
-::-webkit-scrollbar-thumb {
-
-  background:
-    rgba(0,0,0,0.2);
-
-  border-radius:
-    999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-
-  background:
-    rgba(0,0,0,0.4);
-}
-
-/* Prose */
-
-.prose {
-
-  max-width:
-    none;
-}
-
-.prose h1 {
-
-  font-size:
-    56px;
-
-  font-weight:
-    900;
-
-  line-height:
-    1.1;
-
-  letter-spacing:
-    -0.04em;
-
-  margin-top:
-    2.5rem;
-
-  margin-bottom:
-    1.5rem;
-}
-
-.prose h2 {
-
-  font-size:
-    42px;
-
-  font-weight:
-    800;
-
-  line-height:
-    1.2;
-
-  letter-spacing:
-    -0.03em;
-
-  margin-top:
-    2.5rem;
-
-  margin-bottom:
-    1.25rem;
-}
-
-.prose h3 {
-
-  font-size:
-    32px;
-
-  font-weight:
-    700;
-
-  line-height:
-    1.3;
-
-  margin-top:
-    2rem;
-
-  margin-bottom:
-    1rem;
-}
-
-.prose p {
-
-  font-size:
-    18px;
-
-  line-height:
-    1.9;
-
-  color:
-    rgba(0,0,0,0.72);
-
-  margin-bottom:
-    1.5rem;
-}
-
-.prose ul {
-
-  padding-left:
-    1.5rem;
-
-  margin-bottom:
-    1.5rem;
-}
-
-.prose li {
-
-  margin-bottom:
-    0.75rem;
-
-  color:
-    rgba(0,0,0,0.72);
-}
-
-.prose strong {
-
-  color:
-    black;
-}
-
-.prose img {
-
-  border-radius:
-    32px;
-
-  margin:
-    2.5rem 0;
-}
-
-.prose blockquote {
-
-  border-left:
-    4px solid black;
-
-  padding-left:
-    1.5rem;
-
-  margin:
-    2rem 0;
-
-  font-style:
-    italic;
-
-  color:
-    rgba(0,0,0,0.72);
-}
-
-/* React Quill */
-
-.ql-toolbar.ql-snow {
-
-  border:
-    1px solid
-    rgba(0,0,0,0.08)
-    !important;
-
-  border-bottom:
-    none
-    !important;
-
-  border-radius:
-    24px 24px 0 0;
-
-  padding:
-    18px
-    !important;
-
-  background:
-    white;
-}
-
-.ql-container.ql-snow {
-
-  border:
-    1px solid
-    rgba(0,0,0,0.08)
-    !important;
-
-  border-radius:
-    0 0 24px 24px;
-
-  min-height:
-    400px;
-
-  font-size:
-    16px;
+/* =========================================
+   RICH TEXT EDITOR
+========================================= */
+
+.ql-container {
+  min-height: 300px;
+  font-size: 16px;
 }
 
 .ql-editor {
-
-  min-height:
-    400px;
-
-  padding:
-    32px
-    !important;
-
-  line-height:
-    1.9;
+  min-height: 300px;
+  line-height: 1.8;
 }
 
 .ql-editor h1 {
-
-  font-size:
-    42px;
-
-  font-weight:
-    900;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .ql-editor h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
 
-  font-size:
-    32px;
-
-  font-weight:
-    800;
+.ql-editor h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .ql-editor p {
+  margin-bottom: 1rem;
+}
 
-  color:
-    rgba(0,0,0,0.72);
+.ql-editor ul {
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.ql-editor ol {
+  padding-left: 1.5rem;
+  list-style: decimal;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid #000;
+  padding-left: 1rem;
+  color: #666;
 }
 
 .ql-editor img {
+  border-radius: 16px;
+  margin-block: 1.5rem;
+}
 
-  border-radius:
-    24px;
+/* =========================================
+   BLOG CONTENT
+========================================= */
+
+.blog-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.blog-content h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-content h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.blog-content ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  list-style: disc;
+}
+
+.blog-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  list-style: decimal;
+}
+
+.blog-content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.blog-content img {
+  width: 100%;
+  border-radius: 24px;
+  margin-block: 2rem;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid #000;
+  padding-left: 1.5rem;
+  margin-block: 2rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+}
+
+.blog-content a {
+  text-decoration: underline;
+}
+
+/* =========================================
+   UTILITIES
+========================================= */
+
+.text-balance {
+  text-wrap: balance;
 }
