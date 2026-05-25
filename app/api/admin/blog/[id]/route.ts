@@ -2,21 +2,17 @@ import {
     NextResponse,
   } from "next/server";
   
-  type Props = {
-  
-    params: {
-  
-      id: string;
-    };
-  };
-  
   export async function PATCH(
   
     request: Request,
   
-    {
-      params,
-    }: Props
+    context: {
+  
+      params: {
+  
+        id: string;
+      };
+    }
   ) {
   
     try {
@@ -29,7 +25,7 @@ import {
         success: true,
   
         id:
-          params.id,
+          context.params.id,
   
         data:
           body,
@@ -55,9 +51,13 @@ import {
   
     request: Request,
   
-    {
-      params,
-    }: Props
+    context: {
+  
+      params: {
+  
+        id: string;
+      };
+    }
   ) {
   
     try {
@@ -67,7 +67,7 @@ import {
         success: true,
   
         deletedId:
-          params.id,
+          context.params.id,
       });
   
     } catch {
