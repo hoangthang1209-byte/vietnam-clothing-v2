@@ -1,23 +1,149 @@
-export default function Navbar() {
-  return (
-    <header className="fixed top-0 z-50 w-full border-b border-neutral-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <div className="text-lg font-semibold tracking-wide">
-          Vietnam Clothing
-        </div>
+"use client";
 
-        <nav className="hidden gap-8 text-sm md:flex">
-          <a href="#">Uniforms</a>
-          <a href="#">Merchandise</a>
-          <a href="#">Corporate Gifts</a>
-          <a href="#">Industries</a>
-          <a href="#">Case Studies</a>
+import Link
+from "next/link";
+
+export default function Navbar() {
+
+  return (
+
+    <header
+      className="
+        fixed
+        top-0
+        z-50
+        w-full
+        border-b
+        border-neutral-200/60
+        bg-white/80
+        backdrop-blur-xl
+        supports-[backdrop-filter]:bg-white/60
+      "
+    >
+
+      <div
+        className="
+          mx-auto
+          flex
+          h-16
+          max-w-7xl
+          items-center
+          justify-between
+          px-5
+          md:h-20
+          lg:px-8
+        "
+      >
+
+        <Link
+          href="/en"
+          className="
+            text-base
+            font-semibold
+            tracking-tight
+            md:text-lg
+          "
+        >
+
+          Vietnam Clothing
+
+        </Link>
+
+        <nav
+          className="
+            hidden
+            items-center
+            gap-6
+            text-sm
+            md:flex
+          "
+        >
+
+          <Link
+            href="/en/products"
+            className="
+              transition
+              hover:text-neutral-500
+            "
+          >
+
+            Uniforms
+
+          </Link>
+
+          <Link
+            href="/en/products"
+            className="
+              transition
+              hover:text-neutral-500
+            "
+          >
+
+            Merchandise
+
+          </Link>
+
+          <Link
+            href="/en/collections"
+            className="
+              transition
+              hover:text-neutral-500
+            "
+          >
+
+            Corporate Gifts
+
+          </Link>
+
+          <Link
+            href="/en/about"
+            className="
+              transition
+              hover:text-neutral-500
+            "
+          >
+
+            Industries
+
+          </Link>
+
+          <Link
+            href="/en/blog"
+            className="
+              transition
+              hover:text-neutral-500
+            "
+          >
+
+            Case Studies
+
+          </Link>
+
         </nav>
 
-        <button className="rounded-full bg-black px-5 py-3 text-sm text-white transition hover:bg-neutral-800">
+        <Link
+          href="/en/contact"
+          className="
+            rounded-full
+            bg-black
+            px-5
+            py-3
+            text-sm
+            font-medium
+            text-white
+            transition
+            duration-300
+            hover:scale-105
+            hover:bg-neutral-800
+          "
+        >
+
           Get Quote
-        </button>
+
+        </Link>
+
       </div>
+
     </header>
   );
 }

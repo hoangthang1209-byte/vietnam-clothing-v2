@@ -24,7 +24,8 @@ export default function Hero({
         bg-gradient-to-b
         from-white
         to-neutral-100
-        pt-56
+        pt-36
+        md:pt-56
       "
     >
 
@@ -34,9 +35,11 @@ export default function Hero({
           grid
           max-w-7xl
           items-center
-          gap-20
+          gap-14
           px-6
-          pb-24
+          pb-20
+          md:gap-20
+          md:pb-24
           lg:grid-cols-2
         "
       >
@@ -57,11 +60,14 @@ export default function Hero({
 
           <p
             className="
-              mb-6
-              text-sm
+              mb-5
+              text-[11px]
               uppercase
-              tracking-[0.3em]
+              tracking-[0.25em]
               text-neutral-500
+              md:mb-6
+              md:text-sm
+              md:tracking-[0.3em]
             "
           >
 
@@ -73,11 +79,12 @@ export default function Hero({
 
           <h1
             className="
-              max-w-2xl
-              text-6xl
+              max-w-full
+              text-5xl
               font-bold
-              leading-tight
+              leading-[0.95]
               tracking-tight
+              md:max-w-2xl
               md:text-7xl
             "
           >
@@ -98,11 +105,14 @@ export default function Hero({
 
           <p
             className="
-              mt-8
+              mt-6
               max-w-xl
-              text-lg
-              leading-8
+              text-base
+              leading-7
               text-neutral-600
+              md:mt-8
+              md:text-lg
+              md:leading-8
             "
           >
 
@@ -118,10 +128,12 @@ export default function Hero({
 
           <div
             className="
-              mt-12
+              mt-10
               flex
-              flex-wrap
+              flex-col
               gap-4
+              sm:flex-row
+              md:mt-12
             "
           >
 
@@ -132,6 +144,8 @@ export default function Hero({
                 px-8
                 py-4
                 text-white
+                shadow-2xl
+                shadow-black/10
                 transition
                 hover:scale-105
                 hover:bg-neutral-800
@@ -147,8 +161,10 @@ export default function Hero({
                 rounded-full
                 border
                 border-black
+                bg-white/70
                 px-8
                 py-4
+                backdrop-blur-xl
                 transition
                 hover:bg-black
                 hover:text-white
@@ -163,13 +179,16 @@ export default function Hero({
 
           <div
             className="
-              mt-20
+              mt-14
               grid
               grid-cols-3
-              gap-10
+              gap-5
               border-t
               border-neutral-200
-              pt-10
+              pt-8
+              md:mt-20
+              md:gap-10
+              md:pt-10
             "
           >
 
@@ -177,8 +196,9 @@ export default function Hero({
 
               <div
                 className="
-                  text-4xl
+                  text-3xl
                   font-bold
+                  md:text-4xl
                 "
               >
 
@@ -189,8 +209,9 @@ export default function Hero({
               <p
                 className="
                   mt-2
-                  text-sm
+                  text-xs
                   text-neutral-500
+                  md:text-sm
                 "
               >
 
@@ -204,8 +225,9 @@ export default function Hero({
 
               <div
                 className="
-                  text-4xl
+                  text-3xl
                   font-bold
+                  md:text-4xl
                 "
               >
 
@@ -216,8 +238,9 @@ export default function Hero({
               <p
                 className="
                   mt-2
-                  text-sm
+                  text-xs
                   text-neutral-500
+                  md:text-sm
                 "
               >
 
@@ -231,8 +254,9 @@ export default function Hero({
 
               <div
                 className="
-                  text-4xl
+                  text-3xl
                   font-bold
+                  md:text-4xl
                 "
               >
 
@@ -243,8 +267,9 @@ export default function Hero({
               <p
                 className="
                   mt-2
-                  text-sm
+                  text-xs
                   text-neutral-500
+                  md:text-sm
                 "
               >
 
@@ -279,7 +304,8 @@ export default function Hero({
           <div
             className="
               overflow-hidden
-              rounded-[40px]
+              rounded-[28px]
+              md:rounded-[40px]
             "
           >
 
@@ -290,9 +316,10 @@ export default function Hero({
               height={2000}
               priority
               className="
-                h-[750px]
+                h-[420px]
                 w-full
                 object-cover
+                md:h-[750px]
               "
             />
 
@@ -301,21 +328,27 @@ export default function Hero({
           <div
             className="
               absolute
-              -bottom-10
-              -left-10
-              rounded-[32px]
+              -bottom-6
+              left-4
+              rounded-[24px]
               bg-white
-              p-8
+              p-5
               shadow-2xl
+              md:-bottom-10
+              md:-left-10
+              md:rounded-[32px]
+              md:p-8
             "
           >
 
             <p
               className="
-                text-sm
+                text-[10px]
                 uppercase
-                tracking-[0.3em]
+                tracking-[0.25em]
                 text-neutral-500
+                md:text-sm
+                md:tracking-[0.3em]
               "
             >
 
@@ -325,9 +358,11 @@ export default function Hero({
 
             <div
               className="
-                mt-4
-                text-5xl
+                mt-3
+                text-4xl
                 font-bold
+                md:mt-4
+                md:text-5xl
               "
             >
 
@@ -338,7 +373,9 @@ export default function Hero({
             <p
               className="
                 mt-2
+                text-sm
                 text-neutral-600
+                md:text-base
               "
             >
 
