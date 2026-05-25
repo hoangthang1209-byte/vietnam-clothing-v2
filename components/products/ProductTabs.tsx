@@ -4,49 +4,74 @@ import {
   useState,
 } from "react";
 
-import type {
-  Product,
-} from "@/types/product";
-
 type Props = {
 
-  product: Product;
+  description?: string;
+
+  specifications?:
+    any[];
+
+  faq?: any[];
 };
 
-const tabs = [
-
-  "Overview",
-
-  "Specifications",
-
-  "FAQ",
-];
-
 export default function ProductTabs({
-  product,
+
+  description,
+
+  specifications,
+
+  faq,
+
 }: Props) {
 
   const [
     activeTab,
     setActiveTab,
   ] = useState(
-    "Overview"
+    "description"
   );
+
+  const tabs = [
+
+    {
+      key:
+        "description",
+
+      label:
+        "Description",
+    },
+
+    {
+      key:
+        "specifications",
+
+      label:
+        "Specifications",
+    },
+
+    {
+      key:
+        "faq",
+
+      label:
+        "FAQ",
+    },
+  ];
 
   return (
 
     <section
       className="
         border-t
-        border-black/5
-        py-32
+        border-black/10
+        py-24
       "
     >
 
       <div
         className="
           mx-auto
-          max-w-7xl
+          max-w-5xl
           px-6
         "
       >
@@ -55,10 +80,7 @@ export default function ProductTabs({
           className="
             flex
             flex-wrap
-            gap-4
-            border-b
-            border-black/10
-            pb-6
+            gap-3
           "
         >
 
@@ -69,30 +91,38 @@ export default function ProductTabs({
               ) => (
 
                 <button
-                  key={tab}
+                  key={
+                    tab.key
+                  }
+
                   onClick={() =>
                     setActiveTab(
-                      tab
+                      tab.key
                     )
                   }
+
                   className={`
                     rounded-full
                     px-6
                     py-3
                     text-sm
+                    font-medium
                     transition
 
                     ${
-                      activeTab === tab
+                      activeTab ===
+                      tab.key
 
                         ? "bg-black text-white"
 
-                        : "bg-neutral-100 hover:bg-neutral-200"
+                        : "bg-neutral-100 text-black"
                     }
                   `}
                 >
 
-                  {tab}
+                  {
+                    tab.label
+                  }
 
                 </button>
               )
@@ -103,86 +133,24 @@ export default function ProductTabs({
 
         <div
           className="
-            pt-16
+            mt-12
           "
         >
 
           {
             activeTab ===
-              "Overview" && (
+              "description" && (
 
               <div
                 className="
-                  grid
-                  gap-16
-                  lg:grid-cols-2
+                  leading-8
+                  text-black/70
                 "
               >
 
-                <div>
-
-                  <h3
-                    className="
-                      text-4xl
-                      font-bold
-                      tracking-tight
-                    "
-                  >
-
-                    Product Overview
-
-                  </h3>
-
-                  <p
-                    className="
-                      mt-8
-                      text-lg
-                      leading-8
-                      text-black/60
-                    "
-                  >
-
-                    {
-                      product.description
-                    }
-
-                  </p>
-
-                </div>
-
-                <div
-                  className="
-                    grid
-                    gap-4
-                  "
-                >
-
-                  {
-                    product.features.map(
-                      (
-                        feature,
-                        index
-                      ) => (
-
-                        <div
-                          key={index}
-                          className="
-                            rounded-[24px]
-                            border
-                            border-black/5
-                            bg-neutral-50
-                            p-6
-                          "
-                        >
-
-                          {feature}
-
-                        </div>
-                      )
-                    )
-                  }
-
-                </div>
+                {
+                  description
+                }
 
               </div>
             )
@@ -190,7 +158,7 @@ export default function ProductTabs({
 
           {
             activeTab ===
-              "Specifications" && (
+              "specifications" && (
 
               <div
                 className="
@@ -200,7 +168,7 @@ export default function ProductTabs({
               >
 
                 {
-                  product.specifications.map(
+                  specifications?.map(
                     (
                       spec,
                       index
@@ -214,14 +182,14 @@ export default function ProductTabs({
                           justify-between
                           rounded-[24px]
                           border
-                          border-black/5
+                          border-black/10
                           p-6
                         "
                       >
 
                         <div
                           className="
-                            text-black/50
+                            font-medium
                           "
                         >
 
@@ -233,7 +201,7 @@ export default function ProductTabs({
 
                         <div
                           className="
-                            font-medium
+                            text-black/60
                           "
                         >
 
@@ -254,17 +222,17 @@ export default function ProductTabs({
 
           {
             activeTab ===
-              "FAQ" && (
+              "faq" && (
 
               <div
                 className="
                   grid
-                  gap-6
+                  gap-4
                 "
               >
 
                 {
-                  product.faq.map(
+                  faq?.map(
                     (
                       item,
                       index
@@ -275,15 +243,15 @@ export default function ProductTabs({
                         className="
                           rounded-[28px]
                           border
-                          border-black/5
+                          border-black/10
                           p-8
                         "
                       >
 
-                        <h3
+                        <div
                           className="
-                            text-2xl
-                            font-bold
+                            text-xl
+                            font-semibold
                           "
                         >
 
@@ -291,9 +259,9 @@ export default function ProductTabs({
                             item.question
                           }
 
-                        </h3>
+                        </div>
 
-                        <p
+                        <div
                           className="
                             mt-4
                             leading-8
@@ -305,7 +273,7 @@ export default function ProductTabs({
                             item.answer
                           }
 
-                        </p>
+                        </div>
 
                       </div>
                     )

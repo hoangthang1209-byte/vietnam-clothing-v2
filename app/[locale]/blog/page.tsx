@@ -1,179 +1,298 @@
 import Link
 from "next/link";
 
+import Image
+from "next/image";
+
+import type {
+  Metadata,
+} from "next";
+
 import {
-  blogPosts,
-} from "@/data/blog";
+  createClient,
+} from "@/lib/supabase/server";
 
-export default function BlogPage() {
+export const metadata:
+Metadata = {
 
-  const posts =
-    Object.values(
-      blogPosts
+  title:
+    "Blog | Vietnam Clothing",
+
+  description:
+    "Explore apparel manufacturing insights, OEM production knowledge and sourcing guides from Vietnam Clothing.",
+
+  openGraph: {
+
+    title:
+      "Vietnam Clothing Blog",
+
+    description:
+      "Apparel manufacturing insights and OEM production knowledge.",
+
+    images: [
+
+      {
+        url:
+          "/og-image.jpg",
+      },
+    ],
+  },
+};
+
+export default async function BlogPage() {
+
+  const supabase =
+    await createClient();
+
+  const {
+    data: blogs,
+  } = await supabase
+
+    .from(
+      "blogs"
+    )
+
+    .select("*")
+
+    .eq(
+      "published",
+      true
+    )
+
+    .order(
+      "created_at",
+      {
+        ascending: false,
+      }
     );
+
+  const jsonLd = {
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "Blog",
+
+    name:
+      "Vietnam Clothing Blog",
+
+    description:
+      "Apparel manufacturing insights and sourcing knowledge.",
+
+    publisher: {
+
+      "@type":
+        "Organization",
+
+      name:
+        "Vietnam Clothing",
+    },
+  };
 
   return (
 
-    <main className="bg-white text-black">
+    <main
+      className="
+        bg-white
+        px-6
+        pb-24
+        pt-40
+        text-black
+      "
+    >
 
-      <section className="py-32">
+      <script
+        type="
+          application/ld+json
+        "
+        dangerouslySetInnerHTML={{
 
-        <div className="mx-auto max-w-7xl px-6">
+          __html:
+            JSON.stringify(
+              jsonLd
+            ),
+        }}
+      />
 
-          <div className="max-w-4xl">
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+        "
+      >
 
-            <div
-              className="
-                text-sm
-                uppercase
-                tracking-[0.3em]
-                text-black/40
-              "
-            >
+        <div
+          className="
+            max-w-4xl
+          "
+        >
 
-              Editorial
+          <div
+            className="
+              text-sm
+              uppercase
+              tracking-[0.3em]
+              text-black/40
+            "
+          >
 
-            </div>
-
-            <h1
-              className="
-                mt-6
-                text-7xl
-                font-semibold
-                leading-none
-                tracking-tight
-              "
-            >
-
-              Apparel
-              Manufacturing
-              Insights
-
-            </h1>
-
-            <p
-              className="
-                mt-8
-                max-w-2xl
-                text-xl
-                leading-relaxed
-                text-black/70
-              "
-            >
-
-              Insights, manufacturing
-              guides and apparel industry
-              knowledge from Vietnam
-              Clothing.
-
-            </p>
+            Vietnam Clothing Blog
 
           </div>
 
-          <div className="mt-24 grid gap-12 md:grid-cols-2">
+          <h1
+            className="
+              mt-6
+              text-6xl
+              font-black
+              tracking-tight
+            "
+          >
 
-            {
-              posts.map(
-                (
-                  post
-                ) => (
+            Apparel Manufacturing
+            Insights
 
-                  <Link
-                    key={
-                      post.slug
-                    }
-                    href={`/blog/${post.slug}`}
+          </h1>
+
+          <p
+            className="
+              mt-8
+              max-w-3xl
+              text-lg
+              leading-8
+              text-black/60
+            "
+          >
+
+            Explore apparel
+            manufacturing insights,
+            sourcing tips and OEM
+            production knowledge
+            from Vietnam Clothing.
+
+          </p>
+
+        </div>
+
+        <div
+          className="
+            mt-20
+            grid
+            gap-10
+            lg:grid-cols-3
+          "
+        >
+
+          {
+            blogs?.map(
+              (
+                blog: any
+              ) => (
+
+                <Link
+                  key={
+                    blog.id
+                  }
+
+                  href={`
+                    /en/blog/${blog.slug}
+                  `}
+
+                  className="
+                    group
+                    block
+                  "
+                >
+
+                  <div
                     className="
-                      group
-                      block
+                      overflow-hidden
+                      rounded-[40px]
+                    "
+                  >
+
+                    <Image
+                      src={
+                        blog.image
+                      }
+                      alt={
+                        blog.title
+                      }
+                      width={1200}
+                      height={800}
+                      className="
+                        aspect-[4/3]
+                        w-full
+                        object-cover
+                        transition
+                        duration-700
+                        group-hover:scale-105
+                      "
+                    />
+
+                  </div>
+
+                  <div
+                    className="
+                      mt-8
                     "
                   >
 
                     <div
                       className="
-                        overflow-hidden
-                        rounded-[40px]
+                        text-sm
+                        uppercase
+                        tracking-[0.2em]
+                        text-black/40
                       "
                     >
 
-                      <img
-                        src={
-                          post.coverImage
-                        }
-                        alt={
-                          post.title
-                        }
-                        className="
-                          aspect-[16/10]
-                          w-full
-                          object-cover
-                          transition
-                          duration-700
-                          group-hover:scale-105
-                        "
-                      />
+                      {
+                        blog.category
+                      }
 
                     </div>
 
-                    <div className="mt-8">
+                    <h2
+                      className="
+                        mt-4
+                        text-3xl
+                        font-black
+                        tracking-tight
+                      "
+                    >
 
-                      <div
-                        className="
-                          text-sm
-                          uppercase
-                          tracking-[0.2em]
-                          text-black/40
-                        "
-                      >
+                      {
+                        blog.title
+                      }
 
-                        {
-                          post.category
-                        }
+                    </h2>
 
-                      </div>
+                    <p
+                      className="
+                        mt-6
+                        leading-8
+                        text-black/60
+                      "
+                    >
 
-                      <h2
-                        className="
-                          mt-4
-                          text-4xl
-                          font-semibold
-                          tracking-tight
-                        "
-                      >
+                      {
+                        blog.excerpt
+                      }
 
-                        {
-                          post.title
-                        }
+                    </p>
 
-                      </h2>
+                  </div>
 
-                      <p
-                        className="
-                          mt-4
-                          text-lg
-                          leading-relaxed
-                          text-black/70
-                        "
-                      >
-
-                        {
-                          post.excerpt
-                        }
-
-                      </p>
-
-                    </div>
-
-                  </Link>
-                )
+                </Link>
               )
-            }
-
-          </div>
+            )
+          }
 
         </div>
 
-      </section>
+      </div>
 
     </main>
   );

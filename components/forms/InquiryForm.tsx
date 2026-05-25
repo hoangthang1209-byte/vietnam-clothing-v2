@@ -4,11 +4,16 @@ import {
   useState,
 } from "react";
 
-import {
-  supabase,
-} from "@/lib/supabase";
+type Props = {
 
-export default function InquiryForm() {
+  product?: string;
+};
+
+export default function InquiryForm({
+
+  product,
+
+}: Props) {
 
   const [
     loading,
@@ -17,24 +22,12 @@ export default function InquiryForm() {
     false
   );
 
-  const [
-    success,
-    setSuccess,
-  ] = useState(
-    false
-  );
-
-  const [
-    errorMessage,
-    setErrorMessage,
-  ] = useState(
-    ""
-  );
-
   async function handleSubmit(
+
     e: React.FormEvent<
       HTMLFormElement
     >
+
   ) {
 
     e.preventDefault();
@@ -43,77 +36,39 @@ export default function InquiryForm() {
       true
     );
 
-    setSuccess(
-      false
-    );
-
-    setErrorMessage(
-      ""
-    );
-
     const formData =
       new FormData(
         e.currentTarget
       );
 
-    const name =
-      formData.get(
-        "name"
-      );
+    formData.append(
+      "product",
+      product || ""
+    );
 
-    const email =
-      formData.get(
-        "email"
-      );
+    await fetch(
 
-    const company =
-      formData.get(
-        "company"
-      );
+      "/api/inquiries",
 
-    const message =
-      formData.get(
-        "message"
-      );
+      {
 
-    const {
-      error,
-    } = await supabase
-      .from(
-        "inquiries"
-      )
-      .insert([
+        method:
+          "POST",
 
-        {
-          name,
-          email,
-          company,
-          message,
-        },
-      ]);
+        body:
+          formData,
+      }
+    );
+
+    alert(
+      "Inquiry submitted!"
+    );
 
     setLoading(
       false
     );
 
-    if (
-      error
-    ) {
-
-      setErrorMessage(
-        "Something went wrong. Please try again."
-      );
-
-      return;
-    }
-
-    setSuccess(
-      true
-    );
-
-    (
-      e.target as HTMLFormElement
-    ).reset();
+    e.currentTarget.reset();
   }
 
   return (
@@ -130,88 +85,100 @@ export default function InquiryForm() {
 
       <input
         name="name"
-        type="text"
-        placeholder="Your Name"
+        placeholder="
+          Your name
+        "
         required
         className="
+          w-full
           rounded-2xl
           border
           border-black/10
-          bg-white
-          px-6
+          px-5
           py-4
           outline-none
-          transition
-          focus:border-black
         "
       />
 
       <input
-        name="email"
         type="email"
-        placeholder="Email Address"
+        name="email"
+        placeholder="
+          Email address
+        "
         required
         className="
+          w-full
           rounded-2xl
           border
           border-black/10
-          bg-white
-          px-6
+          px-5
           py-4
           outline-none
-          transition
-          focus:border-black
         "
       />
 
       <input
         name="company"
-        type="text"
-        placeholder="Company Name"
+        placeholder="
+          Company name
+        "
         className="
+          w-full
           rounded-2xl
           border
           border-black/10
-          bg-white
-          px-6
+          px-5
           py-4
           outline-none
-          transition
-          focus:border-black
         "
       />
 
       <textarea
         name="message"
         rows={6}
-        placeholder="Tell us about your project..."
+        placeholder="
+          Tell us about your project...
+        "
         required
         className="
+          w-full
           rounded-2xl
           border
           border-black/10
-          bg-white
-          px-6
+          px-5
           py-4
           outline-none
-          transition
-          focus:border-black
+        "
+      />
+
+      <input
+        type="file"
+        name="attachment"
+        className="
+          w-full
+          rounded-2xl
+          border
+          border-dashed
+          border-black/10
+          px-5
+          py-5
         "
       />
 
       <button
         type="submit"
-        disabled={loading}
+        disabled={
+          loading
+        }
         className="
           rounded-full
           bg-black
           px-8
-          py-4
+          py-5
+          text-sm
+          font-medium
           text-white
-          transition
-          hover:scale-[1.02]
-          disabled:cursor-not-allowed
-          disabled:opacity-50
         "
       >
 
@@ -224,52 +191,6 @@ export default function InquiryForm() {
         }
 
       </button>
-
-      {
-        success && (
-
-          <div
-            className="
-              rounded-2xl
-              border
-              border-green-200
-              bg-green-50
-              px-5
-              py-4
-              text-sm
-              text-green-700
-            "
-          >
-
-            Inquiry submitted successfully.
-
-          </div>
-        )
-      }
-
-      {
-        errorMessage && (
-
-          <div
-            className="
-              rounded-2xl
-              border
-              border-red-200
-              bg-red-50
-              px-5
-              py-4
-              text-sm
-              text-red-700
-            "
-          >
-
-            {
-              errorMessage
-            }
-
-          </div>
-        )
-      }
 
     </form>
   );

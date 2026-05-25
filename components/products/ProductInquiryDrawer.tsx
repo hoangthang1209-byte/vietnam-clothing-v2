@@ -1,6 +1,10 @@
 "use client";
 
 import {
+  useState,
+} from "react";
+
+import {
   motion,
   AnimatePresence,
 } from "framer-motion";
@@ -12,184 +16,240 @@ import {
 import InquiryForm
 from "@/components/forms/InquiryForm";
 
+import StickyInquiryBar
+from "@/components/products/StickyInquiryBar";
+
 type Props = {
 
-  isOpen: boolean;
+  product: {
 
-  onClose: () => void;
-
-  productTitle: string;
+    title: string;
+  };
 };
 
 export default function ProductInquiryDrawer({
 
-  isOpen,
-
-  onClose,
-
-  productTitle,
+  product,
 
 }: Props) {
 
+  const [
+    isOpen,
+    setIsOpen,
+  ] = useState(
+    false
+  );
+
   return (
 
-    <AnimatePresence>
+    <>
 
-      {
-        isOpen && (
+      <StickyInquiryBar
 
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            className="
-              fixed
-              inset-0
-              z-[999]
-              flex
-              items-center
-              justify-center
-              bg-black/40
-              p-6
-              backdrop-blur-sm
-            "
-          >
+        title={
+          product.title
+        }
+
+        onClick={() =>
+          setIsOpen(
+            true
+          )
+        }
+      />
+
+      <button
+        onClick={() =>
+          setIsOpen(
+            true
+          )
+        }
+        className="
+          rounded-full
+          bg-black
+          px-8
+          py-5
+          text-sm
+          font-medium
+          text-white
+        "
+      >
+
+        Request Quote
+
+      </button>
+
+      <AnimatePresence>
+
+        {
+          isOpen && (
 
             <motion.div
               initial={{
                 opacity: 0,
-                scale: 0.96,
               }}
               animate={{
                 opacity: 1,
-                scale: 1,
               }}
               exit={{
                 opacity: 0,
-                scale: 0.96,
-              }}
-              transition={{
-                duration: 0.2,
               }}
               className="
-                relative
-                w-full
-                max-w-2xl
-                rounded-[40px]
-                bg-white
-                p-10
-                shadow-2xl
+                fixed
+                inset-0
+                z-[999]
+                flex
+                items-center
+                justify-center
+                bg-black/40
+                p-6
+                backdrop-blur-sm
               "
             >
 
-              <button
-                onClick={onClose}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  scale: 0.96,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.96,
+                }}
+                transition={{
+                  duration: 0.2,
+                }}
                 className="
-                  absolute
-                  right-6
-                  top-6
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-full
-                  bg-neutral-100
+                  relative
+                  max-h-[90vh]
+                  w-full
+                  max-w-2xl
+                  overflow-y-auto
+                  rounded-[40px]
+                  bg-white
+                  p-10
+                  shadow-2xl
                 "
               >
 
-                <X
+                <button
+                  onClick={() =>
+                    setIsOpen(
+                      false
+                    )
+                  }
                   className="
-                    h-5
-                    w-5
+                    absolute
+                    right-6
+                    top-6
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-neutral-100
                   "
-                />
+                >
 
-              </button>
+                  <X
+                    className="
+                      h-5
+                      w-5
+                    "
+                  />
 
-              <div
-                className="
-                  max-w-xl
-                "
-              >
+                </button>
 
                 <div
                   className="
-                    text-xs
-                    uppercase
-                    tracking-[0.3em]
-                    text-black/40
+                    max-w-xl
                   "
                 >
 
-                  Request Quote
-
-                </div>
-
-                <h2
-                  className="
-                    mt-6
-                    text-5xl
-                    font-bold
-                    tracking-tight
-                  "
-                >
-
-                  Start Your
-                  Project
-
-                </h2>
-
-                <p
-                  className="
-                    mt-6
-                    leading-8
-                    text-black/60
-                  "
-                >
-
-                  Get quotation,
-                  MOQ and production
-                  consultation for:
-
-                  <span
+                  <div
                     className="
-                      font-semibold
-                      text-black
+                      text-xs
+                      uppercase
+                      tracking-[0.3em]
+                      text-black/40
                     "
                   >
 
-                    {" "}
-                    {productTitle}
+                    Request Quote
 
-                  </span>
+                  </div>
 
-                </p>
+                  <h2
+                    className="
+                      mt-6
+                      text-5xl
+                      font-bold
+                      tracking-tight
+                    "
+                  >
 
-              </div>
+                    Start Your
+                    Project
 
-              <div
-                className="
-                  mt-12
-                "
-              >
+                  </h2>
 
-                <InquiryForm />
+                  <p
+                    className="
+                      mt-6
+                      leading-8
+                      text-black/60
+                    "
+                  >
 
-              </div>
+                    Get quotation,
+                    MOQ and production
+                    consultation for:
+
+                    <span
+                      className="
+                        font-semibold
+                        text-black
+                      "
+                    >
+
+                      {" "}
+                      {
+                        product.title
+                      }
+
+                    </span>
+
+                  </p>
+
+                </div>
+
+                <div
+                  className="
+                    mt-12
+                  "
+                >
+
+                  <InquiryForm
+
+                    product={
+                      product.title
+                    }
+                  />
+
+                </div>
+
+              </motion.div>
 
             </motion.div>
+          )
+        }
 
-          </motion.div>
-        )
-      }
+      </AnimatePresence>
 
-    </AnimatePresence>
+    </>
   );
 }

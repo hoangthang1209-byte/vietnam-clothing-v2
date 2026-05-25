@@ -2,15 +2,6 @@ import type {
   Metadata,
 } from "next";
 
-import {
-  Geist,
-  Geist_Mono,
-} from "next/font/google";
-
-import {
-  Plus_Jakarta_Sans,
-} from "next/font/google";
-
 import "./globals.css";
 
 import Navbar
@@ -19,38 +10,8 @@ from "@/components/layout/Navbar";
 import Footer
 from "@/components/layout/Footer";
 
-const jakarta =
-  Plus_Jakarta_Sans({
-
-    subsets: [
-      "latin",
-    ],
-  });
-
-const geistSans =
-  Geist({
-
-    variable:
-      "--font-geist-sans",
-
-    subsets: [
-      "latin",
-    ],
-  });
-
-const geistMono =
-  Geist_Mono({
-
-    variable:
-      "--font-geist-mono",
-
-    subsets: [
-      "latin",
-    ],
-  });
-
 export const metadata:
-  Metadata = {
+Metadata = {
 
   metadataBase:
     new URL(
@@ -60,14 +21,33 @@ export const metadata:
   title: {
 
     default:
-      "Vietnam Clothing",
+      "Vietnam Clothing | OEM Apparel Manufacturer",
 
     template:
       "%s | Vietnam Clothing",
   },
 
   description:
-    "Premium OEM & ODM apparel manufacturing partner in Vietnam.",
+    "Vietnam Clothing is a premium OEM apparel manufacturer specializing in custom clothing, uniforms, sportswear and fashion production in Vietnam.",
+
+  keywords: [
+
+    "Vietnam clothing manufacturer",
+
+    "OEM apparel manufacturer",
+
+    "custom clothing manufacturer",
+
+    "Vietnam garment factory",
+
+    "sportswear manufacturer",
+
+    "uniform manufacturer",
+
+    "streetwear manufacturer",
+
+    "private label clothing",
+  ],
 
   openGraph: {
 
@@ -75,7 +55,7 @@ export const metadata:
       "Vietnam Clothing",
 
     description:
-      "Premium OEM & ODM apparel manufacturing partner in Vietnam.",
+      "Premium OEM apparel manufacturer in Vietnam.",
 
     url:
       "https://vietnamclothing.com",
@@ -88,6 +68,23 @@ export const metadata:
 
     type:
       "website",
+
+    images: [
+
+      {
+        url:
+          "/og-image.jpg",
+
+        width:
+          1200,
+
+        height:
+          630,
+
+        alt:
+          "Vietnam Clothing",
+      },
+    ],
   },
 
   twitter: {
@@ -99,66 +96,47 @@ export const metadata:
       "Vietnam Clothing",
 
     description:
-      "Premium OEM & ODM apparel manufacturing partner in Vietnam.",
+      "Premium OEM apparel manufacturer in Vietnam.",
+
+    images: [
+
+      "/og-image.jpg",
+    ],
   },
 
   robots: {
 
-    index:
-      true,
+    index: true,
 
-    follow:
-      true,
-  },
-
-  icons: {
-
-    icon:
-      "/favicon.ico",
+    follow: true,
   },
 };
 
 export default function RootLayout({
+
   children,
+
 }: Readonly<{
+
   children:
     React.ReactNode;
 }>) {
 
   return (
 
-    <html
-      lang="en"
-      className={`
-        ${geistSans.variable}
-        ${geistMono.variable}
-        h-full
-        antialiased
-      `}
-    >
+    <html lang="en">
 
       <body
-        className={`
-          min-h-full
-          flex
-          flex-col
+        className="
           bg-white
           text-black
-          ${jakarta.className}
-        `}
+          antialiased
+        "
       >
 
         <Navbar />
 
-        <main
-          className="
-            flex-1
-          "
-        >
-
-          {children}
-
-        </main>
+        {children}
 
         <Footer />
 

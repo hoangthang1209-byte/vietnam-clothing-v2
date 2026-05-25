@@ -1,88 +1,58 @@
-import Hero
-from "../../sections/Hero";
+import HeroSection
+from "@/components/home/HeroSection";
 
-import TrustedBrands
-from "../../sections/TrustedBrands";
+import BrandMarquee
+from "@/components/home/BrandMarquee";
 
-import ManufacturingCapabilities
-from "../../sections/ManufacturingCapabilities";
+import HomeCategories
+from "@/components/home/HomeCategories";
 
-import ProductCategories
-from "../../sections/ProductCategories";
+import FeaturedProducts
+from "@/components/home/FeaturedProducts";
 
 import WhyChooseUs
-from "../../sections/WhyChooseUs";
+from "@/components/home/WhyChooseUs";
+
+import TrustedBrands
+from "@/components/home/TrustedBrands";
+
+import FactoryStats
+from "@/components/home/FactoryStats";
 
 import FactoryGallery
-from "../../sections/FactoryGallery";
+from "@/components/home/FactoryGallery";
 
-import FactoryProcess
-from "../../sections/FactoryProcess";
+import HomeCTA
+from "@/components/home/HomeCTA";
 
-import Testimonials
-from "../../sections/Testimonials";
-
-import FinalCTA
-from "../../sections/FinalCTA";
-
-import RealInquiryForm
-from "@/components/RealInquiryForm";
-
-import {
-  dictionaries,
-} from "../../dictionaries";
-
-export default async function HomePage({
-  params,
-}: {
-  params:
-    Promise<{
-      locale:
-        | "en"
-        | "vi";
-    }>;
-}) {
-
-  const {
-    locale,
-  } = await params;
-
-  const dict =
-    dictionaries[
-      locale
-    ];
+export default function HomePage() {
 
   return (
 
     <main
       className="
-        min-h-screen
         bg-white
         text-black
       "
     >
 
-      <Hero
-        dict={dict}
-      />
+      <HeroSection />
 
-      <TrustedBrands />
+      <BrandMarquee />
 
-      <ProductCategories />
+      <HomeCategories />
 
-      <ManufacturingCapabilities />
+      <FeaturedProducts />
 
       <WhyChooseUs />
 
+      <TrustedBrands />
+
+      <FactoryStats />
+
       <FactoryGallery />
 
-      <FactoryProcess />
-
-      <Testimonials />
-
-      <FinalCTA />
-
-      <RealInquiryForm />
+      <HomeCTA />
 
     </main>
   );

@@ -3,41 +3,17 @@
 import Image
 from "next/image";
 
-import {
-  motion,
-} from "framer-motion";
-
-import {
-  ArrowRight,
-} from "lucide-react";
-
-import Container
-from "@/components/ui/Container";
-
-import type {
-  Product,
-} from "@/types/product";
-
 type Props = {
 
-  product: Product;
+  product: any;
 
   activeImage: string;
 
-  setActiveImage:
-    (
-      image: string
-    ) => void;
+  setActiveImage: (
+    image: string
+  ) => void;
 
-  setIsFullscreen:
-    (
-      value: boolean
-    ) => void;
-
-  setIsInquiryOpen:
-    (
-      value: boolean
-    ) => void;
+  onOpenFullscreen: () => void;
 };
 
 export default function ProductHero({
@@ -48,174 +24,198 @@ export default function ProductHero({
 
   setActiveImage,
 
-  setIsFullscreen,
-
-  setIsInquiryOpen,
+  onOpenFullscreen,
 
 }: Props) {
 
-  const galleryImages =
-
-    product.gallery?.length
-
-      ? product.gallery
-
-      : [
-          product.image,
-        ];
-
   return (
 
-    <motion.section
-      initial={{
-        opacity: 0,
-        y: 40,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.7,
-      }}
-      className="pb-24 pt-12"
+    <section
+      className="
+        pb-24
+        pt-40
+      "
     >
 
-      <Container
+      <div
         className="
+          mx-auto
           grid
+          max-w-7xl
           gap-20
+          px-6
           lg:grid-cols-2
         "
       >
 
-        <div>
+        <div
+          className="
+            grid
+            gap-6
+          "
+        >
 
           <button
-            onClick={() =>
-              setIsFullscreen(
-                true
-              )
+            onClick={
+              onOpenFullscreen
             }
             className="
               overflow-hidden
               rounded-[40px]
               border
-              border-black/5
-              bg-neutral-100
-              transition
-              hover:scale-[1.01]
+              border-black/10
             "
           >
 
             <Image
-              src={activeImage}
-              alt={product.title}
+              src={
+                activeImage
+              }
+              alt={
+                product.title
+              }
               width={1600}
-              height={1600}
+              height={1800}
               className="
-                h-full
+                aspect-[4/5]
                 w-full
                 object-cover
               "
-              priority
             />
 
           </button>
 
-          <div
-            className="
-              mt-6
-              grid
-              grid-cols-4
-              gap-4
-            "
-          >
+          {
+            product.gallery?.length > 0 && (
 
-            {
-              galleryImages.map(
-                (
-                  image,
-                  index
-                ) => (
+              <div
+                className="
+                  grid
+                  grid-cols-4
+                  gap-4
+                "
+              >
 
-                  <button
-                    key={index}
-                    onClick={() =>
-                      setActiveImage(
-                        image
-                      )
+                <button
+                  onClick={() =>
+                    setActiveImage(
+                      product.image
+                    )
+                  }
+                  className={`
+                    overflow-hidden
+                    rounded-[20px]
+                    border
+
+                    ${
+                      activeImage ===
+                      product.image
+
+                        ? "border-black"
+
+                        : "border-black/10"
                     }
-                    className={`
-                      overflow-hidden
-                      rounded-[24px]
-                      border
-                      transition
+                  `}
+                >
 
-                      ${
-                        activeImage === image
+                  <Image
+                    src={
+                      product.image
+                    }
+                    alt=""
+                    width={400}
+                    height={400}
+                    className="
+                      aspect-square
+                      w-full
+                      object-cover
+                    "
+                  />
 
-                          ? "border-black ring-2 ring-black"
+                </button>
 
-                          : "border-black/10 hover:border-black/40"
-                      }
-                    `}
-                  >
+                {
+                  product.gallery.map(
+                    (
+                      image: string,
+                      index: number
+                    ) => (
 
-                    <Image
-                      src={image}
-                      alt={product.title}
-                      width={400}
-                      height={400}
-                      className="
-                        aspect-square
-                        h-full
-                        w-full
-                        object-cover
-                      "
-                    />
+                      <button
+                        key={index}
+                        onClick={() =>
+                          setActiveImage(
+                            image
+                          )
+                        }
+                        className={`
+                          overflow-hidden
+                          rounded-[20px]
+                          border
 
-                  </button>
-                )
-              )
-            }
+                          ${
+                            activeImage ===
+                            image
 
-          </div>
+                              ? "border-black"
+
+                              : "border-black/10"
+                          }
+                        `}
+                      >
+
+                        <Image
+                          src={image}
+                          alt=""
+                          width={400}
+                          height={400}
+                          className="
+                            aspect-square
+                            w-full
+                            object-cover
+                          "
+                        />
+
+                      </button>
+                    )
+                  )
+                }
+
+              </div>
+            )
+          }
 
         </div>
 
-        <div
-          className="
-            lg:sticky
-            lg:top-32
-            lg:h-fit
-          "
-        >
+        <div>
 
           <div
             className="
-              text-xs
+              text-sm
               uppercase
               tracking-[0.3em]
               text-black/40
             "
           >
 
-            {product.category}
+            {
+              product.category
+            }
 
           </div>
 
           <h1
             className="
               mt-6
-              text-5xl
+              text-6xl
               font-bold
               tracking-tight
-              md:text-6xl
             "
           >
 
-            {product.title}
+            {
+              product.title
+            }
 
           </h1>
 
@@ -228,195 +228,71 @@ export default function ProductHero({
             "
           >
 
-            {product.description}
+            {
+              product.description
+            }
 
           </p>
 
-          <div
-            className="
-              mt-10
-              flex
-              flex-wrap
-              gap-4
-            "
-          >
-
-            <button
-              onClick={() =>
-                setIsInquiryOpen(
-                  true
-                )
-              }
-              className="
-                flex
-                items-center
-                gap-2
-                rounded-full
-                bg-black
-                px-8
-                py-4
-                text-white
-                transition
-                hover:scale-105
-              "
-            >
-
-              Request Quote
-
-              <ArrowRight
-                className="
-                  h-4
-                  w-4
-                "
-              />
-
-            </button>
-
-            <button
-              className="
-                rounded-full
-                border
-                border-black/10
-                px-8
-                py-4
-                transition
-                hover:bg-black
-                hover:text-white
-              "
-            >
-
-              Download Catalog
-
-            </button>
-
-          </div>
-
-          <div
-            className="
-              mt-16
-              grid
-              gap-4
-              sm:grid-cols-3
-            "
-          >
-
-            <div
-              className="
-                rounded-[28px]
-                border
-                border-black/5
-                bg-neutral-50
-                p-6
-              "
-            >
+          {
+            product.features?.length > 0 && (
 
               <div
                 className="
-                  text-xs
-                  uppercase
-                  tracking-[0.2em]
-                  text-black/40
+                  mt-10
+                  grid
+                  gap-3
                 "
               >
 
-                MOQ
+                {
+                  product.features
+                    .slice(
+                      0,
+                      4
+                    )
+                    .map(
+                      (
+                        feature: string,
+                        index: number
+                      ) => (
+
+                        <div
+                          key={index}
+                          className="
+                            flex
+                            items-center
+                            gap-3
+                            text-black/70
+                          "
+                        >
+
+                          <div
+                            className="
+                              h-2
+                              w-2
+                              rounded-full
+                              bg-black
+                            "
+                          />
+
+                          {
+                            feature
+                          }
+
+                        </div>
+                      )
+                    )
+                }
 
               </div>
-
-              <div
-                className="
-                  mt-3
-                  text-2xl
-                  font-bold
-                "
-              >
-
-                100+
-
-              </div>
-
-            </div>
-
-            <div
-              className="
-                rounded-[28px]
-                border
-                border-black/5
-                bg-neutral-50
-                p-6
-              "
-            >
-
-              <div
-                className="
-                  text-xs
-                  uppercase
-                  tracking-[0.2em]
-                  text-black/40
-                "
-              >
-
-                Lead Time
-
-              </div>
-
-              <div
-                className="
-                  mt-3
-                  text-2xl
-                  font-bold
-                "
-              >
-
-                7-14d
-
-              </div>
-
-            </div>
-
-            <div
-              className="
-                rounded-[28px]
-                border
-                border-black/5
-                bg-neutral-50
-                p-6
-              "
-            >
-
-              <div
-                className="
-                  text-xs
-                  uppercase
-                  tracking-[0.2em]
-                  text-black/40
-                "
-              >
-
-                OEM / ODM
-
-              </div>
-
-              <div
-                className="
-                  mt-3
-                  text-2xl
-                  font-bold
-                "
-              >
-
-                Yes
-
-              </div>
-
-            </div>
-
-          </div>
+            )
+          }
 
         </div>
 
-      </Container>
+      </div>
 
-    </motion.section>
+    </section>
   );
 }

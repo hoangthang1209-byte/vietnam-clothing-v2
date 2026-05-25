@@ -1,52 +1,46 @@
-import Link
-from "next/link";
-
 import Image
 from "next/image";
 
+import Link
+from "next/link";
+
 import {
-  supabase,
-} from "@/lib/supabase";
+  getProducts,
+} from "@/lib/getProducts";
 
 type Props = {
 
-  currentSlug: string;
-
-  category: string;
+  currentSlug?: string;
 };
 
 export default async function RelatedProducts({
 
   currentSlug,
 
-  category,
-
 }: Props) {
 
-  const {
-    data: products,
-  } = await supabase
+  const products =
+    await getProducts();
 
-    .from(
-      "products"
-    )
+  const relatedProducts =
+    products
 
-    .select("*")
+      .filter(
+        (
+          product: any
+        ) =>
 
-    .eq(
-      "category",
-      category
-    )
+          product.slug !==
+          currentSlug
+      )
 
-    .neq(
-      "slug",
-      currentSlug
-    )
-
-    .limit(3);
+      .slice(
+        0,
+        3
+      );
 
   if (
-    !products?.length
+    relatedProducts.length === 0
   ) {
 
     return null;
@@ -72,11 +66,10 @@ export default async function RelatedProducts({
 
         <div
           className="
-            mb-16
             flex
             items-end
             justify-between
-            gap-8
+            gap-10
           "
         >
 
@@ -84,14 +77,14 @@ export default async function RelatedProducts({
 
             <div
               className="
-                text-xs
+                text-sm
                 uppercase
                 tracking-[0.3em]
                 text-black/40
               "
             >
 
-              Related Products
+              More Products
 
             </div>
 
@@ -104,8 +97,7 @@ export default async function RelatedProducts({
               "
             >
 
-              Explore More
-              Products
+              Related Products
 
             </h2>
 
@@ -115,15 +107,15 @@ export default async function RelatedProducts({
 
         <div
           className="
+            mt-14
             grid
-            gap-8
-            md:grid-cols-2
-            lg:grid-cols-3
+            gap-6
+            md:grid-cols-3
           "
         >
 
           {
-            products.map(
+            relatedProducts.map(
               (
                 product: any
               ) => (
@@ -137,20 +129,15 @@ export default async function RelatedProducts({
                   }
                   className="
                     group
-                    overflow-hidden
-                    rounded-[40px]
-                    border
-                    border-black/5
-                    bg-white
-                    transition
-                    hover:-translate-y-1
-                    hover:shadow-2xl
                   "
                 >
 
                   <div
                     className="
                       overflow-hidden
+                      rounded-[32px]
+                      border
+                      border-black/10
                     "
                   >
 
@@ -161,15 +148,14 @@ export default async function RelatedProducts({
                       alt={
                         product.title
                       }
-                      width={1600}
-                      height={2000}
+                      width={1200}
+                      height={1400}
                       className="
                         aspect-[4/5]
-                        h-full
                         w-full
                         object-cover
                         transition
-                        duration-700
+                        duration-500
                         group-hover:scale-105
                       "
                     />
@@ -178,15 +164,15 @@ export default async function RelatedProducts({
 
                   <div
                     className="
-                      p-8
+                      mt-5
                     "
                   >
 
                     <div
                       className="
-                        text-xs
+                        text-sm
                         uppercase
-                        tracking-[0.3em]
+                        tracking-[0.2em]
                         text-black/40
                       "
                     >
@@ -199,8 +185,8 @@ export default async function RelatedProducts({
 
                     <h3
                       className="
-                        mt-5
-                        text-3xl
+                        mt-3
+                        text-2xl
                         font-bold
                         tracking-tight
                       "
@@ -214,9 +200,10 @@ export default async function RelatedProducts({
 
                     <p
                       className="
-                        mt-5
-                        leading-8
+                        mt-3
+                        leading-7
                         text-black/60
+                        line-clamp-3
                       "
                     >
 

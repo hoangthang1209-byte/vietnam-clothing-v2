@@ -1,6 +1,10 @@
 import Image
 from "next/image";
 
+import type {
+  Metadata,
+} from "next";
+
 import {
   notFound,
 } from "next/navigation";
@@ -9,16 +13,84 @@ import {
   getProductBySlug,
 } from "@/lib/getProductBySlug";
 
-import ProductPageClient
-from "@/components/products/ProductPageClient";
+import ProductInquiryDrawer
+from "@/components/products/ProductInquiryDrawer";
+
+import ProductTabs
+from "@/components/products/ProductTabs";
+
+import ProductGallery
+from "@/components/products/ProductGallery";
+
+import ProductQuickInfo
+from "@/components/products/ProductQuickInfo";
+
+import ProductCTA
+from "@/components/products/ProductCTA";
+
+import RelatedProducts
+from "@/components/products/RelatedProducts";
+
+import Breadcrumb
+from "@/components/ui/Breadcrumb";
 
 type Props = {
 
   params: {
 
     slug: string;
+    locale: string;
   };
 };
+
+export async function generateMetadata({
+
+  params,
+
+}: Props): Promise<
+  Metadata
+> {
+
+  const product =
+    await getProductBySlug(
+      params.slug
+    );
+
+  if (!product) {
+
+    return {
+
+      title:
+        "Product Not Found",
+    };
+  }
+
+  return {
+
+    title:
+      `${product.title} | Vietnam Clothing`,
+
+    description:
+      product.description,
+
+    openGraph: {
+
+      title:
+        product.title,
+
+      description:
+        product.description,
+
+      images: [
+
+        {
+          url:
+            product.image,
+        },
+      ],
+    },
+  };
+}
 
 export default async function ProductDetailPage({
 
@@ -31,34 +103,176 @@ export default async function ProductDetailPage({
       params.slug
     );
 
-  if (
-    !product
-  ) {
+  if (!product) {
 
     notFound();
   }
+
+  const jsonLd = {
+
+    "@context":
+      "https://schema.org",
+
+    "@type":
+      "Product",
+
+    name:
+      product.title,
+
+    description:
+      product.description,
+
+    image: [
+
+      product.image,
+
+      ...(product.gallery || []),
+    ],
+
+    brand: {
+
+      "@type":
+        "Brand",
+
+      name:
+        "Vietnam Clothing",
+    },
+
+    manufacturer: {
+
+      "@type":
+        "Organization",
+
+      name:
+        "Vietnam Clothing",
+    },
+
+    category:
+      product.category,
+  };
+
+  const faqJsonLd =
+
+    product.faq?.length > 0
+
+      ? {
+
+          "@context":
+            "https://schema.org",
+
+          "@type":
+            "FAQPage",
+
+          mainEntity:
+
+            product.faq.map(
+              (
+                item: any
+              ) => ({
+
+                "@type":
+                  "Question",
+
+                name:
+                  item.question,
+
+                acceptedAnswer: {
+
+                  "@type":
+                    "Answer",
+
+                  text:
+                    item.answer,
+                },
+              })
+            ),
+        }
+
+      : null;
 
   return (
 
     <main
       className="
         bg-white
+        pb-24
         text-black
       "
     >
 
+      <script
+        type="
+          application/ld+json
+        "
+        dangerouslySetInnerHTML={{
+
+          __html:
+            JSON.stringify(
+              jsonLd
+            ),
+        }}
+      />
+
+      {
+        faqJsonLd && (
+
+          <script
+            type="
+              application/ld+json
+            "
+            dangerouslySetInnerHTML={{
+
+              __html:
+                JSON.stringify(
+                  faqJsonLd
+                ),
+            }}
+          />
+        )
+      }
+
       <section
         className="
-          border-b
-          border-black/5
           pb-24
-          pt-56
+          pt-40
         "
       >
 
         <div
           className="
             mx-auto
+            max-w-7xl
+            px-6
+          "
+        >
+
+          <Breadcrumb
+            items={[
+
+              {
+                label:
+                  "Products",
+
+                href:
+                  "/en/products",
+              },
+
+              {
+                label:
+                  product.title,
+
+                href:
+                  `/en/products/${product.slug}`,
+              },
+            ]}
+          />
+
+        </div>
+
+        <div
+          className="
+            mx-auto
+            mt-10
             grid
             max-w-7xl
             gap-20
@@ -66,6 +280,58 @@ export default async function ProductDetailPage({
             lg:grid-cols-2
           "
         >
+
+          <div
+            className="
+              grid
+              gap-6
+            "
+          >
+
+            <div
+              className="
+                overflow-hidden
+                rounded-[40px]
+                border
+                border-black/10
+              "
+            >
+
+              <Image
+                src={
+                  product.image
+                }
+                alt={
+                  product.title
+                }
+                width={1600}
+                height={1800}
+                className="
+                  aspect-[4/5]
+                  w-full
+                  object-cover
+                "
+              />
+
+            </div>
+
+            {
+              product.gallery?.length > 0 && (
+
+                <ProductGallery
+
+                  images={
+                    product.gallery
+                  }
+
+                  title={
+                    product.title
+                  }
+                />
+              )
+            }
+
+          </div>
 
           <div>
 
@@ -90,7 +356,6 @@ export default async function ProductDetailPage({
                 text-6xl
                 font-bold
                 tracking-tight
-                md:text-7xl
               "
             >
 
@@ -103,7 +368,6 @@ export default async function ProductDetailPage({
             <p
               className="
                 mt-8
-                max-w-xl
                 text-lg
                 leading-8
                 text-black/60
@@ -118,97 +382,14 @@ export default async function ProductDetailPage({
 
             <div
               className="
-                mt-12
-                grid
-                gap-4
+                mt-10
               "
             >
 
-              {
-                product.features?.map(
-                  (
-                    feature: string,
-                    index: number
-                  ) => (
-
-                    <div
-                      key={index}
-                      className="
-                        flex
-                        items-center
-                        gap-4
-                        rounded-2xl
-                        border
-                        border-black/5
-                        px-6
-                        py-5
-                      "
-                    >
-
-                      <div
-                        className="
-                          h-2
-                          w-2
-                          rounded-full
-                          bg-black
-                        "
-                      />
-
-                      <div>
-
-                        {
-                          feature
-                        }
-
-                      </div>
-
-                    </div>
-                  )
-                )
-              }
-
-            </div>
-
-            <div
-              className="
-                mt-14
-              "
-            >
-
-              <ProductPageClient
+              <ProductInquiryDrawer
                 product={
                   product
                 }
-              />
-
-            </div>
-
-          </div>
-
-          <div>
-
-            <div
-              className="
-                overflow-hidden
-                rounded-[40px]
-              "
-            >
-
-              <Image
-                src={
-                  product.image
-                }
-                alt={
-                  product.title
-                }
-                width={2000}
-                height={2400}
-                className="
-                  aspect-[4/5]
-                  h-full
-                  w-full
-                  object-cover
-                "
               />
 
             </div>
@@ -220,7 +401,7 @@ export default async function ProductDetailPage({
       </section>
 
       {
-        product.gallery?.length > 0 && (
+        product.features?.length > 0 && (
 
           <section
             className="
@@ -238,7 +419,7 @@ export default async function ProductDetailPage({
 
               <div
                 className="
-                  mb-16
+                  max-w-3xl
                 "
               >
 
@@ -251,7 +432,7 @@ export default async function ProductDetailPage({
                   "
                 >
 
-                  Product Gallery
+                  Features
 
                 </div>
 
@@ -264,8 +445,7 @@ export default async function ProductDetailPage({
                   "
                 >
 
-                  Production
-                  Showcase
+                  Product Highlights
 
                 </h2>
 
@@ -273,41 +453,42 @@ export default async function ProductDetailPage({
 
               <div
                 className="
+                  mt-12
                   grid
-                  gap-8
+                  gap-4
                   md:grid-cols-2
                 "
               >
 
                 {
-                  product.gallery.map(
+                  product.features.map(
                     (
-                      image: string,
+                      feature: string,
                       index: number
                     ) => (
 
                       <div
                         key={index}
                         className="
-                          overflow-hidden
-                          rounded-[40px]
+                          rounded-[24px]
+                          border
+                          border-black/10
+                          p-8
                         "
                       >
 
-                        <Image
-                          src={image}
-                          alt={
-                            product.title
-                          }
-                          width={1600}
-                          height={1600}
+                        <div
                           className="
-                            aspect-square
-                            h-full
-                            w-full
-                            object-cover
+                            text-lg
+                            font-medium
                           "
-                        />
+                        >
+
+                          {
+                            feature
+                          }
+
+                        </div>
 
                       </div>
                     )
@@ -321,6 +502,70 @@ export default async function ProductDetailPage({
           </section>
         )
       }
+
+      <ProductTabs
+        description={
+          product.description
+        }
+        specifications={
+          product.specifications
+        }
+        faq={
+          product.faq
+        }
+      />
+
+      <ProductQuickInfo
+        product={product}
+      />
+
+      {
+        product.content && (
+
+          <section
+            className="
+              py-24
+            "
+          >
+
+            <div
+              className="
+                mx-auto
+                max-w-4xl
+                px-6
+              "
+            >
+
+              <div
+                className="
+                  prose
+                  prose-neutral
+                  max-w-none
+                  prose-img:rounded-[32px]
+                "
+
+                dangerouslySetInnerHTML={{
+
+                  __html:
+                    product.content,
+                }}
+              />
+
+            </div>
+
+          </section>
+        )
+      }
+
+      <ProductCTA
+        product={product}
+      />
+
+      <RelatedProducts
+        currentSlug={
+          product.slug || ""
+        }
+      />
 
     </main>
   );

@@ -1,104 +1,52 @@
-import type {
-  Metadata,
-} from "next";
+import Image
+from "next/image";
 
 import Link
 from "next/link";
 
-import Image
-from "next/image";
-
-import { notFound }
-from "next/navigation";
+import {
+  notFound,
+} from "next/navigation";
 
 import {
-  collections,
-} from "@/data/collections";
-
-import Breadcrumb
-from "@/components/navigation/Breadcrumb";
+  getProducts,
+} from "@/lib/getProducts";
 
 type Props = {
 
-  params:
-    Promise<{
-      locale: string;
-      slug: string;
-    }>;
+  params: {
+
+    slug: string;
+    locale: string;
+  };
 };
 
-export async function generateStaticParams() {
-
-  return Object.keys(
-    collections
-  ).map(
-    (
-      slug
-    ) => ({
-
-      slug,
-    })
-  );
-}
-
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
-
-  const {
-    slug,
-  } = await params;
-
-  const collection =
-    collections[
-      slug as keyof typeof collections
-    ];
-
-  if (
-    !collection
-  ) {
-
-    return {};
-  }
-
-  return {
-
-    title:
-      collection.seoTitle,
-
-    description:
-      collection.seoDescription,
-
-    openGraph: {
-
-      title:
-        collection.seoTitle,
-
-      description:
-        collection.seoDescription,
-
-      images: [
-        collection.heroImage,
-      ],
-    },
-  };
-}
-
 export default async function CollectionPage({
+
   params,
+
 }: Props) {
 
-  const {
-    slug,
-  } = await params;
+  const products =
+    await getProducts();
 
-  const collection =
-    collections[
-      slug as keyof typeof collections
-    ];
+  const collectionProducts =
+    products.filter(
+      (
+        product: any
+      ) =>
+
+        product.category
+          ?.toLowerCase()
+          .replaceAll(
+            " ",
+            "-"
+          ) ===
+        params.slug
+    );
 
   if (
-    !collection
+    collectionProducts.length === 0
   ) {
 
     notFound();
@@ -106,41 +54,35 @@ export default async function CollectionPage({
 
   return (
 
-    <main className="bg-white text-black">
+    <main
+      className="
+        bg-white
+        text-black
+      "
+    >
 
-      <section className="pt-32">
+      <section
+        className="
+          border-b
+          border-black/5
+          pb-24
+          pt-56
+        "
+      >
 
-        <div className="mx-auto max-w-7xl px-6">
+        <div
+          className="
+            mx-auto
+            max-w-7xl
+            px-6
+          "
+        >
 
-          <Breadcrumb
-            items={[
-              {
-                label:
-                  "Collections",
-
-                href:
-                  "/en/collections",
-              },
-
-              {
-                label:
-                  collection.title,
-
-                href:
-                  `/en/collections/${slug}`,
-              },
-            ]}
-          />
-
-        </div>
-
-      </section>
-
-      <section className="py-20">
-
-        <div className="mx-auto max-w-7xl px-6">
-
-          <div className="max-w-4xl">
+          <div
+            className="
+              max-w-4xl
+            "
+          >
 
             <div
               className="
@@ -151,22 +93,26 @@ export default async function CollectionPage({
               "
             >
 
-              Collection
+              Product Collection
 
             </div>
 
             <h1
               className="
                 mt-6
-                text-5xl
-                font-semibold
+                text-6xl
+                font-bold
                 tracking-tight
                 md:text-7xl
               "
             >
 
               {
-                collection.title
+                params.slug
+                  .replaceAll(
+                    "-",
+                    " "
+                  )
               }
 
             </h1>
@@ -174,44 +120,19 @@ export default async function CollectionPage({
             <p
               className="
                 mt-8
-                max-w-2xl
-                text-xl
-                leading-relaxed
-                text-black/70
+                max-w-3xl
+                text-lg
+                leading-8
+                text-black/60
               "
             >
 
-              {
-                collection.description
-              }
+              Explore premium OEM &
+              ODM apparel manufacturing
+              products from Vietnam
+              Clothing.
 
             </p>
-
-          </div>
-
-          <div
-            className="
-              mt-16
-              overflow-hidden
-              rounded-[40px]
-            "
-          >
-
-            <Image
-              src={
-                collection.heroImage
-              }
-              alt={
-                collection.title
-              }
-              width={2000}
-              height={1200}
-              className="
-                aspect-[16/8]
-                w-full
-                object-cover
-              "
-            />
 
           </div>
 
@@ -219,46 +140,53 @@ export default async function CollectionPage({
 
       </section>
 
-      <section className="pb-32">
+      <section
+        className="
+          py-24
+        "
+      >
 
-        <div className="mx-auto max-w-7xl px-6">
+        <div
+          className="
+            mx-auto
+            max-w-7xl
+            px-6
+          "
+        >
 
           <div
             className="
-              text-sm
-              uppercase
-              tracking-[0.3em]
-              text-black/40
+              grid
+              gap-8
+              md:grid-cols-2
+              xl:grid-cols-3
             "
           >
 
-            Products
-
-          </div>
-
-          <div className="mt-12 grid gap-10 md:grid-cols-3">
-
             {
-              collection.products.map(
+              collectionProducts.map(
                 (
-                  product
+                  product: any
                 ) => (
 
                   <Link
                     key={
-                      product.slug
+                      product.id
                     }
-                    href={`/en/products/${product.slug}`}
+                    href={
+                      `/en/products/${product.slug}`
+                    }
                     className="
                       group
-                      block
                     "
                   >
 
                     <div
                       className="
                         overflow-hidden
-                        rounded-[32px]
+                        rounded-[36px]
+                        border
+                        border-black/10
                       "
                     >
 
@@ -269,8 +197,8 @@ export default async function CollectionPage({
                         alt={
                           product.title
                         }
-                        width={1400}
-                        height={1600}
+                        width={1200}
+                        height={1400}
                         className="
                           aspect-[4/5]
                           w-full
@@ -283,11 +211,15 @@ export default async function CollectionPage({
 
                     </div>
 
-                    <div className="mt-6">
+                    <div
+                      className="
+                        mt-6
+                      "
+                    >
 
                       <div
                         className="
-                          text-sm
+                          text-xs
                           uppercase
                           tracking-[0.2em]
                           text-black/40
@@ -300,11 +232,11 @@ export default async function CollectionPage({
 
                       </div>
 
-                      <div
+                      <h2
                         className="
                           mt-3
                           text-3xl
-                          font-semibold
+                          font-bold
                           tracking-tight
                         "
                       >
@@ -313,7 +245,22 @@ export default async function CollectionPage({
                           product.title
                         }
 
-                      </div>
+                      </h2>
+
+                      <p
+                        className="
+                          mt-4
+                          line-clamp-3
+                          leading-7
+                          text-black/60
+                        "
+                      >
+
+                        {
+                          product.description
+                        }
+
+                      </p>
 
                     </div>
 

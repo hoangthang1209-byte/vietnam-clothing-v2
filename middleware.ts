@@ -1,51 +1,122 @@
 import {
-    NextRequest,
-    NextResponse,
-  } from "next/server";
-  
-  const locales = [
-    "en",
-    "vi",
-  ];
-  
-  export function middleware(
-    request: NextRequest
-  ) {
-  
-    const {
-      pathname,
-    } = request.nextUrl;
-  
-    const pathnameHasLocale =
-      locales.some(
-        (
-          locale
-        ) =>
-  
-          pathname.startsWith(
-            `/${locale}`
-          )
+  NextResponse,
+} from "next/server";
+
+import type {
+  NextRequest,
+} from "next/server";
+
+import {
+  createServerClient,
+} from "@supabase/ssr";
+
+export async function middleware(
+
+  request: NextRequest
+
+) {
+
+  const response =
+    NextResponse.next();
+
+  const supabase =
+    createServerClient(
+
+      process.env
+        .NEXT_PUBLIC_SUPABASE_URL!,
+
+      process.env
+        .NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+
+      {
+
+        cookies: {
+
+          get(
+            name: string
+          ) {
+
+            return request.cookies.get(
+              name
+            )?.value;
+          },
+
+          set(
+            name: string,
+            value: string
+          ) {
+
+            response.cookies.set(
+              name,
+              value
+            );
+          },
+
+          remove(
+            name: string
+          ) {
+
+            response.cookies.set(
+              name,
+              "",
+              {
+
+                maxAge: 0,
+              }
+            );
+          },
+        },
+      }
+    );
+
+  const {
+    data: {
+      user,
+    },
+  } = await supabase.auth
+
+    .getUser();
+
+  const isAdminRoute =
+
+    request.nextUrl.pathname
+      .startsWith(
+        "/admin"
       );
-  
-    if (
-      pathnameHasLocale
-    ) {
-  
-      return NextResponse.next();
-    }
-  
-    request.nextUrl.pathname =
-      `/en${pathname}`;
-  
+
+  const isLoginPage =
+
+    request.nextUrl.pathname ===
+    "/admin/login";
+
+  if (
+
+    isAdminRoute &&
+
+    !user &&
+
+    !isLoginPage
+
+  ) {
+
     return NextResponse.redirect(
-      request.nextUrl
+
+      new URL(
+
+        "/admin/login",
+
+        request.url
+      )
     );
   }
-  
-  export const config = {
-  
-    matcher: [
-  
-      "/((?!_next|api|favicon.ico).*)",
-    ],
-  };
+
+  return response;
+}
+
+export const config = {
+
+  matcher: [
+
+    "/admin/:path*",
+  ],
+};
