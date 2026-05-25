@@ -1,122 +1,51 @@
-import {
-  NextResponse,
-} from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-import type {
-  NextRequest,
-} from "next/server";
+const locales = ["en", "vi"];
 
-import {
-  createServerClient,
-} from "@supabase/ssr";
-
-export async function middleware(
-
+export function middleware(
   request: NextRequest
-
 ) {
+  const { pathname } = request.nextUrl;
 
-  const response =
-    NextResponse.next();
-
-  const supabase =
-    createServerClient(
-
-      process.env
-        .NEXT_PUBLIC_SUPABASE_URL!,
-
-      process.env
-        .NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-
-      {
-
-        cookies: {
-
-          get(
-            name: string
-          ) {
-
-            return request.cookies.get(
-              name
-            )?.value;
-          },
-
-          set(
-            name: string,
-            value: string
-          ) {
-
-            response.cookies.set(
-              name,
-              value
-            );
-          },
-
-          remove(
-            name: string
-          ) {
-
-            response.cookies.set(
-              name,
-              "",
-              {
-
-                maxAge: 0,
-              }
-            );
-          },
-        },
-      }
+  const pathnameHasLocale =
+    locales.some(
+      (locale) =>
+        pathname.startsWith(
+          `/${locale}`
+        )
     );
 
-  const {
-    data: {
-      user,
-    },
-  } = await supabase.auth
-
-    .getUser();
-
-  const isAdminRoute =
-
-    request.nextUrl.pathname
-      .startsWith(
-        "/admin"
-      );
-
-  const isLoginPage =
-
-    request.nextUrl.pathname ===
-    "/admin/login";
-
   if (
-
-    isAdminRoute &&
-
-    !user &&
-
-    !isLoginPage
-
+    pathname === "/"
   ) {
-
     return NextResponse.redirect(
-
       new URL(
-
-        "/admin/login",
-
+        "/en",
         request.url
       )
     );
   }
 
-  return response;
+  if (
+    !pathnameHasLocale &&
+    !pathname.startsWith("/_next") &&
+    !pathname.startsWith("/api") &&
+    !pathname.includes(".")
+  ) {
+    return NextResponse.redirect(
+      new URL(
+        `/en${pathname}`,
+        request.url
+      )
+    );
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-
   matcher: [
-
-    "/admin/:path*",
+    "/((?!_next).*)",
   ],
 };
