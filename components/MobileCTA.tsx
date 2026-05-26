@@ -10,14 +10,17 @@ export default function MobileCTA() {
     <div
       className="
         fixed
-        bottom-0
-        left-0
+        bottom-4
+        left-1/2
         z-50
-        w-full
-        border-t
-        border-black/10
+        w-[92%]
+        -translate-x-1/2
+        rounded-[28px]
+        border
+        border-white/20
         bg-white/80
-        p-3
+        p-2
+        shadow-[0_20px_60px_rgba(0,0,0,0.12)]
         backdrop-blur-2xl
         md:hidden
       "
@@ -46,7 +49,7 @@ export default function MobileCTA() {
           "
         >
 
-          WhatsApp
+          WA
 
         </Link>
 
@@ -55,7 +58,7 @@ export default function MobileCTA() {
           target="_blank"
           className="
             rounded-2xl
-            bg-blue-500
+            bg-[#0068FF]
             px-3
             py-3
             text-center
@@ -73,14 +76,13 @@ export default function MobileCTA() {
           href="tel:0867401618"
           className="
             rounded-2xl
-            border
-            border-black/10
-            bg-white
+            bg-neutral-100
             px-3
             py-3
             text-center
             text-xs
             font-semibold
+            text-black
           "
         >
 

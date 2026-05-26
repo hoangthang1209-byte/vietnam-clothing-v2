@@ -45,10 +45,10 @@ export default function Navbar() {
             rounded-full
             border
             border-white/20
-            bg-white/70
+            bg-white/90
             px-6
             py-4
-            shadow-[0_8px_40px_rgba(0,0,0,0.08)]
+            shadow-[0_10px_30px_rgba(0,0,0,0.06)]
             backdrop-blur-2xl
           "
         >
@@ -56,7 +56,7 @@ export default function Navbar() {
           <Link
             href="/en"
             className="
-              text-lg
+              text-xl
               font-black
               tracking-tight
             "
@@ -80,6 +80,10 @@ export default function Navbar() {
 
             <Link
               href="/en/products"
+              className="
+                transition
+                hover:text-black
+              "
             >
 
               Products
@@ -88,6 +92,10 @@ export default function Navbar() {
 
             <Link
               href="/en/about"
+              className="
+                transition
+                hover:text-black
+              "
             >
 
               About
@@ -96,6 +104,10 @@ export default function Navbar() {
 
             <Link
               href="/en/contact"
+              className="
+                transition
+                hover:text-black
+              "
             >
 
               Contact
@@ -104,6 +116,10 @@ export default function Navbar() {
 
             <Link
               href="/en/blog"
+              className="
+                transition
+                hover:text-black
+              "
             >
 
               Blog
@@ -148,13 +164,14 @@ export default function Navbar() {
             }
             className="
               flex
-              h-11
-              w-11
+              h-12
+              w-12
               items-center
               justify-center
               rounded-full
               border
               border-black/10
+              bg-white
               md:hidden
             "
           >
