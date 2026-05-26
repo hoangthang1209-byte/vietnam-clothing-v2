@@ -22,86 +22,40 @@ export default function DesktopDock() {
         border
         border-white/20
         bg-white/70
-        px-5
-        py-4
+        p-3
         shadow-[0_20px_60px_rgba(0,0,0,0.12)]
         backdrop-blur-2xl
       "
     >
 
-      <div
+      <p
         className="
-          px-3
-        "
-      >
-
-        <p
-          className="
-            text-xs
-            uppercase
-            tracking-[0.25em]
-            text-neutral-500
-          "
-        >
-
-          Vietnam Clothing
-
-        </p>
-
-        <p
-          className="
-            mt-1
-            text-sm
-            font-medium
-          "
-        >
-
-          Premium OEM Apparel Manufacturer
-
-        </p>
-
-      </div>
-
-      <div
-        className="
-          h-10
-          w-px
-          bg-black/10
-        "
-      />
-
-      <Link
-        href="https://wa.me/84867401618"
-        target="_blank"
-        className="
-          rounded-full
-          bg-[#25D366]
-          px-5
-          py-3
+          px-4
           text-sm
           font-medium
-          text-white
-          transition
-          hover:scale-105
+          text-neutral-700
+          whitespace-nowrap
         "
       >
 
-        WhatsApp
+        Start your OEM apparel project with Vietnam Clothing
 
-      </Link>
+      </p>
 
       <Link
         href="/en/contact"
         className="
           rounded-full
           bg-black
-          px-5
+          px-6
           py-3
           text-sm
           font-medium
           text-white
           transition
+          duration-300
           hover:scale-105
+          hover:bg-neutral-800
         "
       >
 
