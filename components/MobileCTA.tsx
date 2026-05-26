@@ -17,7 +17,7 @@ export default function MobileCTA() {
         border-t
         border-black/10
         bg-white/80
-        p-4
+        p-3
         backdrop-blur-2xl
         md:hidden
       "
@@ -25,43 +25,24 @@ export default function MobileCTA() {
 
       <div
         className="
-          flex
-          gap-3
+          grid
+          grid-cols-4
+          gap-2
         "
       >
 
         <Link
-          href="tel:+84901234567"
-          className="
-            flex-1
-            rounded-full
-            border
-            border-black
-            px-5
-            py-4
-            text-center
-            text-sm
-            font-medium
-          "
-        >
-
-          Call
-
-        </Link>
-
-        <Link
-          href="https://wa.me/84901234567"
+          href="https://wa.me/84867401618"
           target="_blank"
           className="
-            flex-1
-            rounded-full
-            border
-            border-black
-            px-5
-            py-4
+            rounded-2xl
+            bg-[#25D366]
+            px-3
+            py-3
             text-center
-            text-sm
-            font-medium
+            text-xs
+            font-semibold
+            text-white
           "
         >
 
@@ -70,21 +51,58 @@ export default function MobileCTA() {
         </Link>
 
         <Link
-          href="/en/contact"
+          href="https://zalo.me/0867401618"
+          target="_blank"
           className="
-            flex-1
-            rounded-full
-            bg-black
-            px-5
-            py-4
+            rounded-2xl
+            bg-blue-500
+            px-3
+            py-3
             text-center
-            text-sm
-            font-medium
+            text-xs
+            font-semibold
             text-white
           "
         >
 
-          Get Quote
+          Zalo
+
+        </Link>
+
+        <Link
+          href="tel:0867401618"
+          className="
+            rounded-2xl
+            border
+            border-black/10
+            bg-white
+            px-3
+            py-3
+            text-center
+            text-xs
+            font-semibold
+          "
+        >
+
+          Call
+
+        </Link>
+
+        <Link
+          href="/en/contact"
+          className="
+            rounded-2xl
+            bg-black
+            px-3
+            py-3
+            text-center
+            text-xs
+            font-semibold
+            text-white
+          "
+        >
+
+          Quote
 
         </Link>
 

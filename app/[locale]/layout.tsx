@@ -1,18 +1,94 @@
-import MobileCTA from "@/components/MobileCTA";
-import FloatingButtons from "@/components/FloatingButtons";
+import type {
+  Metadata,
+} from "next";
+
+import "../globals.css";
+
+import Navbar
+from "@/sections/Navbar";
+
+import Footer
+from "@/sections/Footer";
+
+import FloatingButtons
+from "@/components/FloatingButtons";
+
+import MobileCTA
+from "@/components/MobileCTA";
+
+import DesktopDock
+from "@/components/DesktopDock";
+
+export const metadata:
+Metadata = {
+
+  metadataBase:
+    new URL(
+      "https://vietnamclothing.vn"
+    ),
+
+  title: {
+
+    default:
+      "Vietnam Clothing | OEM Apparel Manufacturer",
+
+    template:
+      "%s | Vietnam Clothing",
+  },
+
+  description:
+    "Vietnam Clothing is a premium OEM apparel manufacturer specializing in custom clothing, uniforms, sportswear and fashion production in Vietnam.",
+
+  openGraph: {
+
+    title:
+      "Vietnam Clothing",
+
+    description:
+      "Premium OEM apparel manufacturer in Vietnam.",
+
+    url:
+      "https://vietnamclothing.vn",
+
+    siteName:
+      "Vietnam Clothing",
+
+    locale:
+      "en_US",
+
+    type:
+      "website",
+  },
+};
 
 export default function LocaleLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children:
+    React.ReactNode;
 }) {
+
   return (
+
     <>
-      {children}
+
+      <Navbar />
+
+      <main>
+
+        {children}
+
+      </main>
+
+      <Footer />
+
+      <FloatingButtons />
 
       <MobileCTA />
 
-      <FloatingButtons />
+      <DesktopDock />
+
     </>
+
   );
 }
