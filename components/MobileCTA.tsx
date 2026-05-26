@@ -1,30 +1,95 @@
+"use client";
+
+import Link
+from "next/link";
+
 export default function MobileCTA() {
-    return (
-      <div className="fixed bottom-0 left-0 z-50 w-full border-t border-neutral-200 bg-white p-3 lg:hidden">
-  
-        <div className="grid grid-cols-3 gap-3">
-  
-          <a
-            href="tel:0867401618"
-            className="flex items-center justify-center rounded-full border border-black px-4 py-3 text-sm font-medium"
-          >
-            Call
-          </a>
-  
-          <a
-            href="https://wa.me/84867401618"
-            target="_blank"
-            className="flex items-center justify-center rounded-full border border-black px-4 py-3 text-sm font-medium"
-          >
-            WhatsApp
-          </a>
-  
-          <button className="rounded-full bg-black px-4 py-3 text-sm font-medium text-white">
-            Get Quote
-          </button>
-  
-        </div>
-  
+
+  return (
+
+    <div
+      className="
+        fixed
+        bottom-0
+        left-0
+        z-50
+        w-full
+        border-t
+        border-black/10
+        bg-white/80
+        p-4
+        backdrop-blur-2xl
+        md:hidden
+      "
+    >
+
+      <div
+        className="
+          flex
+          gap-3
+        "
+      >
+
+        <Link
+          href="tel:+84901234567"
+          className="
+            flex-1
+            rounded-full
+            border
+            border-black
+            px-5
+            py-4
+            text-center
+            text-sm
+            font-medium
+          "
+        >
+
+          Call
+
+        </Link>
+
+        <Link
+          href="https://wa.me/84901234567"
+          target="_blank"
+          className="
+            flex-1
+            rounded-full
+            border
+            border-black
+            px-5
+            py-4
+            text-center
+            text-sm
+            font-medium
+          "
+        >
+
+          WhatsApp
+
+        </Link>
+
+        <Link
+          href="/en/contact"
+          className="
+            flex-1
+            rounded-full
+            bg-black
+            px-5
+            py-4
+            text-center
+            text-sm
+            font-medium
+            text-white
+          "
+        >
+
+          Get Quote
+
+        </Link>
+
       </div>
-    );
-  }
+
+    </div>
+  );
+}
