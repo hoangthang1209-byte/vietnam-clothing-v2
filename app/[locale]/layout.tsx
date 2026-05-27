@@ -4,12 +4,6 @@ import type {
 
 import "../globals.css";
 
-import Navbar
-from "@/sections/Navbar";
-
-import Footer
-from "@/sections/Footer";
-
 import FloatingButtons
 from "@/components/FloatingButtons";
 
@@ -72,15 +66,11 @@ export default function LocaleLayout({
 
     <>
 
-      <Navbar />
-
       <main>
 
         {children}
 
       </main>
-
-      <Footer />
 
       <FloatingButtons />
 
@@ -89,6 +79,5 @@ export default function LocaleLayout({
       <DesktopDock />
 
     </>
-
   );
 }
