@@ -9,6 +9,7 @@ export default function RealInquiryForm() {
 
   const [success, setSuccess] =
     useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
@@ -18,6 +19,8 @@ export default function RealInquiryForm() {
     const form = e.currentTarget;
 
     setLoading(true);
+    setSuccess(false);
+    setErrorMessage("");
 
     const formData = new FormData(form);
 
@@ -25,11 +28,8 @@ export default function RealInquiryForm() {
       formData.entries()
     );
 
-    const { error, data: response } =
-      await supabase
-        .from("leads")
-        .insert([
-          {
+    try {
+      const { error } = await supabase.from("leads").insert([{ 
             brand: "Vietnam Clothing",
 
             company: data.company,
@@ -43,23 +43,19 @@ export default function RealInquiryForm() {
             quantity: data.quantity,
 
             status: "New",
-          },
-        ]);
-
-    console.log(error);
-    console.log(response);
-
-    setLoading(false);
-
-    if (!error) {
+           }]);
+      if (error) throw error;
       setSuccess(true);
-
       form.reset();
+    } catch {
+      setErrorMessage("We couldn’t submit your inquiry. Please try again or email support@vietnamclothing.vn.");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <section className="bg-neutral-100 py-32">
+    <section id="inquiry" className="scroll-mt-24 bg-neutral-100 py-32">
 
       <div className="mx-auto max-w-4xl px-6">
 
@@ -142,6 +138,8 @@ export default function RealInquiryForm() {
               : "Submit Inquiry"}
 
           </button>
+
+          {errorMessage && <p role="alert" className="mt-6 text-sm text-red-700">{errorMessage}</p>}
 
           {success && (
 
