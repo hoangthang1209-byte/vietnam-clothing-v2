@@ -1,26 +1,17 @@
 import Hero
 from "../../sections/Hero";
 
-import TrustedBrands
-from "../../sections/TrustedBrands";
-
 import ManufacturingCapabilities
 from "../../sections/ManufacturingCapabilities";
 
 import ProductCategories
 from "../../sections/ProductCategories";
 
-import WhyChooseUs
-from "../../sections/WhyChooseUs";
-
 import FactoryGallery
 from "../../sections/FactoryGallery";
 
 import FactoryProcess
 from "../../sections/FactoryProcess";
-
-import Testimonials
-from "../../sections/Testimonials";
 
 import FinalCTA
 from "../../sections/FinalCTA";
@@ -66,19 +57,19 @@ export default async function HomePage({
         dict={dict}
       />
 
-      <TrustedBrands />
+      
 
       <ProductCategories />
 
       <ManufacturingCapabilities />
 
-      <WhyChooseUs />
+      
 
       <FactoryGallery />
 
       <FactoryProcess />
 
-      <Testimonials />
+      
 
       <FinalCTA />
 
