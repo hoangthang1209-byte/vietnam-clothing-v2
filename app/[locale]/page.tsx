@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-import Hero
-from "../../sections/Hero";
+import VNCHero from "../../sections/VNCHero";
 
 import ManufacturingCapabilities
 from "../../sections/ManufacturingCapabilities";
@@ -9,21 +8,11 @@ from "../../sections/ManufacturingCapabilities";
 import ProductCategories
 from "../../sections/ProductCategories";
 
-import FactoryGallery
-from "../../sections/FactoryGallery";
-
-import FactoryProcess
-from "../../sections/FactoryProcess";
-
 import FinalCTA
 from "../../sections/FinalCTA";
 
 import RealInquiryForm
 from "@/components/RealInquiryForm";
-
-import {
-  dictionaries,
-} from "../../dictionaries";
 
 export default async function HomePage({
   params,
@@ -40,10 +29,7 @@ export default async function HomePage({
     locale,
   } = await params;
 
-  const dict =
-    dictionaries[
-      locale
-    ];
+  
 
   return (
 
@@ -55,9 +41,7 @@ export default async function HomePage({
       "
     >
 
-      <Hero
-        dict={dict}
-      />
+      <VNCHero locale={locale} />
 
       
 
@@ -75,9 +59,9 @@ export default async function HomePage({
 
       
 
-      <FactoryGallery />
+      
 
-      <FactoryProcess />
+      
 
       
 
