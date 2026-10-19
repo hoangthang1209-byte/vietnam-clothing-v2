@@ -24,14 +24,14 @@ Metadata = {
   title: {
 
     default:
-      "Vietnam Clothing | OEM Apparel Manufacturer",
+      "VNC | Merchandise, Apparel & Sourcing",
 
     template:
       "%s | Vietnam Clothing",
   },
 
   description:
-    "Vietnam Clothing is a premium OEM apparel manufacturer specializing in custom clothing, uniforms, sportswear and fashion production in Vietnam.",
+    "VNC provides coordinated merchandise, apparel development and sourcing solutions from Vietnam for global brands and businesses.",
 
   openGraph: {
 
@@ -39,7 +39,7 @@ Metadata = {
       "Vietnam Clothing",
 
     description:
-      "Premium OEM apparel manufacturer in Vietnam.",
+      "Merchandise, apparel and sourcing solutions from Vietnam.",
 
     url:
       "https://vietnamclothing.vn",
