@@ -1,268 +1,46 @@
-import {
-  NextResponse,
-} from "next/server";
+import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
-import {
-  createClient,
-} from "@/lib/supabase/server";
+export async function POST(request: Request) {
+  try {
+    const length = Number(request.headers.get("content-length") || 0);
+    if (length > 6_000_000) {
+      return NextResponse.json({ error: "Request too large" }, { status: 413 });
+    }
+    const data = await request.formData();
+    const field = (name: string) => {
+      const value = data.get(name);
+      return typeof value === "string" ? value.trim() : "";
+    };
+    const name = field("name").slice(0, 160);
+    const email = field("email").slice(0, 254);
+    const company = field("company").slice(0, 200);
+    const message = field("message").slice(0, 5000);
+    const product = field("product").slice(0, 250);
 
-import {
-  resend,
-} from "@/lib/resend";
-
-export async function POST(
-
-  request: Request
-
-) {
-
-  const formData =
-    await request.formData();
-
-  const name =
-    formData.get(
-      "name"
-    );
-
-  const email =
-    formData.get(
-      "email"
-    );
-
-  const company =
-    formData.get(
-      "company"
-    );
-
-  const message =
-    formData.get(
-      "message"
-    );
-
-  const product =
-    formData.get(
-      "product"
-    );
-
-  const attachment =
-    formData.get(
-      "attachment"
-    ) as File;
-
-  const supabase =
-    await createClient();
-
-  let attachmentUrl =
-    "";
-
-  if (
-
-    attachment &&
-
-    attachment.size > 0
-
-  ) {
-
-    const bytes =
-      await attachment
-        .arrayBuffer();
-
-    const buffer =
-      Buffer.from(
-        bytes
+    if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: "Invalid inquiry" }, { status: 400 });
+    }
+    const attachment = data.get("attachment");
+    if (attachment instanceof File && attachment.size > 0) {
+      // Keep attachments off public storage until private file handling is implemented.
+      return NextResponse.json(
+        { error: "Attachments are temporarily unavailable. Please submit without a file." },
+        { status: 400 }
       );
-
-    const fileName =
-      `${Date.now()}-${attachment.name}`;
-
-    await supabase
-      .storage
-
-      .from(
-        "inquiries"
-      )
-
-      .upload(
-
-        fileName,
-
-        buffer,
-
-        {
-
-          contentType:
-            attachment.type,
-        }
-      );
-
-    const {
-      data,
-    } = supabase
-      .storage
-
-      .from(
-        "inquiries"
-      )
-
-      .getPublicUrl(
-        fileName
-      );
-
-    attachmentUrl =
-      data.publicUrl;
-  }
-
-  await supabase
-
-    .from(
-      "inquiries"
-    )
-
-    .insert({
-
-      name,
-
-      email,
-
-      company,
-
-      message,
-
-      product,
-
-      attachment:
-        attachmentUrl,
+    }
+    const supabase = await createClient();
+    const { error } = await supabase.from("inquiries").insert({
+      name, email, company, message, product, attachment: "",
     });
-
-  await resend.emails.send({
-
-    from:
-      "Vietnam Clothing <onboarding@resend.dev>",
-
-    to: [
-      "your@email.com",
-    ],
-
-    subject:
-      `New Inquiry - ${name}`,
-
-    html: `
-
-      <h2>
-        New Inquiry
-      </h2>
-
-      <p>
-        <strong>Name:</strong>
-        ${name}
-      </p>
-
-      <p>
-        <strong>Email:</strong>
-        ${email}
-      </p>
-
-      <p>
-        <strong>Company:</strong>
-        ${company}
-      </p>
-
-      <p>
-        <strong>Product:</strong>
-        ${product}
-      </p>
-
-      <p>
-        <strong>Message:</strong>
-      </p>
-
-      <p>
-        ${message}
-      </p>
-
-      ${
-        attachmentUrl
-
-          ? `
-
-            <p>
-              <strong>
-                Attachment:
-              </strong>
-            </p>
-
-            <p>
-              <a href="${attachmentUrl}">
-                View Attachment
-              </a>
-            </p>
-          `
-
-          : ""
-      }
-    `,
-  });
-
-  await resend.emails.send({
-
-    from:
-      "Vietnam Clothing <onboarding@resend.dev>",
-
-    to: [
-      String(email),
-    ],
-
-    subject:
-      "We received your inquiry",
-
-    html: `
-
-      <div
-        style="
-          font-family:
-          Arial;
-          line-height:
-          1.7;
-        "
-      >
-
-        <h2>
-          Thank you for contacting
-          Vietnam Clothing
-        </h2>
-
-        <p>
-          We have received your
-          inquiry regarding:
-        </p>
-
-        <p>
-          <strong>
-            ${product}
-          </strong>
-        </p>
-
-        <p>
-          Our sales team will
-          contact you shortly.
-        </p>
-
-        <br />
-
-        <p>
-          Best regards,
-        </p>
-
-        <p>
-          Vietnam Clothing
-        </p>
-
-      </div>
-    `,
-  });
-
-  return NextResponse.json({
-
-    success: true,
-  });
+    if (error) {
+      console.error("VNC inquiry persistence failed", { code: error.code });
+      return NextResponse.json({ error: "Inquiry could not be saved" }, { status: 503 });
+    }
+    // Notification emails must not use hardcoded placeholder recipients.
+    // Add verified Resend sender and recipient configuration before enabling notifications.
+    return NextResponse.json({ success: true }, { status: 201 });
+  } catch {
+    return NextResponse.json({ error: "Unable to process inquiry" }, { status: 500 });
+  }
 }
