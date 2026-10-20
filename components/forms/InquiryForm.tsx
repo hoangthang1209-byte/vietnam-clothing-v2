@@ -133,20 +133,6 @@ export default function InquiryForm({
         "
       />
 
-      <input
-        type="file"
-        name="attachment"
-        className="
-          w-full
-          rounded-2xl
-          border
-          border-dashed
-          border-black/10
-          px-5
-          py-5
-        "
-      />
-
       <button
         type="submit"
         disabled={
