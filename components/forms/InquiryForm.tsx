@@ -22,53 +22,34 @@ export default function InquiryForm({
     false
   );
 
-  async function handleSubmit(
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
-    e: React.FormEvent<
-      HTMLFormElement
-    >
-
-  ) {
-
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    setLoading(true);
+    setErrorMessage("");
+    setSuccess(false);
 
-    setLoading(
-      true
-    );
+    const formData = new FormData(form);
+    formData.set("product", product || "");
 
-    const formData =
-      new FormData(
-        e.currentTarget
-      );
-
-    formData.append(
-      "product",
-      product || ""
-    );
-
-    await fetch(
-
-      "/api/inquiries",
-
-      {
-
-        method:
-          "POST",
-
-        body:
-          formData,
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("Submission failed");
       }
-    );
-
-    alert(
-      "Inquiry submitted!"
-    );
-
-    setLoading(
-      false
-    );
-
-    e.currentTarget.reset();
+      setSuccess(true);
+      form.reset();
+    } catch {
+      setErrorMessage("We could not submit your inquiry. Please try again or email support@vietnamclothing.vn.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -191,6 +172,9 @@ export default function InquiryForm({
         }
 
       </button>
+      {errorMessage && <p role="alert" className="text-sm text-red-700">{errorMessage}</p>}
+      {success && <p role="status" className="text-sm text-green-700">Your inquiry has been received.</p>}
+
 
     </form>
   );
