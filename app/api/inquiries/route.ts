@@ -37,9 +37,45 @@ export async function POST(request: Request) {
       console.error("VNC inquiry persistence failed", { code: error.code });
       return NextResponse.json({ error: "Inquiry could not be saved" }, { status: 503 });
     }
+
+    // Keep Supabase as the durable source until the VNC OS bridge has been verified.
+    // Secrets are server-only; a missing configuration must not block existing enquiries.
+    let crmSynced = false;
+    const bridgeKey = process.env.VNC_LEAD_INGEST_SECRET;
+    const bridgeBase = process.env.VNC_OS_URL;
+    if (bridgeKey && bridgeKey.length >= 32 && bridgeBase) {
+      try {
+        const endpoint = new URL("/api/integrations/vnc/leads", bridgeBase);
+        if (endpoint.protocol !== "https:" || endpoint.hostname !== "os.vietnamclothing.vn") {
+          throw new Error("Unexpected VNC OS integration host");
+        }
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-vnc-ingest-key": bridgeKey,
+            },
+            body: JSON.stringify({
+              name, company, email, message: [product && `Product: ${product}`, message].filter(Boolean).join("\\n"),
+            }),
+            cache: "no-store",
+            signal: controller.signal,
+          });
+          crmSynced = response.ok;
+          if (!crmSynced) console.error("VNC OS lead sync failed", { status: response.status });
+        } finally {
+          clearTimeout(timeout);
+        }
+      } catch {
+        console.error("VNC OS lead sync temporarily unavailable");
+      }
+    }
     // Notification emails must not use hardcoded placeholder recipients.
     // Add verified Resend sender and recipient configuration before enabling notifications.
-    return NextResponse.json({ success: true }, { status: 201 });
+    return NextResponse.json({ success: true, crmSynced }, { status: 201 });
   } catch {
     return NextResponse.json({ error: "Unable to process inquiry" }, { status: 500 });
   }
