@@ -251,6 +251,9 @@ export default function Navbar() {
                     md:flex
                   "
                 >
+                  <Link href="/en/contact" className="rounded-full bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-neutral-800">
+                    Request a Quote
+                  </Link>
 
                   <Link
                     href="/en"
@@ -464,6 +467,10 @@ export default function Navbar() {
 
                   Contact
 
+                </Link>
+                <Link href="/en/contact" onClick={() => setIsMenuOpen(false)}
+                  className="mt-4 rounded-full bg-black px-6 py-4 text-center text-base font-semibold text-white">
+                  Request a Quote
                 </Link>
 
               </div>
