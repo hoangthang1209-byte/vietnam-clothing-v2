@@ -1,32 +1,9 @@
 const items = [
-    {
-      number: "10+",
-      title: "Years Experience",
-      description:
-        "Extensive experience in OEM & ODM apparel manufacturing for global clients.",
-    },
-  
-    {
-      number: "500K",
-      title: "Monthly Capacity",
-      description:
-        "Large-scale production capacity with stable lead times and quality control.",
-    },
-  
-    {
-      number: "100+",
-      title: "Global Brands",
-      description:
-        "Trusted manufacturing partner for corporate uniforms and merchandise projects.",
-    },
-  
-    {
-      number: "24/7",
-      title: "Production Support",
-      description:
-        "Fast communication, sampling support and flexible production solutions.",
-    },
-  ];
+  { number: "01", title: "Product Development", description: "Translate buyer requirements into product specifications, samples and production plans." },
+  { number: "02", title: "Supplier Sourcing", description: "Coordinate manufacturing partners based on product category, material and order requirements." },
+  { number: "03", title: "Quality Coordination", description: "Support quality checkpoints, specifications and production follow-up across suppliers." },
+  { number: "04", title: "Order Management", description: "Coordinate timelines, packing requirements and shipment preparation for B2B orders." },
+];
   
   export default function WhyChooseUs() {
     return (
@@ -49,9 +26,9 @@ const items = [
             </p>
   
             <h2 className="text-5xl font-bold leading-tight tracking-tight lg:text-6xl">
-              Reliable Manufacturing
+              Sourcing & Production
               <br />
-              Partner In Vietnam
+              Management In Vietnam
             </h2>
   
           </div>

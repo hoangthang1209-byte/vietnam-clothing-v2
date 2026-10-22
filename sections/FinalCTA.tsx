@@ -32,13 +32,9 @@ export default function FinalCTA() {
   
           <div className="mt-14 flex flex-col items-center justify-center gap-5 sm:flex-row">
   
-            <button className="rounded-full bg-white px-10 py-5 text-sm font-medium text-black transition duration-300 hover:scale-105 hover:bg-neutral-200">
-              Request Quotation
-            </button>
+            <a href="#inquiry" className="rounded-full bg-white px-10 py-5 text-sm font-medium text-black transition duration-300 hover:scale-105 hover:bg-neutral-200">Request Quotation</a>
   
-            <button className="rounded-full border border-white/20 bg-white/5 px-10 py-5 text-sm backdrop-blur transition duration-300 hover:bg-white hover:text-black">
-              Download Catalog
-            </button>
+            <a href="mailto:support@vietnamclothing.vn?subject=VNC%20Product%20Catalog%20Request" className="rounded-full border border-white/20 bg-white/5 px-10 py-5 text-sm backdrop-blur transition duration-300 hover:bg-white hover:text-black">Request Catalog by Email</a>
   
           </div>
   

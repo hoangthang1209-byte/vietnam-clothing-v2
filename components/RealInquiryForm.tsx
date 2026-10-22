@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function RealInquiryForm() {
   const [loading, setLoading] =
@@ -9,6 +8,7 @@ export default function RealInquiryForm() {
 
   const [success, setSuccess] =
     useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
@@ -18,48 +18,32 @@ export default function RealInquiryForm() {
     const form = e.currentTarget;
 
     setLoading(true);
+    setSuccess(false);
+    setErrorMessage("");
 
     const formData = new FormData(form);
 
-    const data = Object.fromEntries(
-      formData.entries()
-    );
-
-    const { error, data: response } =
-      await supabase
-        .from("leads")
-        .insert([
-          {
-            brand: "Vietnam Clothing",
-
-            company: data.company,
-
-            contact: data.name,
-
-            email: data.email,
-
-            inquiry: data.message,
-
-            quantity: data.quantity,
-
-            status: "New",
-          },
-        ]);
-
-    console.log(error);
-    console.log(response);
-
-    setLoading(false);
-
-    if (!error) {
+    try {
+      const message = String(formData.get("message") || "").trim();
+      const quantity = String(formData.get("quantity") || "").trim();
+      formData.set("message", quantity ? `Estimated quantity: ${quantity}\n\n${message}` : message);
+      formData.set("product", "General VNC inquiry");
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) throw new Error("Inquiry request failed");
       setSuccess(true);
-
       form.reset();
+    } catch {
+      setErrorMessage("We couldn’t submit your inquiry. Please try again or email support@vietnamclothing.vn.");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <section className="bg-neutral-100 py-32">
+    <section id="inquiry" className="scroll-mt-24 bg-neutral-100 py-32">
 
       <div className="mx-auto max-w-4xl px-6">
 
@@ -142,6 +126,8 @@ export default function RealInquiryForm() {
               : "Submit Inquiry"}
 
           </button>
+
+          {errorMessage && <p role="alert" className="mt-6 text-sm text-red-700">{errorMessage}</p>}
 
           {success && (
 
