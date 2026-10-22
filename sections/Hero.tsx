@@ -209,7 +209,7 @@ export default function Hero({
                 "
               >
 
-                10+
+                01
 
               </div>
 
@@ -222,7 +222,7 @@ export default function Hero({
                 "
               >
 
-                Years Experience
+                Product Development
 
               </p>
 
@@ -238,7 +238,7 @@ export default function Hero({
                 "
               >
 
-                500+
+                02
 
               </div>
 
@@ -251,7 +251,7 @@ export default function Hero({
                 "
               >
 
-                Global Clients
+                Supplier Coordination
 
               </p>
 
@@ -267,7 +267,7 @@ export default function Hero({
                 "
               >
 
-                30+
+                03
 
               </div>
 
@@ -280,7 +280,7 @@ export default function Hero({
                 "
               >
 
-                Countries Exported
+                Quality Control
 
               </p>
 
@@ -359,7 +359,7 @@ export default function Hero({
               "
             >
 
-              Production Capacity
+              Production Planning
 
             </p>
 
@@ -373,7 +373,7 @@ export default function Hero({
               "
             >
 
-              500K
+              OEM
 
             </div>
 
@@ -386,7 +386,7 @@ export default function Hero({
               "
             >
 
-              Pieces / Month
+              Sourcing & Delivery
 
             </p>
 
