@@ -23,20 +23,20 @@ Metadata = {
 
   metadataBase:
     new URL(
-      "https://vietnamclothing.com"
+      "https://www.vietnamclothing.vn"
     ),
 
   title: {
 
     default:
-      "Vietnam Clothing | OEM Apparel Manufacturer",
+      "Vietnam Clothing | International Apparel & Merchandise Sourcing",
 
     template:
       "%s | Vietnam Clothing",
   },
 
   description:
-    "Vietnam Clothing is a premium OEM apparel manufacturer specializing in custom clothing, uniforms, sportswear and fashion production in Vietnam.",
+    "Vietnam Clothing is a Vietnam-based B2B apparel and merchandise sourcing partner coordinating product development, manufacturing, quality control and delivery for international buyers.",
 
   keywords: [
 
@@ -46,7 +46,11 @@ Metadata = {
 
     "custom clothing manufacturer",
 
-    "Vietnam garment factory",
+    "Vietnam apparel sourcing partner",
+
+    "Vietnam merchandise sourcing",
+
+    "manufacturing coordination Vietnam",
 
     "sportswear manufacturer",
 
@@ -63,10 +67,10 @@ Metadata = {
       "Vietnam Clothing",
 
     description:
-      "Premium OEM apparel manufacturer in Vietnam.",
+      "International B2B apparel and merchandise sourcing partner based in Vietnam.",
 
     url:
-      "https://vietnamclothing.com",
+      "https://www.vietnamclothing.vn",
 
     siteName:
       "Vietnam Clothing",

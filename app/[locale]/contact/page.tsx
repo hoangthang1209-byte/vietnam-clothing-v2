@@ -50,7 +50,7 @@ export default function ContactPage() {
           >
 
             Start Your
-            Clothing Project
+            Sourcing Project
 
           </h1>
 
@@ -64,12 +64,7 @@ export default function ContactPage() {
             "
           >
 
-            Get quotation,
-            MOQ consultation,
-            sampling support and
-            OEM manufacturing
-            solutions from our
-            Vietnam apparel factory.
+            Request a quotation, discuss minimum order quantities, develop samples and coordinate apparel or merchandise manufacturing with our Vietnam-based sourcing team.
 
           </p>
 
@@ -148,7 +143,7 @@ export default function ContactPage() {
                 "
               >
 
-                Factory
+                Sourcing Location
 
               </div>
 
